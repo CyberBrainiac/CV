@@ -1,11 +1,11 @@
 let page = document.querySelector('.page');
 let paragraph = document.querySelector('p');
-page.classList.add('dark-theme');
+page.classList.add('light-theme');
 let themeButton = document.querySelector('.theme-button');
 let myHead = document.querySelector('h1');
 themeButton.onclick = function () {
-  page.classList.toggle('light-theme');
   page.classList.toggle('dark-theme');
+  page.classList.toggle('light-theme');
 //  myHead.textContent = 'CHEBUREK';
   console.log("Кнопка нажата");
 }
