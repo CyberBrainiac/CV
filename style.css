@@ -24,11 +24,11 @@ h2 {
 
 img {border-radius: 50%;}
 
-ul {list-style-image: url("C:/myDataArs/myProject/TEST/images/list-marker.svg");}
+ul {list-style-image: url("images/list-marker.svg");}
 
 
 .page {
-  background-image: url("C:/myDataArs/myProject/TEST/images/paper4.jpg");
+  background-image: url("images/paper4.jpg");
   background-size: cover;
   background-attachment: fixed;
   position: absolute;
@@ -151,7 +151,7 @@ ul {list-style-image: url("C:/myDataArs/myProject/TEST/images/list-marker.svg");
     color: black;
     height: 100%;
     width: 40%;
-    background-image: url("C:/myDataArs/myProject/TEST/images/Background-S1-left.svg");
+    background-image: url("images/Background-S1-left.svg");
     background-repeat: no-repeat;
     background-size: contain;
     border-right: 1px solid red;
@@ -181,7 +181,7 @@ ul {list-style-image: url("C:/myDataArs/myProject/TEST/images/list-marker.svg");
     z-index: 10;
     height: 100%;
     width: 50%;
-    background-image: url("C:/myDataArs/myProject/TEST/images/Backgroud-S1-right.svg");
+    background-image: url("images/Backgroud-S1-right.svg");
     background-repeat: no-repeat;
     background-position: right top;
     background-size: cover;
@@ -224,10 +224,10 @@ ul {list-style-image: url("C:/myDataArs/myProject/TEST/images/list-marker.svg");
       left: -1.7em;
       top: -0.2em;
     }
-    .phone::before {background-image: url("C:/myDataArs/myProject/TEST/images/mobile-white.svg");}
-    .resumeFile::before {background-image: url("C:/myDataArs/myProject/TEST/images/file-text-white.svg");}
-    .gitHub::before {background-image: url("C:/myDataArs/myProject/TEST/images/github-white.svg");}
-    .mail::before {background-image: url("C:/myDataArs/myProject/TEST/images/mail-white.svg");}
+    .phone::before {background-image: url("images/mobile-white.svg");}
+    .resumeFile::before {background-image: url("images/file-text-white.svg");}
+    .gitHub::before {background-image: url("images/github-white.svg");}
+    .mail::before {background-image: url("images/mail-white.svg");}
 
 /*Section 2*/
 #section-2 {
