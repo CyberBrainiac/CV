@@ -1,242 +1,158 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style-themes.css">
+  <!-- <meta http-equiv="default-style" content="default style"> ЗАЧЕМ? ЗАЧЕМ? -->
+  <link rel="stylesheet" href="C:\myDataArs\myProject\TEST\styles\style.css" title = "default style">
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
   <base target="_blank">
-  <title>Сайт-резюме</title>
+  <title>Site Resume</title>
 </head>
 
+
 <body class="page">
-  <header class="page-header">
-    <div class="container">
-      <h1 class="page-title">Визитка</h1>
-      <h2>Архипов Арсений</h2>
-      <p>Я любопытный и настойчивый.<br>
-        Мечтаю построить успешную карьеру в IT!
-      </p>
-      <p><b>Предложения присылайте на:</b></p>
-      <p><a href="mailto:arsenij.arxipov.1998@gmail.com">arsenij.arxipov.1998@gmail.com</a></p>
-      <button class="theme-button" type="button">Изменить тему</button>
+  <!-- Лінійку потрібно буде видалити -->
+  <div class="horizontal-ruler"></div>
+  <!-- Лінійку потрібно буде видалити -->
+  <div class="overlay" id="overlay"><span>SITE IS LOADING<span></div>
+  <header class="header" id="header">
+    <div class="burger-menu">
+      <div class="burger-menu_button"></div>
+
+      <nav class="burger-menu_nav">
+        <a href="#header" class="burger-menu_link" target="_self">Scills & contact</a>
+        <a href="#section-2" class="burger-menu_link" target="_self">Work & education</a>
+        <a href="#section-3" class="burger-menu_link" target="_self">Section 3</a>
+        <a href="#section-4" class="burger-menu_link" target="_self">Section 4</a>
+        <a href="#section-5" class="burger-menu_link" target="_self">Section 5</a>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <section class="about container">
-      <h2 class="section-title">Навыки</h2>
-      <img class="about-image" src="img/my-photo.jpg" alt="photo with pretty man">
-      <div class="about-content-text">
-        <p>Умею работать в команде, а так же, как самостоятельная единица. Имею опыт работы с подчинёнными. Внимательный к деталям, ответственный.</p>
+
+  <main class="pageContent">
+    <section id="section-1">
+      <div class="plot-1">
+        <canvas id="canvasS1-P1"></canvas>
+        <figure class="photo">
+          <img src="C:/myDataArs/myProject/TEST/images/Greed.svg" alt="photo with pretty man">
+          <figcaption class="img-caption">
+            <!-- <p><span class="full-name">Архипов Арсеній</span></p> -->
+            <h2>Some text</h2>
+            <span class="status-cont">Intern web developer</span>
+          </figcaption>
+        </figure>
+
+        <div class="scills">
+          <h2>Scills</h2>
+          <ul>
+            <li>Mocha framework</li>
+            <li>JavaScript</li>
+            <li>HTML 5</li>
+            <li>CSS 3</li>
+            <li>OOP</li>
+            <li>Git</li>
+          </ul>
+        </div>
       </div>
-      <div class="about-content card">
-        <h3 style="height: 41.5px;">Знаком с:</h3>
-        <ul>
-          <li>JavaScript</li>
-          <li>Open Server</li>
-          <li>Docker</li>
-          <li>Git</li>
-        </ul>
-      </div>
-      <div class="about-content card">
-        <h3 style="height: 41.5px;">Базовые знания:</h3>
-        <ul>
-          <li>HTML, CSS</li>
-          <li>GitHub</li>
-          <li>C++</li>
-        </ul>
-      </div>
-      <div class="about-content card">
-        <h3 style="height: 41.5px;">Продвинутые знания:</h3>
-        <ul>
-          <li>LabVIEW</li>
-          <li>Microsoft Office</li>
-          <li>Google docs, Google sheets</li>
-        </ul>
-      </div>
-    </section>
 
-    <section class="status container">
-      <h2 class="section-title">Мой статус</h2>
-      <p>#интерн</p>
-    </section>
+      <div class="plot-2">
+        <div class="aim">
+          <h2>My purpose</h2>
+          <span class="aim-text">Build a brilliant career in IT</span>
+        </div>
 
-    <section class="job container">
-      <h2 class="section-title">Опыт работы</h2>
-      <article class="card">
-        <img class="show" src="img/moderator.png" width="56" height="56" alt="man in headphones with a microphone">
-        <div class="card-content">
-          <h3>"Genesis/Jiji" - <i>remote moderator</i></h3>
-          <ul>
-            <li>
-              <p>Модератор на сайте онлайн-объявлений Jiji</p>
-            </li>
-          </ul>
-          <time datetime="2019-07">Июль 2019 - НАСТОЯЩЕЕ ВРЕМЯ</time>
+        <div class="contacts">
+          <h2>Contact</h2>
+          <span class="phone">Phone: <a href="tel:+38-096-809-87-37" target="_self">(+38) 0968098737</a></span>
+          <span class="resumeFile">Resume: <a href="https://docs.google.com/document/d/1mVNu_hvkYGotuiJspQmokRyUf_wGpLxoB7I1VpieQiQ/edit?usp=sharing">file.pdf</a></span>
+          <span class="gitHub">GitHub: <a href="https://github.com/PoziTronAr/PoziTronAr.github.io">project</a></span>
+          <span class="mail">Email: <a href="mailto:arsenij.arxipov.1998@gmail.com">adress</a></span>
+          <!-- <span class="linkedin"></span>   NEEED TO BE CREATE!!!-->
         </div>
-      </article>
-      <article class="card">
-        <img class="show" src="img/ingener.jpg" width="56" height="56" alt="man in a helmet">
-        <div class="card-content">
-          <h3>ГП "Ивченко-Прогресс" - <i>инженер-исследователь</i></h3>
-          <ul>
-            <li>
-              <p>Регистрация параметров авиационных двигателей на системах стендовых испытаний (ГАММА/MS-DOS;
-                Octavo/QNX; Octopus/LabVIEW)</p>
-            </li>
-            <li>
-              <p>Организация рабочих для подготовки двигателя к испытаниям</p>
-            </li>
-            <li>
-              <p>Разработка собственной системы сбора данных на языке LabVIEW</p>
-            </li>
-          </ul>
-          <time datetime="2020-09">Сентябрь 2020 - НАСТОЯЩЕЕ ВРЕМЯ</time>
-        </div>
-      </article>
-    </section>
-
-    <section class="studies container">
-      <h2 class="section-title">Образование</h2>
-      <article class="card">
-        <div class="card-content">
-          <h3>НУ "Запорожская политехника"</h3>
-          <p><b>Степень:</b></p>
-          <ul>
-            <li>
-              <p><i>Бакалавр</i></p>
-            </li>
-          </ul>
-          <p><b>Специальность:</b>
-          <p>
-          <ul>
-            <li>
-              <p><i>Инженерия программного обеспечения</i></p>
-            </li>
-          </ul>
-          <time datetime="2016-09">Сентябрь 2016 - Июль 2020</time>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card-content">
-          <h3>НУ "Запорожская политехника"</h3>
-          <p><b>Степень:</b></p>
-          <ul>
-            <li>
-              <p><i>Магистр</i></p>
-            </li>
-          </ul>
-          <p><b>Специальность:</b></p>
-          <ul>
-            <li>
-              <p><i>Системы искусственного интеллекта</i></p>
-            </li>
-          </ul>
-          <time datetime="2020-09">Сентябрь 2020 - Декабрь 2021</time>
-        </div>
-      </article>
-      <article class="card" id="identified">
-        <div class="card-content" id="identified2">
-          <p>Диплом бакалавра и магистра защитил на 5 :)</p>
-        </div>
-      </article>
-    </section>
-
-    <section class="projects container">
-      <h2 class="section-title">Проекты</h2>
-      <article class="card" id="project">
-        <div class="projects-card" id="project1">
-          <h3>Сайт-визитка</h3>
-          <p>Языки: <font color="#256BFF"><i>HTML5, CSS, JavaScript</i></font>
-          </p>
-          <p>Моё резюме в виде сайта</p>
-          </p>
-        </div>
-      </article>
-      <article class="card">
-        <div class="projects-card">
-          <h3>Подсистема контроля состояния єлектрощитового оборудования</h3>
-          <p>Язык: <font color="#256BFF"><i>C++</i></font>
-          <p>Реализовано на основе Arduino с возможностью интеграции с системой управления умным домом "MyHome"</p>
-          </p>
-        </div>
-      </article>
-      <article class="card">
-        <div class="projects-card">
-          <h3 style="height: 84px;">ПО для проведения стендовых испытаний авиационных двигателей</h3>
-          <p>Язык: <font color="#256BFF"><i>LabVIEW</i></font>
-          <p>Применимо для сбора, хранения, визуализации, обработки даных в реальном времени по интерфейсу RS232</p>
-          </p>
-        </div>
-      </article>
-    </section>
-
-    <section class="languages container">
-      <h2 class="section-title">Языки</h2>
-      <article class="card">
-        <img class="show" src="img/languages.jpg" width="56" height="56" alt="country flags">
-        <div class="languages-card">
-          <ul>
-            <li>
-              <p>Английский - <font color="#256BFF"><i>Intermediate</i></font>
-              </p>
-            </li>
-            <li>
-              <p>Русский - <font color="#256BFF"><i>свободно</i></font>
-              </p>
-            </li>
-            <li>
-              <p>Украинский - <font color="#256BFF"><i>свободно</i></font>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </article>
-    </section>
-
-    <section class="awards container">
-      <h2 class="section-title">Награды</h2>
-      <div class="award">
-        <p>Certificate of Participation in IEEE IDAACS-SWS 2020, 5th IEEE International Symposium on Smart and Wireles
-          System, September 17-18, 2020.</p>
       </div>
     </section>
 
-    <section class="contacts container">
-      <h2 class="section-title">Ссылки</h2>
-      <figure>
-        <img src="img/my-photo.jpg" alt="photo with pretty man">
-        <figcaption>Архипов Арсений</figcaption>
-      </figure>
-      <div class="contacts-content">
-        <ul>
-          <li>
-            <p><i>Email:</i> <a href="mailto:arsenij.arxipov.1998@gmail.com">arsenij.arxipov.1998@gmail.com</a></p>
-          </li>
-          <li>
-            <p><i>Phone:</i> <a href="tel:+38-096-809-87-37" target="_self">(+38) 0968098737</a></p>
-          </li>
-          <li>
-            <p><i>GitHub:</i> <a href="https://github.com/PoziTronAr/PoziTronAr.github.io">project</a></p>
-          </li>
-          <li>
-            <p><i>Resume:</i>
-              <a href="https://docs.google.com/document/d/1mVNu_hvkYGotuiJspQmokRyUf_wGpLxoB7I1VpieQiQ/edit?usp=sharing">file</a>
-            </p>
-          </li>
-        </ul>
+
+    <section id="section-2">
+      <canvas id="canvasS2"></canvas>
+      <div class="plot-2-1">
+        <div class="work-experience">
+          <h2>Work experience</h2>
+          <div class = "card">
+            <p>SE "Ivchenko-Progress" - research engineer</p>
+            <ul>
+              <li>Pascal and LabVIEW programming</li>
+              <li>Aircraft engine test systems management</li>
+              <li>Organization of the process of preparing an aircraft engine for testing</li>
+            </ul>
+            <p>September 2020 - Present</p>
+            <p></p>
+          </div>
+          <div class = "card">
+            <p>Genesis(Jiji) - remote moderator</p>
+            <ul>
+              <li>Checking user content for compliance with the rules of the online marketplace</li>
+            </ul>
+            <p>July 2019 - October 2022</p>
+          </div>
+        </div>
+      </div>
+      <div class="plot-2-2">
+        <div class="education">
+          <h2>Education</h2>
+          <div class = "card"><p>National University «Zaporizhzhia polytechnic» Master</p></div>
+          <div class = "card"><p>National University «Zaporizhzhia polytechnic» Bachelor</p></div>
+        </div>
       </div>
     </section>
+
+
+    <section id="section-3">Section 3</section>
+    <section id="section-4">Section 4</section>
+    <section id="section-5">Section 5</section>
   </main>
 
-  <footer class="page-footer">
-    <div class="container">
+
+  <footer class="footer">
+    <div class="footer-company">
       <p>© Enthusiasm corporation</p>
+    </div>
+    <div class="footer-createYear">
       <p>2022</p>
     </div>
   </footer>
-  <script src="scripts/script.js"></script>
-</body>
 
+
+  <script>
+    window.onload = () => {
+      let promise = new Promise( function(resolve, reject) {
+
+        let script = document.createElement("script");
+        script.src = "C:/myDataArs/myProject/TEST/scripts/script.js";
+        script.onload = () => {
+          let adaptiveDesign_Result = adaptiveDesign();
+
+          if(adaptiveDesign_Result instanceof Error) {
+            reject(adaptiveDesign_Result);
+          } else {
+            resolve(adaptiveDesign_Result);
+          }
+        }
+
+        document.body.append(script);
+      });
+
+      promise.then(
+        (res) => {
+          console.log("'adaptive design' completed successfully");
+        },
+        (err) => console.log(`Error in Adaptive Design: \n\n${err.stack}`)
+        // (err) => window.onerror = err
+      )
+      // .then((res) => createBubbleAnimation(res), (err) => window.onerror = err))
+    }
+  </script>
+</body>
 </html>
