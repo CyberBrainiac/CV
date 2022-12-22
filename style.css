@@ -24,11 +24,11 @@ h2 {
 
 img {border-radius: 50%;}
 
-ul {list-style-image: url("images/list-marker.svg");}
+ul {list-style-image: url("C:/myDataArs/myProject/TEST/images/list-marker.svg");}
 
 
 .page {
-  background-image: url("images/paper4.jpg");
+  background-image: url("C:/myDataArs/myProject/TEST/images/paper4.jpg");
   background-size: cover;
   background-attachment: fixed;
   position: absolute;
@@ -38,7 +38,7 @@ ul {list-style-image: url("images/list-marker.svg");}
 
 /* .horizontal-ruler {
   position: absolute;
-  top: 471px;
+  top: 596px;
   width: 100vw;
   border: 1px solid red;
 } */
@@ -94,7 +94,6 @@ ul {list-style-image: url("images/list-marker.svg");}
 .burger-menu_button {
   position: fixed;
   z-index: 30;
-  background-color: transparent;
   cursor: pointer;
 }
   .burger-menu_lines {
@@ -102,13 +101,16 @@ ul {list-style-image: url("images/list-marker.svg");}
     position: fixed;
     height: 5px;
     background-color: gray;
-    border: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
   }
 .burger-menu_button:hover .burger-menu_lines {filter: brightness(1.2);}
 .burger-menu_active .burger-menu_lines {background-color: red;}
-.burger-menu_active .burger-menu_nav {
-  transition: 0.4s;
-  height: 100vh;
+
+.buttonOverlay_active{
+  position: fixed;
+  z-index: 40;
+  cursor: pointer;
 }
 
 .burger-menu_nav {
@@ -118,9 +120,9 @@ ul {list-style-image: url("images/list-marker.svg");}
   display: flex;
   flex-flow: column;
   background-color: gray;
-  transition: 0.4s;
   height: 0px;
 }
+/* .burger-menu_active .burger-menu_nav {height: 100vh;} */
 .burger-menu_link {
   text-decoration: none;
   text-transform: uppercase;
@@ -130,7 +132,6 @@ ul {list-style-image: url("images/list-marker.svg");}
   border: none;
   font-size: 0px;
   transition-property: color;
-  transition-duration: 0.4s;
 }
 .burger-menu_link:hover {filter: brightness(0.7);}
 
@@ -141,20 +142,15 @@ ul {list-style-image: url("images/list-marker.svg");}
   justify-content: space-between;
   background-color: white;
 }
+  .plot-1-1 {
+    z-index: 10;
+    height: 100%;
+    width: 40%;
+    color: black;
+  }
   #canvasS1-P1 {
     position: absolute;
     z-index: -1;
-    /* background-color: blue; */
-  }
-  .plot-1 {
-    z-index: 10;
-    color: black;
-    height: 100%;
-    width: 40%;
-    background-image: url("images/Background-S1-left.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-right: 1px solid red;
   }
     .img-caption{
       text-align: center;
@@ -177,15 +173,15 @@ ul {list-style-image: url("images/list-marker.svg");}
       margin-bottom: 5px;
     }
 
-  .plot-2 {
+  .plot-1-2 {
     z-index: 10;
     height: 100%;
     width: 50%;
-    background-image: url("images/Backgroud-S1-right.svg");
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-size: cover;
     color: white;
+  }
+  #canvasS1-P2 {
+    position: absolute;
+    z-index: -1;
   }
     .aim {text-align: center;}
     .aim h2 {
@@ -197,7 +193,6 @@ ul {list-style-image: url("images/list-marker.svg");}
     .contacts {
       display: flex;
       flex-direction: column;
-      /* margin-top: 3em; */
     }
     .contacts h2 {
       font-weight: 500;
@@ -224,10 +219,10 @@ ul {list-style-image: url("images/list-marker.svg");}
       left: -1.7em;
       top: -0.2em;
     }
-    .phone::before {background-image: url("images/mobile-white.svg");}
-    .resumeFile::before {background-image: url("images/file-text-white.svg");}
-    .gitHub::before {background-image: url("images/github-white.svg");}
-    .mail::before {background-image: url("images/mail-white.svg");}
+    .phone::before {background-image: url("C:/myDataArs/myProject/TEST/images/mobile-white.svg");}
+    .resumeFile::before {background-image: url("C:/myDataArs/myProject/TEST/images/file-text-white.svg");}
+    .gitHub::before {background-image: url("C:/myDataArs/myProject/TEST/images/github-white.svg");}
+    .mail::before {background-image: url("C:/myDataArs/myProject/TEST/images/mail-white.svg");}
 
 /*Section 2*/
 #section-2 {

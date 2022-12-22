@@ -6,10 +6,11 @@ function adaptiveDesign() {
   let menu = document.querySelector(".burger-menu");
   let button = document.querySelector(".burger-menu_button");
   let buttonLines = button.children;
-  let links = Array.from( document.querySelector(".burger-menu_nav").children);
+  let navigationLinkArr = Array.from( document.querySelector(".burger-menu_nav").children);
   let page = document.querySelector(".page");
   let idIntervalArr_blinkLine = [];
   let backgroundColor = "#6D6363";
+  let cornerCircleRadius;
   let windowInnerHeight;
   let windowInnerWidth;
   let headerStyle;
@@ -33,6 +34,7 @@ function adaptiveDesign() {
     try {
       adaptiveBodySize();
       drawBackgroundS1_P1();
+      drawBackgroundS1_P2();
       drawBackgroundS2();
       createAdaptiveImage();
       createAdaptiveBurgerMenu();
@@ -62,8 +64,11 @@ function adaptiveDesign() {
         clearInterval(intervalId_checkWidth);
 
         if(menu.classList.contains("burger-menu_active")) {
-          animateMenuNavigation();
+          let navigationBackground = document.querySelector(".burger-menu_nav");
+          navigationBackground.style.transitionDuration = "0s";
+
           menu.classList.toggle("burger-menu_active");
+          animateMenuNavigation();
         }
 
         for(let i = 0; i < idIntervalArr_blinkLine.length; i++) {//цей код не є логіним, проте тільки в такому вігляді дійсно можу очистити всі інтервали. У віпадках перебору масиву interval_id все одно лишаються ті id, що якимось чином до нього ?не потрапили?. Не розумію  чому, помилка проявляеться тільки при швидкій зміні розмірів екрану
@@ -80,7 +85,7 @@ function adaptiveDesign() {
           line.style.borderColor = "white";
         }
 
-        for(let link of links) {
+        for(let link of navigationLinkArr) {
           link.removeEventListener("click", animateMenuButton);
         }
 
@@ -89,6 +94,27 @@ function adaptiveDesign() {
         drawDesign();
       }
     }, 1000);
+  }
+
+
+  function toggleOverlay() {
+    let overlay = document.getElementById("overlay");
+
+    if(overlay.classList.contains("overlay")) {
+      overlay.textContent = "";
+      overlay.classList.toggle("overlay");
+    } else {
+      overlay.classList.toggle("overlay");
+      overlay.textContent = "SITE IS LOADING";
+    }
+  }
+
+
+  function elementOffset(elem) {
+    let el = elem.getBoundingClientRect();
+    let scrolltop = Math.round(document.body.scrollTop + el.top);
+    let scrollleft = Math.round(document.body.scrollLeft + el.left);
+    return {top: scrolltop, left: scrollleft}; //повертає реальне положення елемента на сторінці
   }
 
 
@@ -133,28 +159,67 @@ function adaptiveDesign() {
 
 
   function drawBackgroundS1_P1() {
-    let plot1 = document.querySelector(".plot-1");
+    let plot1 = document.querySelector(".plot-1-1");
     let plot1Style = getComputedStyle(plot1);
-    let canvas = document.getElementById("canvasS1-P1");
-    let ctx = canvas.getContext("2d");
-    canvas.width = Math.floor(parseInt(plot1Style.width));
+
+    const canvas = document.getElementById("canvasS1-P1");
+    const ctx = canvas.getContext("2d");
+    canvas.width = parseInt(plot1Style.width);
     canvas.height = parseInt(plot1Style.height);
 
-    // let p1 =
-    //
-    // ctx.fillStyle = backgroundColor;
-    // ctx.strokeStyle = "red";
-    // ctx.beginPath();
-    // ctx.moveTo(0, 0);
+    let backgroundWidth = parseInt(plot1Style.width);
+    cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Where x - stick; 0.5x - radiusOfCornerCircle
+    let backgroudStick = backgroundWidth / 2.5;
+    let roundingRadius = 30; //коефіціент скруглення кутів
+    let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. Завдяки ньому знаходимо протилежний катет трикутника побудованого на радіусі кола що дотикаеться до 2 прямих які потрібно скруглити.(більш детально у README);
 
+/*Image Background*/
+    ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(backgroudStick * 1.5, 0);
+    ctx.lineTo(backgroundWidth - roundingLeg, backgroudStick - roundingLeg);
+    ctx.arc(backgroundWidth - roundingRadius, backgroudStick + roundingLeg, roundingRadius, 3*Math.PI/1.7, 0, false);
+    ctx.lineTo(backgroundWidth, backgroudStick * 2);
+    ctx.arc(backgroudStick * 2, backgroudStick * 2, cornerCircleRadius, 0, Math.PI / 2, false);
+    ctx.moveTo(backgroudStick * 2, backgroundWidth);
+    ctx.lineTo(backgroudStick * 1 + roundingLeg, backgroundWidth);
+    ctx.arc(backgroudStick * 1 + roundingLeg, backgroundWidth - roundingRadius, roundingRadius, Math.PI / 2, 3*Math.PI/4, false);
+    ctx.lineTo(0, backgroudStick * 1.5);
+    ctx.lineTo(0, 0);
+    ctx.fill();
+  }
+
+
+  function drawBackgroundS1_P2() {
+    let plot2 = document.querySelector(".plot-1-2");
+    let plot2Style = getComputedStyle(plot2);
+    let sectionStyle = getComputedStyle(sectionsArr[0]);
+
+    const canvas = document.getElementById("canvasS1-P2");
+    const ctx = canvas.getContext("2d");
+    canvas.width = parseInt(plot2Style.width);
+    canvas.height = parseInt(plot2Style.height);
+
+    let backgroundWidth = parseInt(plot2Style.width);
+    let sectionHeight = parseInt(sectionStyle.height);
+
+    ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.moveTo(backgroundWidth, 0);
+    ctx.lineTo(cornerCircleRadius / 2.3, backgroundWidth - cornerCircleRadius / 2.3);
+    ctx.arc(cornerCircleRadius, backgroundWidth + cornerCircleRadius / 2.4 - 1, cornerCircleRadius, 5*Math.PI/4, Math.PI, true);
+    ctx.lineTo(0, sectionHeight);
+    ctx.lineTo(backgroundWidth, sectionHeight);
+    ctx.fill();
   }
 
 
   function drawBackgroundS2() {
     let section2 = document.getElementById("section-2");
-    let canvas = document.getElementById("canvasS2");
-    let ctx = canvas.getContext("2d");
-    canvas.width = Math.floor(parseInt(page.style.width));
+    const canvas = document.getElementById("canvasS2");
+    const ctx = canvas.getContext("2d");
+    canvas.width = parseInt(page.style.width);
     canvas.height = parseInt(getComputedStyle(section2).height);
 
     let leg = canvas.width / 2; //у рівнобедренному прямокутному трикутнику катети рівні
@@ -180,7 +245,7 @@ function adaptiveDesign() {
 
 
   function createAdaptiveImage() {
-    let imgContainer = document.querySelector(".plot-1");
+    let imgContainer = document.querySelector(".plot-1-1");
     let imgContainer_width = parseInt( getComputedStyle(imgContainer).width);
     let imgContainer_center = {x: imgContainer_width / 2, y: imgContainer_width / 2} // background image намальований під кутом 45 градусів, довжина = ширені.
     let imgCaption = document.querySelector(".img-caption");
@@ -232,8 +297,7 @@ function adaptiveDesign() {
 
     menuNav.style.left = headerOffset.left + (parseInt(headerStyle.width) - parseInt(menuNav.style.width)) + "px";
     let linksOffsetTop = parseInt(button.style.top) * 4 + parseInt(button.style.height) + "px"; //? Header height!
-    links[0].style.marginTop = linksOffsetTop;
-
+    navigationLinkArr[0].style.marginTop = linksOffsetTop;
 
 /*Create Lines*/
     let buttonLinesOffset = parseInt(button.style.height) / 4; //проміжок між лініями
@@ -247,18 +311,20 @@ function adaptiveDesign() {
     for(let i = 0; i < 3; i++) { //початкове положення ліній
       buttonLines[i].style.top = buttonLinesTopOffset + "px";
       buttonLines[i].style.width = button.style.width;
-      dropDownLine(i);
-
       idIntervalArr_blinkLine.push(createBlinkEffect(i));
+      setTimeout(() => {buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px", 10});
     }
 
-    function dropDownLine(i) {//окрема функція необхідна для збереження контексту значення "i"
-      setTimeout(() => buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px", 10);
-    }
+/*Create overlay*/
+    let buttonOverlay = document.querySelector(".buttonOverlay");
+    buttonOverlay.style.top = button.style.top;
+    buttonOverlay.style.left = button.style.left;
+    buttonOverlay.style.width = parseInt(button.style.width) + 2 + "px";
+    buttonOverlay.style.height = button.style.height;
 
 /*Button Handlers*/
     button.onclick = () => animateMenuButton();
-    for(let link of links) {
+    for(let link of navigationLinkArr) {
       link.addEventListener("click", animateMenuButton);
     }
   }
@@ -278,21 +344,11 @@ function adaptiveDesign() {
   }
 
 
-  function toggleOverlay() {
-    let overlay = document.getElementById("overlay");
-
-    if(overlay.classList.contains("overlay")) {
-      overlay.textContent = "";
-      overlay.classList.toggle("overlay");
-    } else {
-      overlay.classList.toggle("overlay");
-      overlay.textContent = "SITE IS LOADING";
-    }
-  }
-
-
   function animateMenuButton() {
+    let buttonOverlay = document.querySelector(".buttonOverlay");
+    buttonOverlay.classList.add("buttonOverlay_active");
     let buttonLinesOffset = parseInt(button.style.height) / 4; //проміжок між лініями
+
     if(menu.classList.contains("burger-menu_active")) {
       deactivateAnimation();
     } else {
@@ -321,7 +377,6 @@ function adaptiveDesign() {
 
         for(let i = 0; i < 3; i++) {
           buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px";
-          buttonLines[i].style.borderColor = "white";
           idIntervalArr_blinkLine.push(createBlinkEffect(i));
 
           switch (i) { //лінії розходяться, середня повертаеться
@@ -331,10 +386,12 @@ function adaptiveDesign() {
             case 1:
             buttonLines[i].style.marginLeft = "0px";
             buttonLines[i].style.backgroundColor = "gray";
-            buttonLines[i].style.border = "1px solid white";
+            buttonLines[i].style.borderTop = "1px solid white";
+            buttonLines[i].style.borderBottom = "1px solid white";
               break;
           }
         }
+        buttonOverlay.classList.remove("buttonOverlay_active");
       }
     }
 
@@ -367,11 +424,8 @@ function adaptiveDesign() {
 
 /*активація меню 2 крок*/
       function handlerAnimOn() {
-        // document.querySelector(".burger-menu_nav").ontransitionend = animateMenuNavigation();
-        document.querySelector(".burger-menu_nav").addEventListener("transitionend", (el) => {
-          if(el.propertyName == "height") animateMenuNavigation();
-        });
         menu.classList.toggle("burger-menu_active");
+        animateMenuNavigation();
 
         for(let i = 0; i < 3; i++) {
           switch (i) {
@@ -384,12 +438,15 @@ function adaptiveDesign() {
               break;
           }
         }
+        buttonOverlay.classList.remove("buttonOverlay_active");
       }
     }
   }
 
 
   function animateMenuNavigation() {
+    let navigationBackground = document.querySelector(".burger-menu_nav");
+
     if(menu.classList.contains("burger-menu_active")) {
       activateAnimation();
     } else {
@@ -397,9 +454,11 @@ function adaptiveDesign() {
     }
 
     function deactivateAnimation() {
-      links[0].style.borderTop = "none";
+      navigationBackground.style.height = "0";
+      navigationLinkArr[0].style.borderTop = "none";
 
-      for(let link of links) {
+      for(let link of navigationLinkArr) {
+        link.style.transitionDuration = "0";
         link.style.fontSize = "0px";
         link.style.color = "gray";
         link.style.borderBottom = "none";
@@ -410,25 +469,24 @@ function adaptiveDesign() {
     }
 
     function activateAnimation() {
-      links[0].style.borderTop = "1px solid black";
+      navigationBackground.style.transitionDuration = "0.4s";
+      navigationBackground.style.height = "100vh";
 
-      for(let link of links) {
-        link.style.fontSize = fontSize + "px";
-        link.style.borderBottom = "1px solid black";
-        link.style.paddingTop = parseInt(headerStyle.height) / 10 + "px";
-        link.style.paddingBottom = parseInt(headerStyle.height) / 10 + "px";
+      navigationBackground.ontransitionend = () => {
+        navigationLinkArr[0].style.borderTop = "1px solid black";
 
-        setTimeout(() => link.style.color = "white", 50);
+        for(let link of navigationLinkArr) {
+          link.style.transitionDuration = "0.6s";
+          link.style.fontSize = fontSize + "px";
+          link.style.borderBottom = "1px solid black";
+          link.style.paddingTop = parseInt(headerStyle.height) / 10 + "px";
+          link.style.paddingBottom = parseInt(headerStyle.height) / 10 + "px";
+
+          setTimeout(() => link.style.color = "white", 50);
+        }
+        navigationBackground.ontransitionend = undefined;
       }
     }
-  }
-
-
-  function elementOffset(elem) {
-    let el = elem.getBoundingClientRect();
-    let scrolltop = Math.round(document.body.scrollTop + el.top);
-    let scrollleft = Math.round(document.body.scrollLeft + el.left);
-    return {top: scrolltop, left: scrollleft}; //повертає реальне положення елемента на сторінці
   }
 
 
@@ -474,7 +532,7 @@ function adaptiveDesign() {
   function adaptiveContactContainer() {
 
     let contact = document.querySelector(".contacts");
-    let contactContainerStyle = getComputedStyle( document.querySelector(".plot-1"))
+    let contactContainerStyle = getComputedStyle( document.querySelector(".plot-1-1"))
     let arrOfSpan = [...contact.children].slice(1);
     let scillsOffset = elementOffset(document.querySelector(".scills"));
     let purposeContainer = document.querySelector(".aim");
