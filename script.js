@@ -2,12 +2,11 @@
 document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);//для тестов и разработки, удалить после окончания проекта
 
 function adaptiveDesign() {
-  let sectionsArr = document.getElementsByTagName("section");
   let menu = document.querySelector(".burger-menu");
   let button = document.querySelector(".burger-menu_button");
   let buttonLines = button.children;
   let navigationLinkArr = Array.from( document.querySelector(".burger-menu_nav").children);
-  let page = document.querySelector(".page");
+  let pageContent = document.querySelector(".pageContent");
   let idIntervalArr_blinkLine = [];
   let backgroundColor = "#6D6363";
   let cornerCircleRadius;
@@ -25,26 +24,30 @@ function adaptiveDesign() {
 
 
   function drawDesign() {
-    windowInnerWidth = document.documentElement.clientWidth; //параметри можуть змінюватись
+    windowInnerWidth = document.documentElement.clientWidth; //можуть змінюватись при перевороті пристрою
     windowInnerHeight = document.documentElement.clientHeight;
     headerStyle = getComputedStyle( document.querySelector("header"));
     footerStyle = getComputedStyle( document.querySelector("footer"));
-    console.log("drawDesign");
 
     try {
+      /* f() for build content */
       adaptiveBodySize();
-      drawBackgroundS1_P1();
-      drawBackgroundS1_P2();
-      drawBackgroundS2();
       createAdaptiveImage();
       createAdaptiveBurgerMenu();
       adaptiveScillsContainer();
       adaptivePurposeContainer();
       adaptiveContactContainer();
+
+      /* f() for make site pretty */
+      correctExtraHeight();
+      drawBackgroundS1_P1();
+      drawBackgroundS1_P2();
+      drawBackgroundS2();
       toggleOverlay();
     } catch (error) {
       return(error);
     }
+
 
     // let mainPromise = new Promise( function(resolve, reject) {
     //   setInterval(function(resolve) {
@@ -97,19 +100,6 @@ function adaptiveDesign() {
   }
 
 
-  function toggleOverlay() {
-    let overlay = document.getElementById("overlay");
-
-    if(overlay.classList.contains("overlay")) {
-      overlay.textContent = "";
-      overlay.classList.toggle("overlay");
-    } else {
-      overlay.classList.toggle("overlay");
-      overlay.textContent = "SITE IS LOADING";
-    }
-  }
-
-
   function elementOffset(elem) {
     let el = elem.getBoundingClientRect();
     let scrolltop = Math.round(document.body.scrollTop + el.top);
@@ -119,20 +109,28 @@ function adaptiveDesign() {
 
 
   function adaptiveBodySize() {
+    let sectionsArr = document.getElementsByTagName("section");
+    let header = document.querySelector(".header");
     sectionsArr = document.getElementsByTagName("section");
 
     if(windowInnerWidth > 990) {
-      fontSize = 22;
-      page.style.left = (windowInnerWidth - 990) / 2 + "px";
-      page.style.width = "990px";
+      fontSize = 20;
+      pageContent.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
+      pageContent.style.width = "990px";
+      header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
+      header.style.width = "990px";
     } else if(windowInnerWidth >= 660 && windowInnerWidth < 990 ) {
       fontSize = 20;
-      page.style.left = "0px";
-      page.style.width = windowInnerWidth + "px";
+      pageContent.style.marginLeft = "0px";
+      pageContent.style.width = windowInnerWidth + "px";
+      header.style.marginLeft = "0px";
+      header.style.width = windowInnerWidth + "px";
     } else {
       fontSize = 18;
-      page.style.left = "0px";
-      page.style.width = windowInnerWidth + "px";
+      pageContent.style.marginLeft = "0px";
+      pageContent.style.width = windowInnerWidth + "px";
+      header.style.marginLeft = "0px";
+      header.style.width = windowInnerWidth + "px";
     }
 
     if(windowInnerHeight < 660) {
@@ -144,7 +142,7 @@ function adaptiveDesign() {
         if(i == 0) {
           sectionsArr[i].style.height = windowInnerHeight - parseInt(headerStyle.height) + "px";
         } else if (i == sectionsArr.length - 1) {
-          sectionsArr[i].style.height = windowInnerHeight - parseInt(footerStyle.height) - parseInt(footerStyle.paddingTop) - parseInt(footerStyle.paddingBottom)+ "px";
+          sectionsArr[i].style.height = windowInnerHeight - parseInt(footerStyle.height) - parseInt(footerStyle.paddingTop) - parseInt(footerStyle.paddingBottom) + "px";
         } else {
           sectionsArr[i].style.height = "100vh";
         }
@@ -155,92 +153,6 @@ function adaptiveDesign() {
     [...h2].forEach((elem) => {
       elem.style.fontSize = fontSize + 2 + "px";
     });
-  }
-
-
-  function drawBackgroundS1_P1() {
-    let plot1 = document.querySelector(".plot-1-1");
-    let plot1Style = getComputedStyle(plot1);
-
-    const canvas = document.getElementById("canvasS1-P1");
-    const ctx = canvas.getContext("2d");
-    canvas.width = parseInt(plot1Style.width);
-    canvas.height = parseInt(plot1Style.height);
-
-    let backgroundWidth = parseInt(plot1Style.width);
-    cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Where x - stick; 0.5x - radiusOfCornerCircle
-    let backgroudStick = backgroundWidth / 2.5;
-    let roundingRadius = 30; //коефіціент скруглення кутів
-    let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. Завдяки ньому знаходимо протилежний катет трикутника побудованого на радіусі кола що дотикаеться до 2 прямих які потрібно скруглити.(більш детально у README);
-
-/*Image Background*/
-    ctx.fillStyle = backgroundColor;
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(backgroudStick * 1.5, 0);
-    ctx.lineTo(backgroundWidth - roundingLeg, backgroudStick - roundingLeg);
-    ctx.arc(backgroundWidth - roundingRadius, backgroudStick + roundingLeg, roundingRadius, 3*Math.PI/1.7, 0, false);
-    ctx.lineTo(backgroundWidth, backgroudStick * 2);
-    ctx.arc(backgroudStick * 2, backgroudStick * 2, cornerCircleRadius, 0, Math.PI / 2, false);
-    ctx.moveTo(backgroudStick * 2, backgroundWidth);
-    ctx.lineTo(backgroudStick * 1 + roundingLeg, backgroundWidth);
-    ctx.arc(backgroudStick * 1 + roundingLeg, backgroundWidth - roundingRadius, roundingRadius, Math.PI / 2, 3*Math.PI/4, false);
-    ctx.lineTo(0, backgroudStick * 1.5);
-    ctx.lineTo(0, 0);
-    ctx.fill();
-  }
-
-
-  function drawBackgroundS1_P2() {
-    let plot2 = document.querySelector(".plot-1-2");
-    let plot2Style = getComputedStyle(plot2);
-    let sectionStyle = getComputedStyle(sectionsArr[0]);
-
-    const canvas = document.getElementById("canvasS1-P2");
-    const ctx = canvas.getContext("2d");
-    canvas.width = parseInt(plot2Style.width);
-    canvas.height = parseInt(plot2Style.height);
-
-    let backgroundWidth = parseInt(plot2Style.width);
-    let sectionHeight = parseInt(sectionStyle.height);
-
-    ctx.fillStyle = backgroundColor;
-    ctx.beginPath();
-    ctx.moveTo(backgroundWidth, 0);
-    ctx.lineTo(cornerCircleRadius / 2.3, backgroundWidth - cornerCircleRadius / 2.3);
-    ctx.arc(cornerCircleRadius, backgroundWidth + cornerCircleRadius / 2.4 - 1, cornerCircleRadius, 5*Math.PI/4, Math.PI, true);
-    ctx.lineTo(0, sectionHeight);
-    ctx.lineTo(backgroundWidth, sectionHeight);
-    ctx.fill();
-  }
-
-
-  function drawBackgroundS2() {
-    let section2 = document.getElementById("section-2");
-    const canvas = document.getElementById("canvasS2");
-    const ctx = canvas.getContext("2d");
-    canvas.width = parseInt(page.style.width);
-    canvas.height = parseInt(getComputedStyle(section2).height);
-
-    let leg = canvas.width / 2; //у рівнобедренному прямокутному трикутнику катети рівні
-
-
-/*central line*/
-    ctx.strokeStyle = backgroundColor;
-    ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
-    ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, 0);
-    ctx.lineTo(canvas.width / 2, canvas.height - leg + 1);
-    ctx.stroke();
-
-/*triangle*/
-    ctx.fillStyle = backgroundColor;
-    ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.height - leg);
-    ctx.lineTo(0, canvas.height);
-    ctx.lineTo(canvas.width, canvas.height);
-    ctx.lineTo(canvas.width / 2, canvas.height - leg);
-    ctx.fill();
   }
 
 
@@ -302,9 +214,11 @@ function adaptiveDesign() {
 /*Create Lines*/
     let buttonLinesOffset = parseInt(button.style.height) / 4; //проміжок між лініями
     let buttonLinesTopOffset = parseInt(button.style.top); //відступ з гори до ліній меню
+
     for(let i = 0; i < 3; i++) {
       let line = document.createElement("span");
       line.classList.add("burger-menu_lines");
+      if(buttonLinesOffset < 12) line.style.height = "4px";
       button.appendChild(line);
     }
 
@@ -391,7 +305,7 @@ function adaptiveDesign() {
               break;
           }
         }
-        buttonOverlay.classList.remove("buttonOverlay_active");
+        // buttonOverlay.classList.remove("buttonOverlay_active");
       }
     }
 
@@ -438,13 +352,14 @@ function adaptiveDesign() {
               break;
           }
         }
-        buttonOverlay.classList.remove("buttonOverlay_active");
+        // buttonOverlay.classList.remove("buttonOverlay_active");
       }
     }
   }
 
 
   function animateMenuNavigation() {
+    let buttonOverlay = document.querySelector(".buttonOverlay");
     let navigationBackground = document.querySelector(".burger-menu_nav");
 
     if(menu.classList.contains("burger-menu_active")) {
@@ -456,6 +371,10 @@ function adaptiveDesign() {
     function deactivateAnimation() {
       navigationBackground.style.height = "0";
       navigationLinkArr[0].style.borderTop = "none";
+      navigationBackground.ontransitionend = () => {
+        navigationBackground.ontransitionend = undefined;
+        buttonOverlay.classList.remove("buttonOverlay_active");
+      }
 
       for(let link of navigationLinkArr) {
         link.style.transitionDuration = "0";
@@ -473,7 +392,9 @@ function adaptiveDesign() {
       navigationBackground.style.height = "100vh";
 
       navigationBackground.ontransitionend = () => {
+        navigationBackground.ontransitionend = undefined;
         navigationLinkArr[0].style.borderTop = "1px solid black";
+        buttonOverlay.classList.remove("buttonOverlay_active");
 
         for(let link of navigationLinkArr) {
           link.style.transitionDuration = "0.6s";
@@ -484,7 +405,6 @@ function adaptiveDesign() {
 
           setTimeout(() => link.style.color = "white", 50);
         }
-        navigationBackground.ontransitionend = undefined;
       }
     }
   }
@@ -495,7 +415,7 @@ function adaptiveDesign() {
     let scillsStyle = getComputedStyle(scills);
     let scillsPosition = elementOffset(scills);
     let scillsElement = scills.children;
-    let liOffset = elementOffset(document.querySelector(".status-cont")).left - parseInt(page.style.left);
+    let liOffset = elementOffset(document.querySelector(".status-cont")).left - parseInt(pageContent.style.marginLeft);
 
     // console.log(scillsStyle.marginTop);
     // console.log(windowInnerHeight - (scillsPosition.top + parseInt(scillsStyle.height)));
@@ -532,7 +452,7 @@ function adaptiveDesign() {
   function adaptiveContactContainer() {
 
     let contact = document.querySelector(".contacts");
-    let contactContainerStyle = getComputedStyle( document.querySelector(".plot-1-1"))
+    let contactContainerStyle = getComputedStyle( document.querySelector(".plot-1-1"));
     let arrOfSpan = [...contact.children].slice(1);
     let scillsOffset = elementOffset(document.querySelector(".scills"));
     let purposeContainer = document.querySelector(".aim");
@@ -543,8 +463,134 @@ function adaptiveDesign() {
     for(let span of arrOfSpan) {
       span.style.fontSize = fontSize + "px";
       span.children[0].style.fontSize = fontSize + "px"; //link fontSize
-      span.style.marginLeft = windowInnerWidth / 2 - parseInt(contactContainerStyle.width) - parseInt(page.style.left) + "px";
+      span.style.marginLeft = windowInnerWidth / 2 - parseInt(contactContainerStyle.width) - parseInt(pageContent.style.marginLeft) + "px";
       span.style.marginLeft = parseInt(span.style.marginLeft) + 1.5 * fontSize + "px"; // додаю значення contacts.span::before.left
+    }
+  }
+
+
+  function correctExtraHeight() {
+    let sectionsArr = document.getElementsByTagName("section");
+    let legalExtraHeight = 80;
+
+    for(let i = 0; i < sectionsArr.length; i++) {
+      switch (i) { //підлаштування висоти для кожної секції сайту
+        case 0:
+          let photoHeight = parseInt(getComputedStyle( document.querySelector(".photo")).height);
+          let scillsStyle = getComputedStyle( document.querySelector(".scills"));
+          let scillsHeight = parseInt(scillsStyle.height) + parseInt(scillsStyle.marginTop);
+
+          if(parseInt(sectionsArr[i].style.height) - photoHeight - scillsHeight > legalExtraHeight) {
+            sectionsArr[i].style.height = photoHeight + scillsHeight + parseInt(scillsStyle.marginTop) + "px";
+          }
+          break;
+        case 1:
+
+          break;
+        case 2:
+
+          break;
+        default:
+      }
+    }
+  }
+
+
+  function drawBackgroundS1_P1() {
+    let plot1 = document.querySelector(".plot-1-1");
+    let plot1Style = getComputedStyle(plot1);
+
+    const canvas = document.getElementById("canvasS1-P1");
+    const ctx = canvas.getContext("2d");
+    canvas.width = parseInt(plot1Style.width);
+    canvas.height = parseInt(plot1Style.height);
+
+    let backgroundWidth = parseInt(plot1Style.width);
+    cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Where x - stick; 0.5x - radiusOfCornerCircle
+    let backgroudStick = backgroundWidth / 2.5;
+    let roundingRadius = 30; //коефіціент скруглення кутів
+    let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. Завдяки ньому знаходимо протилежний катет трикутника побудованого на радіусі кола що дотикаеться до 2 прямих які потрібно скруглити.(більш детально у README);
+
+/*Image Background*/
+    ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(backgroudStick * 1.5, 0);
+    ctx.lineTo(backgroundWidth - roundingLeg, backgroudStick - roundingLeg);
+    ctx.arc(backgroundWidth - roundingRadius, backgroudStick + roundingLeg, roundingRadius, 3*Math.PI/1.7, 0, false);
+    ctx.lineTo(backgroundWidth, backgroudStick * 2);
+    ctx.arc(backgroudStick * 2, backgroudStick * 2, cornerCircleRadius, 0, Math.PI / 2, false);
+    ctx.moveTo(backgroudStick * 2, backgroundWidth);
+    ctx.lineTo(backgroudStick * 1 + roundingLeg, backgroundWidth);
+    ctx.arc(backgroudStick * 1 + roundingLeg, backgroundWidth - roundingRadius, roundingRadius, Math.PI / 2, 3*Math.PI/4, false);
+    ctx.lineTo(0, backgroudStick * 1.5);
+    ctx.lineTo(0, 0);
+    ctx.fill();
+  }
+
+
+  function drawBackgroundS1_P2() {
+    let plot2 = document.querySelector(".plot-1-2");
+    let plot2Style = getComputedStyle(plot2);
+    // let sectionStyle = getComputedStyle(document.getElementById("section-1"));
+
+    const canvas = document.getElementById("canvasS1-P2");
+    const ctx = canvas.getContext("2d");
+    canvas.width = parseInt(plot2Style.width);
+    canvas.height = parseInt(plot2Style.height);
+
+    let backgroundWidth = parseInt(plot2Style.width);
+    // let sectionHeight = parseInt(sectionStyle.height);
+
+    ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.moveTo(backgroundWidth, 0);
+    ctx.lineTo(cornerCircleRadius / 2.3, backgroundWidth - cornerCircleRadius / 2.3);
+    ctx.arc(cornerCircleRadius, backgroundWidth + cornerCircleRadius / 2.4 - 1, cornerCircleRadius, 5*Math.PI/4, Math.PI, true);
+    ctx.lineTo(0, parseInt(plot2Style.height));
+    ctx.lineTo(backgroundWidth, parseInt(plot2Style.height));
+    ctx.fill();
+  }
+
+
+  function drawBackgroundS2() {
+    let section2 = document.getElementById("section-2");
+    const canvas = document.getElementById("canvasS2");
+    const ctx = canvas.getContext("2d");
+    canvas.width = parseInt(pageContent.style.width);
+    canvas.height = parseInt(getComputedStyle(section2).height);
+
+    let leg = canvas.width / 2; //у рівнобедренному прямокутному трикутнику катети рівні
+
+
+/*central line*/
+    ctx.strokeStyle = backgroundColor;
+    ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, 0);
+    ctx.lineTo(canvas.width / 2, canvas.height - leg + 1);
+    ctx.stroke();
+
+/*triangle*/
+    ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height - leg);
+    ctx.lineTo(0, canvas.height);
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineTo(canvas.width / 2, canvas.height - leg);
+    ctx.fill();
+  }
+
+
+  function toggleOverlay() {
+    let overlay = document.getElementById("overlay");
+
+    if(overlay.classList.contains("overlay")) {
+      overlay.textContent = "";
+      overlay.classList.toggle("overlay");
+    } else {
+      overlay.classList.toggle("overlay");
+      overlay.textContent = "SITE IS LOADING";
     }
   }
 
