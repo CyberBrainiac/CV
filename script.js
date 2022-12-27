@@ -144,13 +144,19 @@ function adaptiveDesign() {
         } else if (i == sectionsArr.length - 1) {
           sectionsArr[i].style.height = windowInnerHeight - parseInt(footerStyle.height) - parseInt(footerStyle.paddingTop) - parseInt(footerStyle.paddingBottom) + "px";
         } else {
-          sectionsArr[i].style.height = "100vh";
+          // sectionsArr[i].style.height = "100vh";
+          sectionsArr[i].style.height = windowInnerHeight + "px";
         }
       }
     }
 
     let h2 = document.getElementsByTagName("h2");
     [...h2].forEach((elem) => {
+      elem.style.fontSize = fontSize + 4 + "px";
+    });
+
+    let h3 = document.getElementsByTagName("h3");
+    [...h3].forEach((elem) => {
       elem.style.fontSize = fontSize + 2 + "px";
     });
   }
@@ -475,18 +481,24 @@ function adaptiveDesign() {
 
     for(let i = 0; i < sectionsArr.length; i++) {
       switch (i) { //підлаштування висоти для кожної секції сайту
-        case 0:
-          let photoHeight = parseInt(getComputedStyle( document.querySelector(".photo")).height);
-          let scillsStyle = getComputedStyle( document.querySelector(".scills"));
-          let scillsHeight = parseInt(scillsStyle.height) + parseInt(scillsStyle.marginTop);
 
-          if(parseInt(sectionsArr[i].style.height) - photoHeight - scillsHeight > legalExtraHeight) {
-            sectionsArr[i].style.height = photoHeight + scillsHeight + parseInt(scillsStyle.marginTop) + "px";
+        case 0:
+          let ruler_S1P1_StyleHeight = parseInt(getComputedStyle(document.querySelector(".ruler-checkExtraSize-S1P1")).height);
+
+          if(ruler_S1P1_StyleHeight > legalExtraHeight) {
+            sectionsArr[i].style.height = parseInt(sectionsArr[i].style.height) - (ruler_S1P1_StyleHeight - legalExtraHeight) + "px";
           }
           break;
-        case 1:
 
+        case 1:
+          let ruler_S2P1_StyleHeight = parseInt(getComputedStyle(document.querySelector(".ruler-checkExtraSize-S2P1")).height);
+          let plot2_1_width = windowInnerWidth / 2; //висота фонa-трикутника секції 2
+
+          if(ruler_S2P1_StyleHeight - plot2_1_width > legalExtraHeight) {
+            sectionsArr[i].style.height = parseInt(sectionsArr[i].style.height) - (ruler_S2P1_StyleHeight - plot2_1_width - legalExtraHeight) + "px";
+          }
           break;
+
         case 2:
 
           break;

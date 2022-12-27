@@ -13,6 +13,7 @@
 h2 {
   text-align: center;
   font-weight: 700;
+  text-shadow: 4px 4px 3px #888;
 }
 
 img {border-radius: 50%;}
@@ -60,7 +61,7 @@ ul {list-style-image: url("images/list-marker.svg");}
   background: #ddd;
   padding: 1em;
   padding-left: 1.5em;
-  margin: 10px auto;
+  margin: 14px auto;
 }
 
 .card:before, .card:after {
@@ -148,10 +149,15 @@ section {display: flex;}
     height: 100%;
     width: 40%;
     color: black;
+    display: flex;
+    flex-direction: column;
   }
   #canvasS1-P1 {
     position: absolute;
     z-index: -1;
+  }
+  .ruler-checkExtraSize-S1P1{
+    flex: 1 1 0%; /*у деяких браузерах не підтримується скорочений варіант flex: 1, використовуй повний синтаксис*/
   }
     .img-caption{
       text-align: center;
@@ -159,10 +165,6 @@ section {display: flex;}
     }
     .img-caption h2 {margin-bottom: 0.4em;}
     .status-cont {font-style: italic;}
-    .full-name { /* Why I do this ????????? */
-      margin-bottom: 0.4em;
-      font-weight: 700;
-    }
 
     .scills {margin-top: 2.5em;}
     .scills ul {
@@ -231,17 +233,25 @@ section {display: flex;}
   background-color: white;
   color: black;
 }
+  .plot-2-1 {
+    z-index: 10;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
   #canvasS2{
     position: absolute;
     z-index: 0;
   }
-
-  .plot-2-1 {
-    z-index: 10;
-    width: 50%;
-  }
+  .ruler-checkExtraSize-S2P1 {height: 100%;}
     .work-experience {margin-top: 20px;}
-    /* .work-experience h2{margin-bottom: 10px;} */
+    .card ul li {
+      margin-top: 0.5em;
+      margin-left: 1.2em;
+    }
+    .card .time {
+      margin-top: 0.5em;
+    }
 
   .plot-2-2 {
     z-index: 10;
@@ -250,11 +260,11 @@ section {display: flex;}
     .education {margin-top: 20px;}
     /* .education h2{margin-bottom: 10px;} */
 
+/* Section 3*/
 #section-3 {
-  background-image: url("https://images.unsplash.com/photo-1551656258-7610a70ff3a3?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ");
-  background-size: cover;
-  color: #000;
-  text-shadow: 4px 4px 3px #fff;
+  margin-top: 60px;
+  background-color: white;
+  color: black;
 }
 
 #section-4 {
