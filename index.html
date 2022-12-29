@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="default-style" content="default style"> ЗАЧЕМ? ЗАЧЕМ? -->
+  <link rel="stylesheet" href="styles/style.css" title = "default style">
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+  <base target="_blank">
+  <title>Site Resume</title>
+</head>
+
+
+<body class="page">
+  <!-- Лінійку потрібно буде видалити -->
+  <div class="horizontal-ruler"></div>
+  <!-- Лінійку потрібно буде видалити -->
+  <div class="overlay" id="overlay"><span>SITE IS LOADING<span></div>
+  <header class="header" id="header">
+    <div class="burger-menu">
+      <div class="burger-menu_button"></div>
+      <div class="buttonOverlay"></div>
+
+      <nav class="burger-menu_nav">
+        <a href="#header" class="burger-menu_link" target="_self">Scills & contact</a>
+        <a href="#section-2" class="burger-menu_link" target="_self">Work & education</a>
+        <a href="#section-3" class="burger-menu_link" target="_self">Section 3</a>
+        <a href="#section-4" class="burger-menu_link" target="_self">Section 4</a>
+        <a href="#section-5" class="burger-menu_link" target="_self">Section 5</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="pageContent">
+    <section id="section-1">
+      <div class="plot-1-1">
+        <canvas id="canvasS1-P1"></canvas>
+        <figure class="photo">
+          <img src="images/Greed.svg" alt="photo of pretty man">
+          <figcaption class="img-caption">
+            <!-- <h2>Arkhipov Arsenii</h2> -->
+            <h2>Some text</h2>
+            <span class="status-cont">Intern web developer</span>
+          </figcaption>
+        </figure>
+
+        <div class="scills">
+          <h2>Scills</h2>
+          <ul>
+            <li>Mocha framework</li>
+            <li>JavaScript</li>
+            <li>HTML 5</li>
+            <li>CSS 3</li>
+            <li>OOP</li>
+            <li>Git</li>
+          </ul>
+        </div>
+
+        <div class="ruler-checkExtraSize-S1P1"></div>
+      </div>
+
+      <div class="plot-1-2">
+        <canvas id="canvasS1-P2"></canvas>
+        <div class="aim">
+          <h2>My purpose</h2>
+          <span class="aim-text">Build a brilliant career in IT</span>
+        </div>
+
+        <div class="contacts">
+          <h2>Contact</h2>
+          <span class="phone">Phone: <a href="tel:+38-096-809-87-37" target="_self">(+38) 0968098737</a></span>
+          <span class="resumeFile">Resume: <a href="https://docs.google.com/document/d/1mVNu_hvkYGotuiJspQmokRyUf_wGpLxoB7I1VpieQiQ/edit?usp=sharing">file.pdf</a></span>
+          <span class="gitHub">GitHub: <a href="https://github.com/PoziTronAr/PoziTronAr.github.io">project</a></span>
+          <span class="mail">Email: <a href="mailto:arsenij.arxipov.1998@gmail.com">adress</a></span>
+          <!-- <span class="linkedin"></span>   NEEED TO BE CREATE!!!-->
+        </div>
+      </div>
+    </section>
+
+
+    <section id="section-2">
+      <canvas id="canvasS2"></canvas>
+
+      <div class="plot-2-1">
+        <div class="work-experience">
+          <h2>Work experience</h2>
+
+          <div class="card">
+            <h3>SE "Ivchenko-Progress" - research engineer</h3>
+            <div class="card-content">
+              <ul>
+                <li>Pascal and LabVIEW programming</li>
+                <li>Aircraft engine test systems management</li>
+                <li>Organization of the process of preparing an aircraft engine for testing</li>
+              </ul>
+            </div>
+            <div class="card-moreInfo">
+              <button id="ButtWork_moreInfo1" class="buttonMoreInfo" type="button" name="buttonMoreInfo1">More info</button>
+              <img src="images/send.svg">
+            </div>
+            <p class="time"><time datetime="2020-09">September 2020 - Present</time></p>
+          </div>
+
+          <div class="card">
+            <h3>Genesis(Jiji) - remote moderator</h3>
+            <div class="card-content">
+              <ul>
+                <li>Checking user content for compliance with the rules of the online marketplace</li>
+              </ul>
+            </div>
+            <div class="card-moreInfo">
+              <button id="ButtWork_moreInfo2" class="buttonMoreInfo" type="button" name="buttonMoreInfo1">More info</button>
+              <img src="images/send.svg">
+            </div>
+            <p class="time"><time datetime="PT1188D00H00M">July 2019 - October 2022</time></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="plot-2-2">
+        <div class="education">
+          <h2>Education</h2>
+          <div class = "card">
+            <h3>National University «Zaporizhzhia polytechnic»</h3>
+            <ul>
+              <li>?Master? | ?Software engineering?</li>
+            </ul>
+            <p class="time"><time datetime="2019-09">September 2020 - December 2021</time></p>
+          </div>
+          <div class = "card">
+            <h3>National University «Zaporizhzhia polytechnic»</h3>
+            <ul>
+              <li>Bachelor | Software engineering</li>
+            </ul>
+            <p class="time"><time datetime="2021-12">September 2016 - July 2020</time></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="plot-2-3">
+        <div class="language">
+          <h2>Language scills</h2>
+            <p>English - intermediate</p>
+            <p>Ukrainian - fluently</p>
+            <p>Russian -fluently</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="section-3">Section 3</section>
+    <section id="section-4">Section 4</section>
+    <section id="section-5">Section 5</section>
+  </main>
+
+
+  <footer class="footer">
+    <div class="footer-company">
+      <p>© Enthusiasm corporation</p>
+    </div>
+    <div class="footer-createYear">
+      <p>2022</p>
+    </div>
+  </footer>
+
+
+  <script>
+    window.onload = () => {
+      let promise = new Promise( function(resolve, reject) {
+
+        let script = document.createElement("script");
+        script.src = "scripts/script.js";
+        script.onload = () => {
+          let adaptiveDesign_Result = adaptiveDesign();
+
+          if(adaptiveDesign_Result instanceof Error) {
+            reject(adaptiveDesign_Result);
+          } else {
+            resolve(adaptiveDesign_Result);
+          }
+        }
+
+        document.body.append(script);
+      });
+
+      promise.then(
+        (res) => {
+          console.log("'adaptive design' completed successfully");
+        },
+        (err) => console.log(`Error in Adaptive Design: \n\n${err.stack}`)
+        // (err) => window.onerror = err
+      )
+      // .then((res) => createBubbleAnimation(res), (err) => window.onerror = err))
+    }
+  </script>
+</body>
+</html>
