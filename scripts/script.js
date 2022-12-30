@@ -3,8 +3,8 @@ document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);
 
 function adaptiveDesign() {
   let menu = document.querySelector(".burger-menu");
-  let button = document.querySelector(".burger-menu_button");
-  let buttonLines = button.children;
+  let menuButton = document.querySelector(".burger-menu_button");
+  let buttonLines = menuButton.children;
   let navigationLinkArr = Array.from( document.querySelector(".burger-menu_nav").children);
   let pageContent = document.querySelector(".pageContent");
   let idIntervalArr_blinkLine = [];
@@ -47,7 +47,7 @@ function adaptiveDesign() {
       adaptiveLanguageContainer();
       adaptiveWorkContainer();
 
-      /* f() for make site pretty */
+      /* f() for make site beauty */
       correctExtraHeight();
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
@@ -97,17 +97,64 @@ function adaptiveDesign() {
           line.style.borderColor = "white";
         }
 
+/*
+
+                      можливо варто використати addListener()
+                      з сайту: https://overcoder.net/q/69715/javascript-dom-%D0%BA%D0%B0%D0%BA-%D1%83%D0%B4%D0%B0%D0%BB%D0%B8%D1%82%D1%8C-%D0%B2%D1%81%D0%B5-%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D1%8F-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0-dom
+
+*/
         for(let link of navigationLinkArr) {
           link.removeEventListener("click", animateMenuButton);
         }
 
+/*
+
+            Ця херня не буде працювати томущо мені конче потрібно щоб функція обробник була у функції створення
+            мобільного дізайну, томущо в іншому випадку доведеться додавати мінімум 3 нових глобальних змінних
+
+
+        let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
+        for (let cardButton of cardButtonArr) {
+          cardButton.removeEventListener("click", clickhandler);
+        }
+*/
         document.querySelector(".burger-menu_button").innerHTML = '';
-        button.onclick = '';
+        menuButton.onclick = '';
         drawDesign();
       }
     }, 1000);
   }
 
+
+/*
+  var _eventHandlers = {}; // somewhere global
+  function addListener(node, event, handler, capture) {
+      if(!(node in _eventHandlers)) {
+          // _eventHandlers stores references to nodes
+          _eventHandlers[node] = {};
+      }
+      if(!(event in _eventHandlers[node])) {
+          // each entry contains another entry for each event type
+          _eventHandlers[node][event] = [];
+      }
+      // capture reference
+      _eventHandlers[node][event].push([handler, capture]);
+      node.addEventListener(event, handler, capture);
+   }
+
+  function removeAllListeners(node, event) {
+      if(node in _eventHandlers) {
+          var handlers = _eventHandlers[node];
+          if(event in handlers) {
+              var eventHandlers = handlers[event];
+              for(var i = eventHandlers.length; i--;) {
+                  var handler = eventHandlers[i];
+                  node.removeEventListener(event, handler[0], handler[1]);
+              }
+          }
+      }
+  }
+*/
 
   function elementOffset(elem) {
     let el = elem.getBoundingClientRect();
@@ -189,14 +236,6 @@ function adaptiveDesign() {
     for (let li of liArr) {
       li.style.fontSize = fontSize + "px";
     }
-
-
-    /*За такою самою логікою зробити стилі для ВСІХ текстових елементів одразу (span / li / p / a / time)
-!  ниид
-!  ту бии
-!  комплате
-!  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    */
   }
 
 
@@ -223,17 +262,17 @@ function adaptiveDesign() {
     let headerOffset = elementOffset(header);
 
 /*Menu Button Style*/
-    button.style.top = Math.trunc( parseInt(headerStyle.height) / 10) + "px";
-    button.style.left = Math.trunc(
+    menuButton.style.top = Math.trunc( parseInt(headerStyle.height) / 10) + "px";
+    menuButton.style.left = Math.trunc(
       (headerOffset.left + parseInt(headerStyle.width)) - (parseInt(headerStyle.width) / 8)) + "px";
-    button.style.width = Math.trunc( parseInt(headerStyle.width) / 12) + "px";
+    menuButton.style.width = Math.trunc( parseInt(headerStyle.width) / 12) + "px";
 
-    if( parseInt(button.style.width) > 60) {
-      button.style.height = button.style.width = "60px";
-    } else if (parseInt(button.style.width) < 35) {
-      button.style.height = button.style.width = "36px";
+    if( parseInt(menuButton.style.width) > 60) {
+      menuButton.style.height = menuButton.style.width = "60px";
+    } else if (parseInt(menuButton.style.width) < 35) {
+      menuButton.style.height = menuButton.style.width = "36px";
     } else {
-      button.style.height = button.style.width;
+      menuButton.style.height = menuButton.style.width;
     }
 
 /*Menu Navigation Style*/
@@ -247,36 +286,36 @@ function adaptiveDesign() {
     }
 
     menuNav.style.left = headerOffset.left + (parseInt(headerStyle.width) - parseInt(menuNav.style.width)) + "px";
-    let linksOffsetTop = parseInt(button.style.top) * 4 + parseInt(button.style.height) + "px";
+    let linksOffsetTop = parseInt(menuButton.style.top) * 4 + parseInt(menuButton.style.height) + "px";
     navigationLinkArr[0].style.marginTop = linksOffsetTop;
 
 /*Create Lines*/
-    let buttonLinesOffset = parseInt(button.style.height) / 4; //проміжок між лініями
-    let buttonLinesTopOffset = parseInt(button.style.top); //відступ з гори до ліній меню
+    let buttonLinesOffset = parseInt(menuButton.style.height) / 4; //проміжок між лініями
+    let buttonLinesTopOffset = parseInt(menuButton.style.top); //відступ з гори до ліній меню
 
     for(let i = 0; i < 3; i++) {
       let line = document.createElement("span");
       line.classList.add("burger-menu_lines");
       if(buttonLinesOffset < 12) line.style.height = "4px";
-      button.appendChild(line);
+      menuButton.appendChild(line);
     }
 
     for(let i = 0; i < 3; i++) { //початкове положення ліній
       buttonLines[i].style.top = buttonLinesTopOffset + "px";
-      buttonLines[i].style.width = button.style.width;
+      buttonLines[i].style.width = menuButton.style.width;
       idIntervalArr_blinkLine.push(createBlinkEffect(i));
       setTimeout(() => {buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px", 10});
     }
 
 /*Create overlay*/
     let buttonOverlay = document.querySelector(".buttonOverlay");
-    buttonOverlay.style.top = button.style.top;
-    buttonOverlay.style.left = button.style.left;
-    buttonOverlay.style.width = parseInt(button.style.width) + 2 + "px";
-    buttonOverlay.style.height = button.style.height;
+    buttonOverlay.style.top = menuButton.style.top;
+    buttonOverlay.style.left = menuButton.style.left;
+    buttonOverlay.style.width = parseInt(menuButton.style.width) + 2 + "px";
+    buttonOverlay.style.height = menuButton.style.height;
 
-/*Button Handlers*/
-    button.onclick = () => animateMenuButton();
+/*Menu Button Handlers*/
+    menuButton.onclick = () => animateMenuButton();
     for(let link of navigationLinkArr) {
       link.addEventListener("click", animateMenuButton);
     }
@@ -300,7 +339,7 @@ function adaptiveDesign() {
   function animateMenuButton() {
     let buttonOverlay = document.querySelector(".buttonOverlay");
     buttonOverlay.classList.add("buttonOverlay_active");
-    let buttonLinesOffset = parseInt(button.style.height) / 4; //проміжок між лініями
+    let buttonLinesOffset = parseInt(menuButton.style.height) / 4; //проміжок між лініями
 
     if(menu.classList.contains("burger-menu_active")) {
       deactivateAnimation();
@@ -504,12 +543,50 @@ function adaptiveDesign() {
       workContainer.classList.toggle("mobile");
     }
 
-    let buttonArr = document.querySelectorAll("button.buttonMoreInfo");
-    for (let button of buttonArr) {
-      button.addEventListener("click", function clickhandler() {
-        button.removeEventListener("click", clickhandler);
-        workContainer.classList.toggle("mobile");
-      });
+/*адаптація для мобільного дизайну*/
+    let cardContentArr = section2.querySelectorAll("div.card-content");
+    let divMoreInfoArr = section2.querySelectorAll("div.card-moreInfo");
+    let divLessInfoArr = section2.querySelectorAll("div.card-lessInfo");
+    let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
+
+    for (let cardButton of cardButtonArr) {
+      cardButton.addEventListener("click", clickHandler);
+    }
+
+    function clickHandler() {
+      switch (this.id) {
+        case "buttWork_moreInfo1":
+          divMoreInfoArr[0].style.display = "none";
+          divMoreInfoArr[1].style.display = "none";
+          divLessInfoArr[0].style.display = "block";
+          // divLessInfoArr[1].style.display = "none";
+          cardContentArr[0].style.display = "block";
+          // cardContentArr[1].style.display = "none";
+          break;
+
+        case "buttWork_moreInfo2":
+          divMoreInfoArr[0].style.display = "none";
+          divMoreInfoArr[1].style.display = "none";
+          divLessInfoArr[1].style.display = "block";
+          // divLessInfoArr[0].style.display = "none";
+          cardContentArr[1].style.display = "block";
+          // cardContentArr[0].style.display = "none";
+          break;
+
+        case "buttWork_lessInfo1":
+          divLessInfoArr[0].style.display = "none";
+          divMoreInfoArr[0].style.display = "block";
+          divMoreInfoArr[1].style.display = "block";
+          cardContentArr[0].style.display = "none";
+          break
+
+        case "buttWork_lessInfo2":
+          divLessInfoArr[1].style.display = "none";
+          divMoreInfoArr[0].style.display = "block";
+          divMoreInfoArr[1].style.display = "block";
+          cardContentArr[1].style.display = "none";
+          break
+      }
     }
   }
 

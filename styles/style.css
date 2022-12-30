@@ -7,19 +7,28 @@
   padding: 0px;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
 }
+
+header {
+  height: 20vh;
+  background-color: lightgreen;
+}
+
+section {display: flex;}
 
 h2 {
   text-align: center;
   font-weight: 700;
   text-shadow: 2px 2px 2px #777;
 }
+h3 {font-weight: 500;}
 
 img {border-radius: 50%;}
-
+button {font-weight: 500;}
 ul {list-style-image: url("../images/list-marker.svg");}
 time {color: gray;}
+
 
 .page {
   width: 100%;
@@ -54,36 +63,6 @@ time {color: gray;}
   flex-wrap: wrap;
   z-index: 50;
   transition: 0.4s;
-}
-
-.card {
-  position: relative;
-  width: 70%;
-  background: #ddd;
-  padding: 0.5em;
-  padding-left: 1em;
-  margin: 14px auto;
-  border-radius: 20px;
-}
-
-.card:before, .card:after {
-  z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 15px;
-  left: 10px;
-  width: 50%;
-  top: 60%;
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 15px 8px rgba(0, 0, 0, 0.7);
-  transform: rotate(-4deg);
-  border-radius: 10px;
-}
-
-.card:after {
-  transform: rotate(4deg);
-  right: 10px;
-  left: auto;
 }
 
 
@@ -134,12 +113,36 @@ time {color: gray;}
 .burger-menu_link:hover {filter: brightness(0.7);}
 
 
-header {
-  height: 20vh;
-  background-color: lightgreen;
+.card {
+  position: relative;
+  width: 70%;
+  background: #ddd;
+  padding: 0.5em;
+  padding-left: 1em;
+  margin: 14px auto;
+  border-radius: 20px;
 }
 
-section {display: flex;}
+.card:before, .card:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 60%;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 8px rgba(0, 0, 0, 0.7);
+  transform: rotate(-4deg);
+  border-radius: 10px;
+}
+
+.card:after {
+  transform: rotate(4deg);
+  right: 10px;
+  left: auto;
+}
+
 
 /*Section 1*/
 #section-1 {
@@ -255,9 +258,13 @@ section {display: flex;}
       margin-top: 0.5em;
       margin-left: 1.2em;
     }
+    #buttWork_moreInfo1::before {background-image: url("../images/arrow-down.svg");}
     .card .time {margin-top: 0.5em;}
-    /* .card-content {display: block;} */
     .card-moreInfo {display: none;}
+    .card-lessInfo {
+      display: none;
+      margin-top: 0.5em;
+    }
     .mobile .card-content {display: none;}
     .mobile .card-moreInfo {
       display: block;
