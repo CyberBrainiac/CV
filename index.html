@@ -17,6 +17,19 @@
   <!-- Лінійку потрібно буде видалити -->
   <!--Додати прелоадер! коло у якому кружляє дуга, допоки не завантажиться сторінка-->
   <div class="overlay" id="overlay"><span>SITE IS LOADING<span></div>
+  <div class="pageBackground"></div>
+
+
+  <svg>
+    <filter id='roughpaper'>
+        <feTurbulence type="fractalNoise" baseFrequency='0.02' result='noise' numOctaves="5" />
+
+        <feDiffuseLighting in='noise' lighting-color='#fff' surfaceScale='3'>
+            <feDistantLight azimuth='45' elevation='50' />
+        </feDiffuseLighting>
+    </filter>
+  </svg>
+
 
   <header class="header" id="header">
     <div class="burger-menu">
@@ -91,11 +104,9 @@
             <h3>SE "Ivchenko-Progress" - research engineer</h3>
             <div class="card-moreInfo">
               <button id="buttWork_moreInfo1" class="buttonCardInfo" type="button" name="buttonMoreInfo1">More info</button>
-              <!-- <img src="images/send.svg"> -->
             </div>
             <div class="card-lessInfo">
               <button id="buttWork_lessInfo1" class="buttonCardInfo" type="button" name="buttonLessInfo1">Less info</button>
-              <img src="images/arrow-up.svg">
             </div>
             <div class="card-content">
               <ul>
@@ -111,11 +122,9 @@
             <h3>Genesis(Jiji) - remote moderator</h3>
             <div class="card-moreInfo">
               <button id="buttWork_moreInfo2" class="buttonCardInfo" type="button" name="buttonMoreInfo1">More info</button>
-              <img src="images/arrow-down.svg">
             </div>
             <div class="card-lessInfo">
               <button id="buttWork_lessInfo2" class="buttonCardInfo" type="button" name="buttonLessInfo2">Less info</button>
-              <img src="images/arrow-up.svg">
             </div>
             <div class="card-content">
               <ul>

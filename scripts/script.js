@@ -167,6 +167,7 @@ function adaptiveDesign() {
   function adaptiveBodySize() {
     let sectionsArr = document.getElementsByTagName("section");
     let header = document.querySelector(".header");
+    let footer = document.querySelector(".footer");
     sectionsArr = document.getElementsByTagName("section");
 
     if(windowInnerWidth > 990) {
@@ -175,18 +176,24 @@ function adaptiveDesign() {
       pageContent.style.width = "990px";
       header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
       header.style.width = "990px";
+      footer.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
+      footer.style.width = "990px";
     } else if(windowInnerWidth >= 660 && windowInnerWidth < 990 ) {
       fontSize = 18;
       pageContent.style.marginLeft = "0px";
       pageContent.style.width = windowInnerWidth + "px";
       header.style.marginLeft = "0px";
       header.style.width = windowInnerWidth + "px";
+      footer.style.marginLeft = "0px";
+      footer.style.width = windowInnerWidth + "px";
     } else {
       fontSize = 16;
       pageContent.style.marginLeft = "0px";
       pageContent.style.width = windowInnerWidth + "px";
       header.style.marginLeft = "0px";
       header.style.width = windowInnerWidth + "px";
+      footer.style.marginLeft = "0px";
+      footer.style.width = windowInnerWidth + "px";
     }
 
     if(windowInnerHeight < 660) {
@@ -528,8 +535,12 @@ function adaptiveDesign() {
 
 
   function adaptiveLanguageContainer() {
+    let sectionsArr = document.getElementsByTagName("section");
     let languageContainer = document.querySelector(".language");
     languageContainer.style.height = parseInt(pageContent.style.width) / 2  -  parseInt(pageContent.style.width) / 5 + "px";
+
+    languageContainer.style.left = parseInt(pageContent.style.marginLeft) + parseInt(pageContent.style.width) / 3.2 + "px";
+    languageContainer.style.top = parseInt(headerStyle.height) + parseInt(sectionsArr[0].style.height) + parseInt(sectionsArr[1].style.height) - parseInt(pageContent.style.width) / 3 + "px";
   }
 
 
