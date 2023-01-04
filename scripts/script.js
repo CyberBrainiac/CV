@@ -44,11 +44,11 @@ function adaptiveDesign() {
       adaptiveScillsContainer();
       adaptivePurposeContainer();
       adaptiveContactContainer();
-      adaptiveLanguageContainer();
       adaptiveWorkContainer();
 
       /* f() for make site beauty */
       correctExtraHeight();
+      adaptiveLanguageContainer();
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
@@ -340,7 +340,7 @@ function adaptiveDesign() {
       }
     }, 1000);
     return interval_Id;
-  }
+  }//зачем передавать элемент если можно использовать this?
 
 
   function animateMenuButton() {
@@ -534,23 +534,12 @@ function adaptiveDesign() {
   }
 
 
-  function adaptiveLanguageContainer() {
-    let sectionsArr = document.getElementsByTagName("section");
-    let languageContainer = document.querySelector(".language");
-    languageContainer.style.height = parseInt(pageContent.style.width) / 2  -  parseInt(pageContent.style.width) / 5 + "px";
-
-    languageContainer.style.left = parseInt(pageContent.style.marginLeft) + parseInt(pageContent.style.width) / 3.2 + "px";
-    languageContainer.style.top = parseInt(headerStyle.height) + parseInt(sectionsArr[0].style.height) + parseInt(sectionsArr[1].style.height) - parseInt(pageContent.style.width) / 3 + "px";
-  }
-
-
   function adaptiveWorkContainer() {
     let section2 = document.getElementById("section-2"); //розмір контейнеру потрібно вираховувати після зміни його розмірів
-    let plot2_1_height = parseInt(getComputedStyle(document.querySelector(".plot-2-1")).height);
-    let languageContainer = document.querySelector(".language");
     let workContainer = document.querySelector(".work-experience");
+    let workContainerStyle = getComputedStyle(workContainer);
 
-    if(plot2_1_height + parseInt(languageContainer.style.height) > parseInt(section2.style.height)) {
+    if(parseInt(workContainerStyle.height) + parseInt(pageContent.style.width) / 4 > parseInt(section2.style.height)) {
       workContainer.classList.toggle("mobile");
     }
 
@@ -570,18 +559,14 @@ function adaptiveDesign() {
           divMoreInfoArr[0].style.display = "none";
           divMoreInfoArr[1].style.display = "none";
           divLessInfoArr[0].style.display = "block";
-          // divLessInfoArr[1].style.display = "none";
           cardContentArr[0].style.display = "block";
-          // cardContentArr[1].style.display = "none";
           break;
 
         case "buttWork_moreInfo2":
           divMoreInfoArr[0].style.display = "none";
           divMoreInfoArr[1].style.display = "none";
           divLessInfoArr[1].style.display = "block";
-          // divLessInfoArr[0].style.display = "none";
           cardContentArr[1].style.display = "block";
-          // cardContentArr[0].style.display = "none";
           break;
 
         case "buttWork_lessInfo1":
@@ -599,6 +584,16 @@ function adaptiveDesign() {
           break
       }
     }
+  }
+
+
+  function adaptiveLanguageContainer() {
+    let sectionsArr = document.getElementsByTagName("section");
+    let languageContainer = document.querySelector(".language");
+    let languageContainerStyle = getComputedStyle(languageContainer);
+
+    languageContainer.style.left = parseInt(pageContent.style.marginLeft) + parseInt(pageContent.style.width) / 2 - parseInt(languageContainerStyle.width) / 2 + "px";
+    languageContainer.style.top = parseInt(headerStyle.height) + parseInt(sectionsArr[0].style.height) + parseInt(sectionsArr[1].style.height) + 60/*Section-marginTop*/ - (parseInt(pageContent.style.width) / 4 + parseInt(languageContainerStyle.height) / 4) + "px";
   }
 
 
