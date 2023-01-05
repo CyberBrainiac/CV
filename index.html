@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <meta http-equiv="default-style" content="default style"> ЗАЧЕМ? ЗАЧЕМ? -->
+  <link rel="stylesheet" href="styles/preloader.css">
   <link rel="stylesheet" href="styles/style.css" title = "default style">
    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
   <base target="_blank">
@@ -16,16 +17,16 @@
   <div class="horizontal-ruler"></div>
   <!-- Лінійку потрібно буде видалити -->
   <!--Додати прелоадер! коло у якому кружляє дуга, допоки не завантажиться сторінка-->
-  <div class="overlay" id="overlay"><span>SITE IS LOADING<span></div>
-  <div class="pageBackground"></div>
 
+  <div class="pageBackground"></div>
+  <div class="overlay" id="overlay"></div>
 
   <svg>
     <filter id='roughpaper'>
         <feTurbulence type="fractalNoise" baseFrequency='0.02' result='noise' numOctaves="5" />
 
         <feDiffuseLighting in='noise' lighting-color='#fff' surfaceScale='3'>
-            <feDistantLight azimuth='45' elevation='50' />
+            <feDistantLight azimuth='45' elevation='40' />
         </feDiffuseLighting>
     </filter>
   </svg>
@@ -51,7 +52,7 @@
       <div class="plot-1-1">
         <canvas id="canvasS1-P1"></canvas>
         <figure class="photo">
-          <img src="images/Greed.svg" alt="photo of pretty man">
+          <img class="myPhoto" src="images/Greed.svg" alt="photo of pretty man">
           <figcaption class="img-caption">
             <!-- <h2>Arkhipov Arsenii</h2> -->
             <h2>Some text</h2>
@@ -101,7 +102,7 @@
           <h2>Work experience</h2>
 
           <div class="card">
-            <h3>SE "Ivchenko-Progress" - research engineer</h3>
+            <h3>SE "Ivchenko-Progress" - <i>research engineer</i></h3>
             <div class="card-moreInfo">
               <button id="buttWork_moreInfo1" class="buttonCardInfo" type="button" name="buttonMoreInfo1">More info</button>
             </div>
@@ -119,7 +120,7 @@
           </div>
 
           <div class="card">
-            <h3>Genesis(Jiji) - remote moderator</h3>
+            <h3>Genesis(Jiji) - <i>remote moderator</i></h3>
             <div class="card-moreInfo">
               <button id="buttWork_moreInfo2" class="buttonCardInfo" type="button" name="buttonMoreInfo1">More info</button>
             </div>
@@ -141,16 +142,12 @@
           <h2>Education</h2>
           <div class = "card">
             <h3>National University «Zaporizhzhia polytechnic»</h3>
-            <ul>
-              <li>?Master? | ?Software engineering?</li>
-            </ul>
+            <span>Master | artificial intelligence system</span>
             <p class="time"><time datetime="2019-09">September 2020 - December 2021</time></p>
           </div>
           <div class = "card">
             <h3>National University «Zaporizhzhia polytechnic»</h3>
-            <ul>
-              <li>Bachelor | Software engineering</li>
-            </ul>
+            <span>Bachelor | Software engineering</span>
             <p class="time"><time datetime="2021-12">September 2016 - July 2020</time></p>
           </div>
         </div>
@@ -180,34 +177,58 @@
     </div>
   </footer>
 
-
   <script>
+    // let scriptPreloader = document.createElement("script");
+    // scriptPreloader.src = "scripts/preloader.js";
+    //
+    // scriptPreloader.onload = () => {
+    //   try {addPreloader()}
+    //   catch(err) {console.log(`Preloader Error: \n\n${err}`);}
+    // }
+    // scriptPreloader.onerror = (err) => {console.log("Failed loaded preloader.js ");}
+    // document.body.append(scriptPreloader);
+
     window.onload = () => {
-      let promise = new Promise( function(resolve, reject) {
+      new Promise((resolve, reject) => {
+        let scriptPreloader = document.createElement("script");
+        scriptPreloader.src = "scripts/preloader.js";
 
-        let script = document.createElement("script");
-        script.src = "scripts/script.js";
-        script.onload = () => {
-          let adaptiveDesign_Result = adaptiveDesign();
+        scriptPreloader.onload = () => {
+          addPreloader(resolve);
+          // try {addPreloader(resolve);}
+          // catch(err) {console.log(`Preloader Error: \n\n${err}`);}
 
-          if(adaptiveDesign_Result instanceof Error) {
-            reject(adaptiveDesign_Result);
-          } else {
-            resolve(adaptiveDesign_Result);
-          }
+          /*
+          Важливо!
+          Відтестувати які помилки я можу ловити, та як їх обробляти
+          Важливо!
+          */
         }
+        scriptPreloader.onerror = (err) => {console.log("Failed loaded preloader.js ");}
+        document.body.append(scriptPreloader);
 
-        document.body.append(script);
-      });
+      }).then((preloaderControl) => {
+        return new Promise((resolve, reject) => {
+          let script = document.createElement("script");
+          script.src = "scripts/script.js";
 
-      promise.then(
-        (res) => {
+          script.onload = () => {
+            let adaptiveDesign_result = adaptiveDesign(preloaderControl);
+            (adaptiveDesign_result instanceof Error) ? reject(adaptiveDesign_result) :  resolve(adaptiveDesign_result);
+          }
+          document.body.append(script);
+        })
+        // .then((resOfAdaptDesign) => {preloaderControl.toggleOverlay();})  //2 рівень вкладеності
+
+      }).then((resOfAdaptDesign) => {
           console.log("'adaptive design' completed successfully");
-        },
-        (err) => console.log(`Error in Adaptive Design: \n\n${err.stack}`)
-        // (err) => window.onerror = err
-      )
-      // .then((res) => createBubbleAnimation(res), (err) => window.onerror = err))
+          return resOfAdaptDesign;
+        })
+      // .then((res) => createBubbleAnimation(res))
+      .catch((err) => {
+        console.log(`Error in Adaptive Design: \n\n${err.stack}`);
+        // window.onerror = err;
+      })
     }
   </script>
 </body>

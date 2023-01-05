@@ -1,7 +1,7 @@
 "use strict";
-document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);//для тестов и разработки, удалить после окончания проекта
+document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);//для тестування
 
-function adaptiveDesign() {
+function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error or null*/
   let menu = document.querySelector(".burger-menu");
   let menuButton = document.querySelector(".burger-menu_button");
   let buttonLines = menuButton.children;
@@ -52,7 +52,6 @@ function adaptiveDesign() {
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
-      toggleOverlay();
     } catch (error) {
       return(error);
     }
@@ -71,8 +70,7 @@ function adaptiveDesign() {
       let currentWindowWidth = document.documentElement.clientWidth;
 
       if(currentWindowWidth != windowInnerWidth) { //розмір вікна змінився, очищую інтервали та hendlers
-        console.log("windowResize");
-        toggleOverlay();
+        preloaderControl.toggleOverlay();
         clearInterval(intervalId_checkWidth);
 
         if(menu.classList.contains("burger-menu_active")) {
@@ -122,7 +120,8 @@ function adaptiveDesign() {
         menuButton.onclick = '';
         drawDesign();
       }
-    }, 1000);
+    }, 300);
+    preloaderControl.toggleOverlay();
   }
 
 
@@ -253,13 +252,13 @@ function adaptiveDesign() {
     let imgCaption = document.querySelector(".img-caption");
     let statusContent = document.querySelector(".status-cont");
 
-    let img = document.getElementsByTagName('img')[0];
-    img.style.height = imgContainer_width / 1.4 + "px";
-    img.style.width = imgContainer_width / 1.4 + "px";
-    let imgRadius = parseInt(img.style.width) / 2;
+    let photo = document.querySelector('.myPhoto');
+    photo.style.height = imgContainer_width / 1.4 + "px";
+    photo.style.width = imgContainer_width / 1.4 + "px";
+    let imgRadius = parseInt(photo.style.width) / 2;
 
-    img.style.marginTop = (imgContainer_center.y - imgRadius) + "px";
-    img.style.marginLeft = (imgContainer_center.x - imgRadius) + "px";
+    photo.style.marginTop = (imgContainer_center.y - imgRadius) + "px";
+    photo.style.marginLeft = (imgContainer_center.x - imgRadius) + "px";
     imgCaption.style.marginTop = imgRadius / 2 + "px";
   }
 
@@ -539,8 +538,10 @@ function adaptiveDesign() {
     let workContainer = document.querySelector(".work-experience");
     let workContainerStyle = getComputedStyle(workContainer);
 
-    if(parseInt(workContainerStyle.height) + parseInt(pageContent.style.width) / 4 > parseInt(section2.style.height)) {
-      workContainer.classList.toggle("mobile");
+    if(parseInt(workContainerStyle.height) + parseInt(pageContent.style.width) / 3 > parseInt(section2.style.height)) {
+      workContainer.classList.add("mobile");
+    } else {
+      workContainer.classList.remove("mobile");
     }
 
 /*адаптація для мобільного дизайну*/
@@ -613,19 +614,20 @@ function adaptiveDesign() {
           break;
 
         case 1:
-          let plot2_1_height = parseInt(getComputedStyle(document.querySelector(".plot-2-1")).height);
+          let workContainerHeight = parseInt(getComputedStyle(document.querySelector(".work-experience")).height);
+          let educationContainerHeight = parseInt(getComputedStyle(document.querySelector(".education")).height);
+          let maxContainersHeight = Math.max(workContainerHeight, educationContainerHeight);
           let plot2_1_width = parseInt(pageContent.style.width) / 2; //висота фонa-трикутника секції 2
           let section2Height = parseInt(sectionsArr[i].style.height);
 
-          if(section2Height - (plot2_1_height + plot2_1_width) > legalExtraHeight /*&& plot2_1_height + plot2_1_width <= section2Height*/) {
-            sectionsArr[i].style.height = section2Height -  (section2Height - plot2_1_height - plot2_1_width - legalExtraHeight) + "px";
+          if(section2Height - maxContainersHeight - plot2_1_width > legalExtraHeight) {
+            sectionsArr[i].style.height = maxContainersHeight + plot2_1_width + legalExtraHeight + "px";
           }
           break;
 
         case 2:
 
           break;
-        default:
       }
     }
   }
@@ -717,18 +719,17 @@ function adaptiveDesign() {
   }
 
 
-  function toggleOverlay() {
-    let overlay = document.getElementById("overlay");
-
-    if(overlay.classList.contains("overlay")) {
-      overlay.textContent = "";
-      overlay.classList.toggle("overlay");
-    } else {
-      overlay.classList.toggle("overlay");
-      overlay.textContent = "SITE IS LOADING";
-    }
-  }
-
+  // function toggleOverlay() {
+  //   let overlay = document.getElementById("overlay");
+  //
+  //   if(overlay.classList.contains("overlay")) {
+  //     overlay.textContent = "";
+  //     overlay.classList.toggle("overlay");
+  //   } else {
+  //     overlay.classList.toggle("overlay");
+  //     overlay.textContent = "SITE IS LOADING";
+  //   }
+  // }
 
   return {headerStyle};
 }
