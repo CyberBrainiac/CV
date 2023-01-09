@@ -34,10 +34,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
     footerStyle = getComputedStyle( document.querySelector("footer"));
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {//mobile or tablet
+      alert("mobile");
       windowInnerWidth = window.outerWidth
       windowInnerHeight = window.outerHeight
     } else {
-      alert("mobile");
       windowInnerWidth = document.documentElement.clientWidth; //можуть змінюватись при перевороті пристрою
       windowInnerHeight = document.documentElement.clientHeight;
     }
