@@ -127,7 +127,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
         drawDesign();
       }
     }, 300);
-    preloaderControl.toggleOverlay();
+    //preloaderControl.toggleOverlay();
   }
 
 
