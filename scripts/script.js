@@ -37,6 +37,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       windowInnerWidth = window.outerWidth
       windowInnerHeight = window.outerHeight
     } else {
+      alert("mobile");
       windowInnerWidth = document.documentElement.clientWidth; //можуть змінюватись при перевороті пристрою
       windowInnerHeight = document.documentElement.clientHeight;
     }
