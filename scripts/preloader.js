@@ -4,21 +4,11 @@ function addPreloader(callback = undefined) { //Returns {} with preloader contro
   let preloaderControl = {
     toggleOverlay,
     get state() {return _preloaderState}}
+  
   let _preloaderState = 1; //1 - on; 0 - off
-
-  let windowInnerWidth; //можуть змінюватись при перевороті пристрою
-  let windowInnerHeight;
   let overlay = document.getElementById("overlay");
   let overlayContent = document.createElement("div");
   let preloadHeader = document.createElement("h1");
-
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { //mobile or tablet
-    windowInnerWidth = window.outerWidth
-    windowInnerHeight = window.outerHeight
-  } else {
-    windowInnerWidth = document.documentElement.clientWidth; //можуть змінюватись при перевороті пристрою
-    windowInnerHeight = document.documentElement.clientHeight;
-  }
 
   let biggear = document.createElement("img");
   biggear.src = "images/biggear.svg";

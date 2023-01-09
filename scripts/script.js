@@ -14,7 +14,12 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let windowInnerWidth;
   let headerStyle;
   let footerStyle;
+  let userDevice;
   let fontSize;
+
+/*визначення типу пристрою клієнта*/
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    userDevice = "PC"} else {userDevice = "Mobile"}
 
 /* Перевірка єлементу на відображення
 
@@ -23,6 +28,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 }
 */
 
+
   let err = drawDesign();
   if(err instanceof Error) {
     return err;
@@ -30,19 +36,12 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 
   function drawDesign() {
+    windowInnerWidth = document.documentElement.clientWidth;
+    windowInnerHeight = document.documentElement.clientHeight;
     headerStyle = getComputedStyle( document.querySelector("header"));
     footerStyle = getComputedStyle( document.querySelector("footer"));
 
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {//mobile or tablet
-      document.querySelector("header").backgroundColor = "red";
-      windowInnerWidth = window.outerWidth
-      windowInnerHeight = window.outerHeight
-    } else {
-      windowInnerWidth = document.documentElement.clientWidth; //можуть змінюватись при перевороті пристрою
-      windowInnerHeight = document.documentElement.clientHeight;
-    }
-
-    try {
+    tr {
       /* f() for build content */
       adaptiveBodySize();
       createAdaptiveImage();
@@ -58,6 +57,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
+      drawBackgroundS3();
     } catch (error) {
       return(error);
     }
@@ -127,7 +127,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
         drawDesign();
       }
     }, 300);
-    //preloaderControl.toggleOverlay();
+    preloaderControl.toggleOverlay();
   }
 
 
@@ -703,39 +703,49 @@ return !elem.offsetWidth && !elem.offsetHeight;
     canvas.width = parseInt(pageContent.style.width);
     canvas.height = parseInt(getComputedStyle(section2).height);
 
-    let leg = canvas.width / 2; //у рівнобедренному прямокутному трикутнику катети рівні
-
-
 /*central line*/
     ctx.strokeStyle = backgroundColor;
     ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2, 0);
-    ctx.lineTo(canvas.width / 2, canvas.height - leg + 1);
+    ctx.lineTo(canvas.width / 2, canvas.height - canvas.width / 2 + 1);
     ctx.stroke();
 
 /*triangle*/
     ctx.fillStyle = backgroundColor;
     ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.height - leg);
+    ctx.moveTo(canvas.width / 2, canvas.height - canvas.width / 2);
     ctx.lineTo(0, canvas.height);
     ctx.lineTo(canvas.width, canvas.height);
-    ctx.lineTo(canvas.width / 2, canvas.height - leg);
+    ctx.lineTo(canvas.width / 2, canvas.height - canvas.width / 2);
     ctx.fill();
   }
 
 
-  // function toggleOverlay() {
-  //   let overlay = document.getElementById("overlay");
-  //
-  //   if(overlay.classList.contains("overlay")) {
-  //     overlay.textContent = "";
-  //     overlay.classList.toggle("overlay");
-  //   } else {
-  //     overlay.classList.toggle("overlay");
-  //     overlay.textContent = "SITE IS LOADING";
-  //   }
-  // }
+  function drawBackgroundS3() {
+    let section3 = document.getElementById("section-3");
+    const canvas = document.getElementById("canvasS3");
+    const ctx = canvas.getContext("2d");
+    canvas.width = parseInt(pageContent.style.width);
+    canvas.height = parseInt(getComputedStyle(section3).height);
+
+/*triangle*/
+    ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(canvas.width / 2, canvas.width / 2);
+    ctx.lineTo(canvas.width, 0);
+    ctx.fill();
+
+/*central line*/
+    ctx.strokeStyle = backgroundColor;
+    ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.width / 2 - 1);
+    ctx.lineTo(canvas.width / 2, canvas.height);
+    ctx.stroke();
+  }
+
 
   return {headerStyle};
 }
