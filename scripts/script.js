@@ -41,7 +41,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     headerStyle = getComputedStyle( document.querySelector("header"));
     footerStyle = getComputedStyle( document.querySelector("footer"));
 
-    tr {
+    try {
       /* f() for build content */
       adaptiveBodySize();
       createAdaptiveImage();
@@ -612,10 +612,12 @@ return !elem.offsetWidth && !elem.offsetHeight;
       switch (i) { //підлаштування висоти для кожної секції сайту
 
         case 0:
-          let ruler_S1P1_StyleHeight = parseInt(getComputedStyle(document.querySelector(".ruler-checkExtraSize-S1P1")).height);
+          // let ruler_S1P1_StyleHeight = parseInt(getComputedStyle(document.querySelector(".ruler-checkExtraSize-S1P1")).height);
+          let photoStyle = getComputedStyle(document.querySelector(".photo"));
+          let scillsStyle = getComputedStyle(document.querySelector(".scills"));
 
-          if(ruler_S1P1_StyleHeight > legalExtraHeight) {
-            sectionsArr[i].style.height = parseInt(sectionsArr[i].style.height) - (ruler_S1P1_StyleHeight - legalExtraHeight) + "px";
+          if((parseInt(sectionsArr[i].style.height) - parseInt(photoStyle.height) - parseInt(scillsStyle.height)) > legalExtraHeight) {
+            sectionsArr[i].style.height = parseInt(photoStyle.height) + parseInt(scillsStyle.height) + legalExtraHeight + "px";
           }
           break;
 

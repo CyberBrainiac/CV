@@ -46,7 +46,10 @@ h3 {
   font-weight: 500;
 }
 
-button {font-weight: 500;}
+button {
+  font-weight: 500;
+  font-size: 18px;
+}
 ul {list-style-image: url("../images/list-marker.svg");}
 time {color: gray;}
 
@@ -73,25 +76,6 @@ time {color: gray;}
   z-index: -1;
   filter: url(#roughpaper);
 }
-
-
-
-/*Overlay*/
-/* .overlay {
-  left: 0px;
-  top: 0px;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background-color: gray;
-  color: black;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  z-index: 50;
-  transition: 0.4s;
-} */
 
 
 /*Burger Menu*/
@@ -189,9 +173,6 @@ time {color: gray;}
       position: absolute;
       z-index: -1;
     }
-    .ruler-checkExtraSize-S1P1{
-      flex: 1 1 0%; /*у деяких браузерах не підтримується скорочений варіант flex: 1, використовуй повний синтаксис*/
-    }
     .plot-1-1 img {border-radius: 50%;}
     .img-caption{
       text-align: center;
@@ -199,7 +180,7 @@ time {color: gray;}
     }
     .img-caption h2 {margin-bottom: 0.4em;}
     .status-cont {font-style: italic;}
-    .scills {margin-top: 2.5em;}
+    .scills h2 {margin-top: 2.5em;}
     .scills ul {
       margin-top: 0.8em;
       border-right: 6px double black;
@@ -327,6 +308,15 @@ time {color: gray;}
 
 /* Section 3*/
 #section-3 {}
+#canvasS3{
+  position: absolute;
+  z-index: 0;
+}
+
+  .projects{
+    z-index: 10;
+    width: 90%;
+  }
 
 #section-4 {
   background-image: url("https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
