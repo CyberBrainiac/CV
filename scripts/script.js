@@ -34,7 +34,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     footerStyle = getComputedStyle( document.querySelector("footer"));
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {//mobile or tablet
-      alert("mobile");
+      document.querySelector("header").backgroundColor = "red";
       windowInnerWidth = window.outerWidth
       windowInnerHeight = window.outerHeight
     } else {
