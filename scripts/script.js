@@ -17,9 +17,11 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let userDevice;
   let fontSize;
 
-/*визначення типу пристрою клієнта*/
+/*визначення типу пристрою клієнта
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     userDevice = "PC"} else {userDevice = "Mobile"}
+*/
+
 
 /* Перевірка єлементу на відображення
 
@@ -27,7 +29,6 @@ function isHidden(elem) {
 return !elem.offsetWidth && !elem.offsetHeight;
 }
 */
-
 
   let err = drawDesign();
   if(err instanceof Error) {
@@ -44,122 +45,81 @@ return !elem.offsetWidth && !elem.offsetHeight;
     try {
       /* f() for build content */
       adaptiveBodySize();
-      createAdaptiveImage();
-      createAdaptiveBurgerMenu();
+      adaptiveImage();
+      adaptiveBurgerMenu();
       adaptiveScillsContainer();
       adaptivePurposeContainer();
       adaptiveContactContainer();
       adaptiveWorkContainer();
+      adaptiveLanguageContainer();
 
       /* f() for make site beauty */
       correctExtraHeight();
-      adaptiveLanguageContainer();
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
       drawBackgroundS3();
     } catch (error) {
-      return(error);
+      return(error); //realise my class for Error
     }
 
-
-    // let mainPromise = new Promise( function(resolve, reject) {
-    //   setInterval(function(resolve) {
-    //     let currentWindowWidth = document.documentElement.clientWidth;
-    //
-    //     if(currentWindowWidth != windowInnerWidth) //розмір вікна змінився, очищую інтервали та hendlers
-    //     return CHANGET!!!
-    //   },1000);
-    // });
-
-    let intervalId_checkWidth = setInterval(() => {
-      let currentWindowWidth = document.documentElement.clientWidth;
-
-      if(currentWindowWidth != windowInnerWidth) { //розмір вікна змінився, очищую інтервали та hendlers
-        preloaderControl.toggleOverlay();
-        clearInterval(intervalId_checkWidth);
-
-        if(menu.classList.contains("burger-menu_active")) {
-          let navigationBackground = document.querySelector(".burger-menu_nav");
-          navigationBackground.style.transitionDuration = "0s";
-
-          menu.classList.toggle("burger-menu_active");
-          animateMenuNavigation();
-        }
-
-        for(let i = 0; i < idIntervalArr_blinkLine.length; i++) {//цей код не є логіним, проте тільки в такому вігляді дійсно можу очистити всі інтервали. У віпадках перебору масиву interval_id все одно лишаються ті id, що якимось чином до нього ?не потрапили?. Не розумію  чому, помилка проявляеться тільки при швидкій зміні розмірів екрану
-          if(i != intervalId_checkWidth) {
-            clearInterval(idIntervalArr_blinkLine[i]);
-          }
-        }
-
-        // for(let id of idIntervalArr_blinkLine) {
-        //   clearInterval(idIntervalArr_blinkLine[id]);
-        // }
-
-        for(let line of buttonLines) {
-          line.style.borderColor = "white";
-        }
-
-/*
-
-                      можливо варто використати addListener()
-                      з сайту: https://overcoder.net/q/69715/javascript-dom-%D0%BA%D0%B0%D0%BA-%D1%83%D0%B4%D0%B0%D0%BB%D0%B8%D1%82%D1%8C-%D0%B2%D1%81%D0%B5-%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D1%8F-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0-dom
-
-*/
-        for(let link of navigationLinkArr) {
-          link.removeEventListener("click", animateMenuButton);
-        }
-
-/*
-
-            Ця херня не буде працювати томущо мені конче потрібно щоб функція обробник була у функції створення
-            мобільного дізайну, томущо в іншому випадку доведеться додавати мінімум 3 нових глобальних змінних
-
-
-        let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
-        for (let cardButton of cardButtonArr) {
-          cardButton.removeEventListener("click", clickhandler);
-        }
-*/
-        document.querySelector(".burger-menu_button").innerHTML = '';
-        menuButton.onclick = '';
-        drawDesign();
+    let mainPromise = new Promise( (resolve, reject) => {
+      window.onresize = () => {
+        if(windowInnerWidth != document.documentElement.clientWidth) //цікавить тільки зміна ширини
+        window.onresize = "";
+        preloaderControl.toggleOverlay(resolve);
       }
-    }, 300);
+
+    }).then((res) => {
+      // debugger
+      // preloaderControl = res;
+      if(menu.classList.contains("burger-menu_active")) {
+        let navigationBackground = document.querySelector(".burger-menu_nav");
+        navigationBackground.style.transitionDuration = "0s";
+
+        menu.classList.toggle("burger-menu_active");
+        animateMenuNavigation();
+      }
+
+      for(let i = 0; i < idIntervalArr_blinkLine.length; i++) {//цей код не є логіним, проте тільки в такому вігляді дійсно можу очистити всі інтервали. У віпадках перебору масиву interval_id все одно лишаються ті id, що якимось чином до нього ?не потрапили?. Не розумію  чому, помилка проявляеться тільки при швидкій зміні розмірів екрану
+          clearInterval(idIntervalArr_blinkLine[i]);
+      }
+
+      // for(let id of idIntervalArr_blinkLine) {
+      //   clearInterval(idIntervalArr_blinkLine[id]);
+      // }
+
+      for(let line of buttonLines) {//навіщо це робити, коли лінії будуть видалені
+        line.style.borderColor = "white";
+      }
+
+      for(let link of navigationLinkArr) {
+        link.removeEventListener("click", animateMenuButton);
+      }
+
+      let workContainer = document.querySelector(".work-experience");
+      if(workContainer.classList.contains("mobile")) {
+        workContainer.classList.remove("mobile");
+      }
+
+      let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
+      for (let cardButton of cardButtonArr) {
+        cardButton.removeEventListener("click", cardButton_clickHandler);
+      }
+
+      document.querySelector(".burger-menu_button").innerHTML = '';
+      menuButton.onclick = '';
+      drawDesign();
+      console.log("complete succesfully");
+      return("true");
+
+    }).catch((err) => {
+      console.log("Error in window resize Promise \n" + err.message);
+    })
+
     preloaderControl.toggleOverlay();
   }
 
-
-/*
-  var _eventHandlers = {}; // somewhere global
-  function addListener(node, event, handler, capture) {
-      if(!(node in _eventHandlers)) {
-          // _eventHandlers stores references to nodes
-          _eventHandlers[node] = {};
-      }
-      if(!(event in _eventHandlers[node])) {
-          // each entry contains another entry for each event type
-          _eventHandlers[node][event] = [];
-      }
-      // capture reference
-      _eventHandlers[node][event].push([handler, capture]);
-      node.addEventListener(event, handler, capture);
-   }
-
-  function removeAllListeners(node, event) {
-      if(node in _eventHandlers) {
-          var handlers = _eventHandlers[node];
-          if(event in handlers) {
-              var eventHandlers = handlers[event];
-              for(var i = eventHandlers.length; i--;) {
-                  var handler = eventHandlers[i];
-                  node.removeEventListener(event, handler[0], handler[1]);
-              }
-          }
-      }
-  }
-*/
 
   function elementOffset(elem) {
     let el = elem.getBoundingClientRect();
@@ -174,6 +134,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let header = document.querySelector(".header");
     let footer = document.querySelector(".footer");
     sectionsArr = document.getElementsByTagName("section");
+
+    if(header.clientHeight < 100) {
+      header.style.height = "100px";
+    }
 
     if(windowInnerWidth > 990) {
       fontSize = 20;
@@ -251,7 +215,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
   }
 
 
-  function createAdaptiveImage() {
+  function adaptiveImage() {
     let imgContainer = document.querySelector(".plot-1-1");
     let imgContainer_width = parseInt( getComputedStyle(imgContainer).width);
     let imgContainer_center = {x: imgContainer_width / 2, y: imgContainer_width / 2} // background image намальований під кутом 45 градусів, довжина = ширені.
@@ -269,7 +233,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
   }
 
 
-  function createAdaptiveBurgerMenu() {
+  function adaptiveBurgerMenu() {
     let header = document.querySelector("header");
     let headerOffset = elementOffset(header);
 
@@ -524,13 +488,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 
   function adaptiveContactContainer() {
-    let contact = document.querySelector(".contacts");
     let contactSpanArr = document.querySelectorAll("div.contacts > span");
-    let scillsOffset = elementOffset(document.querySelector(".scills"));
-    let purposeContainer = document.querySelector(".aim");
-    let purposeContainerStyle = getComputedStyle(purposeContainer);
-
-    contact.style.marginTop = scillsOffset.top - elementOffset(purposeContainer).top - parseInt(purposeContainerStyle.height) + "px"; //позиціонований відносно ScillsContainer
 
     for(let span of contactSpanArr) {
       span.children[0].style.fontSize = fontSize + "px"; //link fontSize
@@ -540,67 +498,67 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 
   function adaptiveWorkContainer() {
-    let section2 = document.getElementById("section-2"); //розмір контейнеру потрібно вираховувати після зміни його розмірів
+    let section2 = document.getElementById("section-2");
     let workContainer = document.querySelector(".work-experience");
     let workContainerStyle = getComputedStyle(workContainer);
 
     if(parseInt(workContainerStyle.height) + parseInt(pageContent.style.width) / 3 > parseInt(section2.style.height)) {
-      workContainer.classList.add("mobile");
-    } else {
-      workContainer.classList.remove("mobile");
+      workContainer.classList.toggle("mobile");
     }
 
 /*адаптація для мобільного дизайну*/
+    let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
+    for (let cardButton of cardButtonArr) {
+      cardButton.addEventListener("click", cardButton_clickHandler);
+    }
+  }
+
+/* попробовать реализовать через css */
+  function cardButton_clickHandler() {
+    let section2 = document.getElementById("section-2");
     let cardContentArr = section2.querySelectorAll("div.card-content");
     let divMoreInfoArr = section2.querySelectorAll("div.card-moreInfo");
     let divLessInfoArr = section2.querySelectorAll("div.card-lessInfo");
-    let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
 
-    for (let cardButton of cardButtonArr) {
-      cardButton.addEventListener("click", clickHandler);
-    }
+    switch (this.id) {
+      case "buttWork_moreInfo1":
+        divMoreInfoArr[0].style.display = "none";
+        divMoreInfoArr[1].style.display = "none";
+        divLessInfoArr[0].style.display = "block";
+        cardContentArr[0].style.display = "block";
+        break;
 
-    function clickHandler() {
-      switch (this.id) {
-        case "buttWork_moreInfo1":
-          divMoreInfoArr[0].style.display = "none";
-          divMoreInfoArr[1].style.display = "none";
-          divLessInfoArr[0].style.display = "block";
-          cardContentArr[0].style.display = "block";
-          break;
+      case "buttWork_moreInfo2":
+        divMoreInfoArr[0].style.display = "none";
+        divMoreInfoArr[1].style.display = "none";
+        divLessInfoArr[1].style.display = "block";
+        cardContentArr[1].style.display = "block";
+        break;
 
-        case "buttWork_moreInfo2":
-          divMoreInfoArr[0].style.display = "none";
-          divMoreInfoArr[1].style.display = "none";
-          divLessInfoArr[1].style.display = "block";
-          cardContentArr[1].style.display = "block";
-          break;
+      case "buttWork_lessInfo1":
+        divLessInfoArr[0].style.display = "none";
+        divMoreInfoArr[0].style.display = "block";
+        divMoreInfoArr[1].style.display = "block";
+        cardContentArr[0].style.display = "none";
+        break
 
-        case "buttWork_lessInfo1":
-          divLessInfoArr[0].style.display = "none";
-          divMoreInfoArr[0].style.display = "block";
-          divMoreInfoArr[1].style.display = "block";
-          cardContentArr[0].style.display = "none";
-          break
-
-        case "buttWork_lessInfo2":
-          divLessInfoArr[1].style.display = "none";
-          divMoreInfoArr[0].style.display = "block";
-          divMoreInfoArr[1].style.display = "block";
-          cardContentArr[1].style.display = "none";
-          break
-      }
+      case "buttWork_lessInfo2":
+        divLessInfoArr[1].style.display = "none";
+        divMoreInfoArr[0].style.display = "block";
+        divMoreInfoArr[1].style.display = "block";
+        cardContentArr[1].style.display = "none";
+        break
     }
   }
 
 
   function adaptiveLanguageContainer() {
-    let sectionsArr = document.getElementsByTagName("section");
+    let section2 = document.getElementById("section-2");
     let languageContainer = document.querySelector(".language");
-    let languageContainerStyle = getComputedStyle(languageContainer);
+debugger
+    languageContainer.style.left = parseInt(pageContent.style.width) / 2 - languageContainer.clientWidth / 2 + "px";
 
-    languageContainer.style.left = parseInt(pageContent.style.marginLeft) + parseInt(pageContent.style.width) / 2 - parseInt(languageContainerStyle.width) / 2 + "px";
-    languageContainer.style.top = parseInt(headerStyle.height) + parseInt(sectionsArr[0].style.height) + parseInt(sectionsArr[1].style.height) + 60/*Section-marginTop*/ - (parseInt(pageContent.style.width) / 4 + parseInt(languageContainerStyle.height) / 4) + "px";
+    languageContainer.style.top = parseInt(section2.style.height) - parseInt(pageContent.style.width) / 3.2 + "px";
   }
 
 
@@ -703,7 +661,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     const canvas = document.getElementById("canvasS2");
     const ctx = canvas.getContext("2d");
     canvas.width = parseInt(pageContent.style.width);
-    canvas.height = parseInt(getComputedStyle(section2).height);
+    canvas.height = section2.clientHeight;
 
 /*central line*/
     ctx.strokeStyle = backgroundColor;
@@ -729,7 +687,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     const canvas = document.getElementById("canvasS3");
     const ctx = canvas.getContext("2d");
     canvas.width = parseInt(pageContent.style.width);
-    canvas.height = parseInt(getComputedStyle(section3).height);
+    canvas.height = section3.clientHeight;
 
 /*triangle*/
     ctx.fillStyle = backgroundColor;
