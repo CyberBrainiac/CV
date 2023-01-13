@@ -4,10 +4,10 @@ document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);
 function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error or null*/
   let menu = document.querySelector(".burger-menu");
   let menuButton = document.querySelector(".burger-menu_button");
-  let buttonLines = menuButton.children;
-  let navigationLinkArr = Array.from( document.querySelector(".burger-menu_nav").children);
+  let buttonLines = [];
+  let navigationLinkArr = document.querySelectorAll(".burger-menu_nav > a");
   let pageContent = document.querySelector(".pageContent");
-  let idIntervalArr_blinkLine = [];
+  let idInterval_blinkLine;
   let backgroundColor = "#6D6363";
   let cornerCircleRadius;
   let windowInnerHeight;
@@ -65,51 +65,40 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
     let mainPromise = new Promise( (resolve, reject) => {
       window.onresize = () => {
-        if(windowInnerWidth != document.documentElement.clientWidth) //цікавить тільки зміна ширини
-        alert(`${windowInnerWidth} \n${document.documentElement.clientWidth}`)
-        window.onresize = "";
-        preloaderControl.toggleOverlay(resolve);
+        if(windowInnerWidth != document.documentElement.clientWidth) {//цікавить тільки зміна ширини
+          window.onresize = "";
+          preloaderControl.toggleOverlay(resolve);
+        }
       }
 
     }).then((res) => {
-      // debugger
       // preloaderControl = res;
+
+      /*чистка menu handler*/
       if(menu.classList.contains("burger-menu_active")) {
         let navigationBackground = document.querySelector(".burger-menu_nav");
         navigationBackground.style.transitionDuration = "0s";
-
         menu.classList.toggle("burger-menu_active");
         animateMenuNavigation();
       }
-
-      for(let i = 0; i < idIntervalArr_blinkLine.length; i++) {//цей код не є логіним, проте тільки в такому вігляді дійсно можу очистити всі інтервали. У віпадках перебору масиву interval_id все одно лишаються ті id, що якимось чином до нього ?не потрапили?. Не розумію  чому, помилка проявляеться тільки при швидкій зміні розмірів екрану
-          clearInterval(idIntervalArr_blinkLine[i]);
-      }
-
-      // for(let id of idIntervalArr_blinkLine) {
-      //   clearInterval(idIntervalArr_blinkLine[id]);
-      // }
-
-      for(let line of buttonLines) {//навіщо це робити, коли лінії будуть видалені
-        line.style.borderColor = "white";
-      }
-
+      clearInterval(idInterval_blinkLine);
+      document.querySelector(".burger-menu_button").innerHTML = '';
+      buttonLines.length = 0;
       for(let link of navigationLinkArr) {
         link.removeEventListener("click", animateMenuButton);
       }
+      menuButton.onclick = '';
 
+      /*чистка button handler в workContainer*/
       let workContainer = document.querySelector(".work-experience");
       if(workContainer.classList.contains("mobile")) {
         workContainer.classList.remove("mobile");
       }
-
       let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
       for (let cardButton of cardButtonArr) {
         cardButton.removeEventListener("click", cardButton_clickHandler);
       }
 
-      document.querySelector(".burger-menu_button").innerHTML = '';
-      menuButton.onclick = '';
       drawDesign();
       console.log("complete succesfully");
       return("true");
@@ -117,7 +106,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
     }).catch((err) => {
       console.log("Error in window resize Promise \n" + err.message);
     })
-
     preloaderControl.toggleOverlay();
   }
 
@@ -274,15 +262,16 @@ return !elem.offsetWidth && !elem.offsetHeight;
       let line = document.createElement("span");
       line.classList.add("burger-menu_lines");
       if(buttonLinesOffset < 12) line.style.height = "4px";
+      buttonLines.push(line);
       menuButton.appendChild(line);
     }
 
     for(let i = 0; i < 3; i++) { //початкове положення ліній
       buttonLines[i].style.top = buttonLinesTopOffset + "px";
       buttonLines[i].style.width = menuButton.style.width;
-      idIntervalArr_blinkLine.push(createBlinkEffect(i));
       setTimeout(() => {buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px", 10});
     }
+    idInterval_blinkLine = createBlinkEffect(buttonLines); //очищую інтервал мерехтіння кнопки меню
 
 /*Create overlay*/
     let buttonOverlay = document.querySelector(".buttonOverlay");
@@ -299,18 +288,13 @@ return !elem.offsetWidth && !elem.offsetHeight;
   }
 
 
-  function createBlinkEffect(elem) {
-    let interval_Id = setInterval(() => {
-      if(buttonLines[elem]) { //перевірка на існування лінії
-        if(buttonLines[elem].style.borderColor == "black") {
-          buttonLines[elem].style.borderColor = "white";
-        } else {
-          buttonLines[elem].style.borderColor = "black";
-        }
+  function createBlinkEffect(arrOfElements) {
+    return setInterval(() => {
+      for (const elem of arrOfElements) {
+        (elem.style.borderColor == "black") ? elem.style.borderColor = "white" : elem.style.borderColor = "black";
       }
     }, 1000);
-    return interval_Id;
-  }//зачем передавать элемент если можно использовать this?
+  }
 
 
   function animateMenuButton() {
@@ -346,7 +330,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
         for(let i = 0; i < 3; i++) {
           buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px";
-          idIntervalArr_blinkLine.push(createBlinkEffect(i));
+          idInterval_blinkLine = createBlinkEffect(buttonLines);
 
           switch (i) { //лінії розходяться, середня повертаеться
             case 0:
@@ -365,11 +349,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
     function activateAnimation() {
 /*активація меню 1 крок*/
-      for(let id of idIntervalArr_blinkLine) {
-        clearInterval(id);
-      }
-      idIntervalArr_blinkLine.length = 0;
-
+      clearInterval(idInterval_blinkLine);
       for(let i = 0; i < 3; i++) {
         buttonLines[i].style.borderColor = "white";
 
@@ -501,9 +481,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptiveWorkContainer() {
     let section2 = document.getElementById("section-2");
     let workContainer = document.querySelector(".work-experience");
-    let workContainerStyle = getComputedStyle(workContainer);
 
-    if(parseInt(workContainerStyle.height) + parseInt(pageContent.style.width) / 3 > parseInt(section2.style.height)) {
+    if(workContainer.clientHeight + parseInt(pageContent.style.width) / 3 > parseInt(section2.style.height)) {
       workContainer.classList.toggle("mobile");
     }
 
