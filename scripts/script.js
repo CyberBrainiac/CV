@@ -16,6 +16,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let footerStyle;
   let userDevice;
   let fontSize;
+  let firstLoad = true;
 
 /*визначення типу пристрою клієнта
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -106,6 +107,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     }).catch((err) => {
       console.log("Error in window resize Promise \n" + err.message);
     })
+
     preloaderControl.toggleOverlay();
   }
 
@@ -535,7 +537,15 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptiveLanguageContainer() {
     let section2 = document.getElementById("section-2");
     let languageContainer = document.querySelector(".language");
+    // let languageContainerWidth = parseInt(getComputedStyle(languageContainer).width);
+    // debugger
+
+
     languageContainer.style.left = parseInt(pageContent.style.width) / 2 - languageContainer.clientWidth / 2 + "px";
+    console.log("container width " + languageContainer.clientWidth);
+    console.log("resulf left " + languageContainer.style.left);
+
+
 
     languageContainer.style.top = parseInt(section2.style.height) - parseInt(pageContent.style.width) / 3.2 + "px";
   }

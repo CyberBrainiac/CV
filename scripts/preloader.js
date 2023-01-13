@@ -9,8 +9,10 @@ function addPreloader(callback = () => {}) { //Returns {} with preloader control
   let overlay = document.getElementById("overlay");
   let overlayContent = document.createElement("div");
   let preloadHeader = document.createElement("h1");
-  let windowInnerWidth = document.documentElement.clientWidth;
-  let windowInnerHeight = document.documentElement.clientHeight;
+  // let windowInnerWidth = document.documentElement.clientWidth;
+  // let windowInnerHeight = document.documentElement.clientHeight;
+  let windowInnerWidth = document.offsetWidth;
+  let windowInnerHeight = document.scrollHeight;
   overlay.style.width = windowInnerWidth + "px";
   overlay.style.height = windowInnerHeight + "px";
 
@@ -34,9 +36,8 @@ function addPreloader(callback = () => {}) { //Returns {} with preloader control
   overlayContent.append(biggear);
   overlayContent.append(gear);
   overlay.append(overlayContent);
-
   let overlayContentStyle = getComputedStyle(overlayContent);
-  overlayContent.style.left = windowInnerWidth / 2 - parseInt(overlayContentStyle.width) / 2 + "px";
+  overlayContent.style.left = document.documentElement.clientWidth / 2 - parseInt(overlayContentStyle.width) / 2 + "px";
 
 
   function gearAnimation() {
@@ -66,11 +67,13 @@ function addPreloader(callback = () => {}) { //Returns {} with preloader control
     } else { //on
       _preloaderState = 1;
       overlay.style.display = "block";
-      // gearAnimation();
       addPreloader(callback);
     }
   }
 
   /*ВАЖЛИВО! для швидкодії розгорнути callback*/
-  setTimeout( () => callback(preloaderControl), 600) //сайт завантажується надто швидко, для того, щоб роздивитися цю чудову анімацію ;)
+  // setTimeout( () => callback(preloaderControl), 600) //сайт завантажується надто швидко, для того, щоб роздивитися цю чудову анімацію ;)
+  overlay.ontransitionend = (ev) => {
+    callback(preloaderControl);
+  }
 }

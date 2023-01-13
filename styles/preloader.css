@@ -15,6 +15,7 @@ h1 {
   background-color: lightgray;
   top: 0px;
   left: 0px;
+  transition: 2.1s;
 }
 
 .overlayContent {

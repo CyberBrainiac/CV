@@ -309,7 +309,6 @@ time {color: gray;}
     color: white;
     position: absolute;
     text-align: center;
-    /* position: sticky; */
   }
   .language h2 {
     font-weight: 500;
@@ -351,8 +350,7 @@ time {color: gray;}
   background-color: #373540;
   color: #f2f2f2;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-top: 12px;
   padding-bottom: 14px;
 }
