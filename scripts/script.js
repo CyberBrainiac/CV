@@ -66,6 +66,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let mainPromise = new Promise( (resolve, reject) => {
       window.onresize = () => {
         if(windowInnerWidth != document.documentElement.clientWidth) //цікавить тільки зміна ширини
+        alert(`${windowInnerWidth} \n${document.documentElement.clientWidth}`)
         window.onresize = "";
         preloaderControl.toggleOverlay(resolve);
       }
@@ -555,7 +556,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptiveLanguageContainer() {
     let section2 = document.getElementById("section-2");
     let languageContainer = document.querySelector(".language");
-debugger
     languageContainer.style.left = parseInt(pageContent.style.width) / 2 - languageContainer.clientWidth / 2 + "px";
 
     languageContainer.style.top = parseInt(section2.style.height) - parseInt(pageContent.style.width) / 3.2 + "px";
