@@ -2,27 +2,47 @@
 document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);//для тестування
 
 function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error or null*/
-  let menu = document.querySelector(".burger-menu");
-  let menuButton = document.querySelector(".burger-menu_button");
-  let buttonLines = [];
   let navigationLinkArr = document.querySelectorAll(".burger-menu_nav > a");
+  let menuButton = document.querySelector(".burger-menu_button");
+  let background = document.querySelector(".pageBackground");
   let pageContent = document.querySelector(".pageContent");
-  let idInterval_blinkLine;
+  let menu = document.querySelector(".burger-menu");
   let backgroundColor = "#6D6363";
+  let idInterval_blinkLine;
+  let drawDesignCount = 0;
   let cornerCircleRadius;
   let windowInnerHeight;
   let windowInnerWidth;
+  let buttonLines = [];
   let headerStyle;
   let footerStyle;
-  let userDevice;
   let fontSize;
-  let firstLoad = true;
 
-/*визначення типу пристрою клієнта
+  const userDevice = function checkUserDev() {
+  /*визначення типу пристрою клієнта*/
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    userDevice = "PC"} else {userDevice = "Mobile"}
-*/
+    return "Mobile";
+  } else {
+    return "PC";
+  }
+  }()
 
+  const firstLoadOrientation = function() {
+    if(innerHeight > innerWidth && userDevice == "Mobile") { 
+      return "Vertical";
+    } else {
+      return "Horizontal";
+    }
+  }()
+
+  const language = {
+    en: {},
+    ua: {},
+  }
+
+  const elementStyleObj = {
+    langContain: {positionLeft: "0px"}
+  }
 
 /* Перевірка єлементу на відображення
 
@@ -42,6 +62,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     windowInnerHeight = document.documentElement.clientHeight;
     headerStyle = getComputedStyle( document.querySelector("header"));
     footerStyle = getComputedStyle( document.querySelector("footer"));
+    drawDesignCount++;
 
     try {
       /* f() for build content */
@@ -52,10 +73,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
       adaptivePurposeContainer();
       adaptiveContactContainer();
       adaptiveWorkContainer();
-      adaptiveLanguageContainer();
-
+      
       /* f() for make site beauty */
       correctExtraHeight();
+      adaptiveLanguageContainer();
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
@@ -68,13 +89,14 @@ return !elem.offsetWidth && !elem.offsetHeight;
       window.onresize = () => {
         if(windowInnerWidth != document.documentElement.clientWidth) {//цікавить тільки зміна ширини
           window.onresize = "";
-          preloaderControl.toggleOverlay(resolve);
+          background.style.zIndex = "50";
+          // preloaderControl.toggleOverlay(resolve);
+          resolve("true");
         }
       }
 
     }).then((res) => {
       // preloaderControl = res;
-
       /*чистка menu handler*/
       if(menu.classList.contains("burger-menu_active")) {
         let navigationBackground = document.querySelector(".burger-menu_nav");
@@ -108,7 +130,11 @@ return !elem.offsetWidth && !elem.offsetHeight;
       console.log("Error in window resize Promise \n" + err.message);
     })
 
-    preloaderControl.toggleOverlay();
+    if(drawDesignCount == 1) {
+      preloaderControl.toggleOverlay();
+    } else {
+      background.style.zIndex = "-1";
+    }
   }
 
 
@@ -173,6 +199,11 @@ return !elem.offsetWidth && !elem.offsetHeight;
       }
     }
 
+    if(userDevice == "Mobile") {
+      background.style.width = "1920px";
+      background.style.height = "1920px";
+    }
+
 /*Add Font Size*/
     let h2 = document.getElementsByTagName("h2");
     [...h2].forEach((elem) => {
@@ -202,6 +233,18 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let liArr = document.getElementsByTagName("li");
     for (let li of liArr) {
       li.style.fontSize = fontSize + "px";
+    }
+
+/*Add unique Font Size*/
+    let footerP = footer.querySelectorAll("p");
+    if(windowInnerWidth >= 500) {
+      for (const p of footerP) {
+        p.style.fontSize = "42px";
+      }
+    } else {
+      for (const p of footerP) {
+        p.style.fontSize = "32px";
+      }
     }
   }
 
@@ -406,10 +449,11 @@ return !elem.offsetWidth && !elem.offsetHeight;
     function deactivateAnimation() {
       navigationBackground.style.height = "0";
       navigationLinkArr[0].style.borderTop = "none";
-      navigationBackground.ontransitionend = () => {
-        navigationBackground.ontransitionend = undefined;
+
+      navigationLinkArr[navigationLinkArr.length - 1].ontransitionend = () => {
+        navigationLinkArr[navigationLinkArr.length - 1].ontransitionend = "";
         buttonOverlay.classList.remove("buttonOverlay_active");
-      }
+      };
 
       for(let link of navigationLinkArr) {
         link.style.transitionDuration = "0";
@@ -427,12 +471,16 @@ return !elem.offsetWidth && !elem.offsetHeight;
       navigationBackground.style.height = "100vh";
 
       navigationBackground.ontransitionend = () => {
-        navigationBackground.ontransitionend = undefined;
+        navigationBackground.ontransitionend = "";
         navigationLinkArr[0].style.borderTop = "1px solid black";
-        buttonOverlay.classList.remove("buttonOverlay_active");
+
+        navigationLinkArr[navigationLinkArr.length - 1].ontransitionend = () => {
+          navigationLinkArr[navigationLinkArr.length - 1].ontransitionend = "";
+          buttonOverlay.classList.remove("buttonOverlay_active");
+        };
 
         for(let link of navigationLinkArr) {
-          link.style.transitionDuration = "0.6s";
+          link.style.transitionDuration = "0.3s";
           link.style.fontSize = fontSize + "px";
           link.style.borderBottom = "1px solid black";
           link.style.paddingTop = parseInt(headerStyle.height) / 10 + "px";
@@ -537,17 +585,19 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptiveLanguageContainer() {
     let section2 = document.getElementById("section-2");
     let languageContainer = document.querySelector(".language");
-    // let languageContainerWidth = parseInt(getComputedStyle(languageContainer).width);
-    // debugger
-
 
     languageContainer.style.left = parseInt(pageContent.style.width) / 2 - languageContainer.clientWidth / 2 + "px";
-    console.log("container width " + languageContainer.clientWidth);
-    console.log("resulf left " + languageContainer.style.left);
+    languageContainer.style.top = parseInt(section2.style.height) - parseInt(pageContent.style.width) / 3 + "px";
 
-
-
-    languageContainer.style.top = parseInt(section2.style.height) - parseInt(pageContent.style.width) / 3.2 + "px";
+    /*частково прибираю баг, який не розумію*/
+    if(firstLoadOrientation == "Vertical") {
+      if(drawDesignCount == 1 && innerHeight > innerWidth) {
+        elementStyleObj.langContain.positionLeft = languageContainer.style.left;
+      }
+      if(drawDesignCount != 1 && innerHeight > innerWidth) {
+        languageContainer.style.left = elementStyleObj.langContain.positionLeft;
+      }
+    }
   }
 
 
@@ -559,12 +609,14 @@ return !elem.offsetWidth && !elem.offsetHeight;
       switch (i) { //підлаштування висоти для кожної секції сайту
 
         case 0:
-          // let ruler_S1P1_StyleHeight = parseInt(getComputedStyle(document.querySelector(".ruler-checkExtraSize-S1P1")).height);
-          let photoStyle = getComputedStyle(document.querySelector(".photo"));
-          let scillsStyle = getComputedStyle(document.querySelector(".scills"));
+          let photoContainHeight = parseInt(getComputedStyle(document.querySelector(".photo")).height);
+          let scillsContainHeight = parseInt(getComputedStyle(document.querySelector(".scills")).height);
 
-          if((parseInt(sectionsArr[i].style.height) - parseInt(photoStyle.height) - parseInt(scillsStyle.height)) > legalExtraHeight) {
-            sectionsArr[i].style.height = parseInt(photoStyle.height) + parseInt(scillsStyle.height) + legalExtraHeight + "px";
+          if(photoContainHeight + scillsContainHeight > parseInt(sectionsArr[i].style.height)) {
+            sectionsArr[i].style.height = photoContainHeight + scillsContainHeight + legalExtraHeight / 2 + "px";
+
+          } else if((parseInt(sectionsArr[i].style.height) - photoContainHeight - scillsContainHeight) > legalExtraHeight) {
+            sectionsArr[i].style.height = photoContainHeight + scillsContainHeight + legalExtraHeight + "px";
           }
           break;
 
@@ -678,23 +730,30 @@ return !elem.offsetWidth && !elem.offsetHeight;
     canvas.width = parseInt(pageContent.style.width);
     canvas.height = section3.clientHeight;
 
-/*triangle*/
-    ctx.fillStyle = backgroundColor;
+// /*triangle*/
+//     ctx.fillStyle = backgroundColor;
+//     ctx.beginPath();
+//     ctx.moveTo(0, 0);
+//     ctx.lineTo(canvas.width / 2, canvas.width / 2);
+//     ctx.lineTo(canvas.width, 0);
+//     ctx.fill();
+
+// /*central line*/
+//     ctx.strokeStyle = backgroundColor;
+//     ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
+//     ctx.beginPath();
+//     ctx.moveTo(canvas.width / 2, canvas.width / 2 - 1);
+//     ctx.lineTo(canvas.width / 2, canvas.height);
+//     ctx.stroke();
+
+    ctx.fillStyle = "#6D6363";
     ctx.beginPath();
     ctx.moveTo(0, 0);
-    ctx.lineTo(canvas.width / 2, canvas.width / 2);
     ctx.lineTo(canvas.width, 0);
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineTo(0, canvas.height);
     ctx.fill();
-
-/*central line*/
-    ctx.strokeStyle = backgroundColor;
-    ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
-    ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.width / 2 - 1);
-    ctx.lineTo(canvas.width / 2, canvas.height);
-    ctx.stroke();
   }
-
 
   return {headerStyle};
 }

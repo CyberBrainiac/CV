@@ -72,11 +72,11 @@ time {color: gray;}
   overflow-x:hidden;
   display: flex;
   flex-wrap: wrap;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-size: 18px;
   font-weight: 300;
 }
-
+.pageContent { font-family: Georgia, 'Times New Roman', Times, serif;}
 .pageBackground {
   width: 100%;
   height: 100vh;
@@ -269,14 +269,15 @@ time {color: gray;}
       margin-top: 0.5em;
       margin-left: 1.2em;
     }
-    .buttonCardInfo {
+    /*мобільна версія*/
+    .mobile button .buttonCardInfo {
       position: relative;
       border-radius: 6px;
       padding: 0px 2px;
       border-width: 2px;
       margin-left: -1.2em;
     }
-    .buttonCardInfo::after {
+    .mobile button .buttonCardInfo::after {
       width: 1.2em;
       height: 1.2em;
       margin-left: 6px;
@@ -284,6 +285,8 @@ time {color: gray;}
       content: "";
       position: absolute;
     }
+    /* .mobile button .buttonCardInfo::after .moreInfo{background-image: url("../images/arrow-down.svg");} */
+    /* .mobile button .buttonCardInfo::after .lessInfo{background-image: url("../images/arrow-up.svg");} */
     #buttWork_moreInfo1::after, #buttWork_moreInfo2::after {background-image: url("../images/arrow-down.svg");}
     #buttWork_lessInfo1::after, #buttWork_lessInfo2::after {background-image: url("../images/arrow-up.svg");}
     .card .time {margin-top: 0.5em;}
@@ -318,30 +321,34 @@ time {color: gray;}
 
 
 /* Section 3*/
-/* #section-3 {} */
+#section-3 {flex-direction: column;}
 #canvasS3{
   position: absolute;
   z-index: 0;
 }
 
+.plot-3-1 {
+  height: 30vh;
+  width: inherit;
+  z-index: 10;
+  /* border: 1px solid red; */
+  background-color: #fff;
+}
+
+.plot-3-2 { z-index: 10;}
   .projects{
-    z-index: 10;
+    width: 90%;
+    margin: auto;
+  }
+  .projects .card {
     width: 90%;
   }
 
-#section-4 {
-  background-image: url("https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
-  background-attachment: fixed;
-  background-size: cover;
-  color: #DF2A29;
-  text-shadow: 4px 4px 6px #fff;
-}
 
-#section-5 {
-  background-attachment: fixed;
-  background-size: cover;
-  color: #0000FF;
-  text-shadow: 0px 0px 15px #7979fc;
+/* Section 4*/
+#section-4 {
+  color: #64a4ee;
+  text-shadow: 4px 4px 6px #fff;
 }
 
 
@@ -353,7 +360,8 @@ time {color: gray;}
   justify-content: space-evenly;
   padding-top: 12px;
   padding-bottom: 14px;
+  font-size: 42px;
+  font-family: "Brush Script MT", Italic;
+  letter-spacing: 2px;
 }
-.footer p {
-  font-size: 14px;
-}
+/* .yearOfCreation {} */

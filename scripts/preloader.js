@@ -9,13 +9,14 @@ function addPreloader(callback = () => {}) { //Returns {} with preloader control
   let overlay = document.getElementById("overlay");
   let overlayContent = document.createElement("div");
   let preloadHeader = document.createElement("h1");
-  // let windowInnerWidth = document.documentElement.clientWidth;
-  // let windowInnerHeight = document.documentElement.clientHeight;
-  let windowInnerWidth = document.offsetWidth;
-  let windowInnerHeight = document.scrollHeight;
+  let windowInnerWidth = document.documentElement.clientWidth;
+  let windowInnerHeight = document.documentElement.clientHeight;
+  // let windowInnerWidth = document.offsetWidth;
+  // let windowInnerHeight = document.scrollHeight;
   overlay.style.width = windowInnerWidth + "px";
   overlay.style.height = windowInnerHeight + "px";
 
+  /*create gear images*/
   let biggear = document.createElement("img");
   biggear.src = "images/biggear.svg";
   biggear.alt = "bigger gear";
@@ -72,8 +73,9 @@ function addPreloader(callback = () => {}) { //Returns {} with preloader control
   }
 
   /*ВАЖЛИВО! для швидкодії розгорнути callback*/
-  // setTimeout( () => callback(preloaderControl), 600) //сайт завантажується надто швидко, для того, щоб роздивитися цю чудову анімацію ;)
+ //сайт завантажується надто швидко, для того, щоб роздивитися цю чудову анімацію ;)
   overlay.ontransitionend = (ev) => {
+    overlay.ontransitionend = "";
     callback(preloaderControl);
   }
 }
