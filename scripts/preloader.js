@@ -3,24 +3,22 @@
 function addPreloader(callback = () => {}) { //Returns {} with preloader control
   let preloaderControl = {
     toggleOverlay,
-    get state() {return _preloaderState}}
+    get state() {return _preloaderState},
+  }
 
   let _preloaderState = 1; //1 - on; 0 - off
   let overlay = document.getElementById("overlay");
   let overlayContent = document.createElement("div");
   let preloadHeader = document.createElement("h1");
-  let windowInnerWidth = document.documentElement.clientWidth;
-  let windowInnerHeight = document.documentElement.clientHeight;
-  // let windowInnerWidth = document.offsetWidth;
-  // let windowInnerHeight = document.scrollHeight;
-  overlay.style.width = windowInnerWidth + "px";
-  overlay.style.height = windowInnerHeight + "px";
+  overlay.style.width = document.documentElement.clientWidth + "px";
+  overlay.style.height = document.documentElement.clientHeight + "px";
 
   /*create gear images*/
   let biggear = document.createElement("img");
   biggear.src = "images/biggear.svg";
   biggear.alt = "bigger gear";
   biggear.classList.add("gearAnimation");
+
   let gear = document.createElement("img");
   gear.src = "images/gear.svg";
   gear.alt = "gear";

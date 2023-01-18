@@ -27,21 +27,9 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   }
   }()
 
-  const firstLoadOrientation = function() {
-    if(innerHeight > innerWidth && userDevice == "Mobile") { 
-      return "Vertical";
-    } else {
-      return "Horizontal";
-    }
-  }()
-
   const language = {
     en: {},
     ua: {},
-  }
-
-  const elementStyleObj = {
-    langContain: {positionLeft: "0px"}
   }
 
 /* Перевірка єлементу на відображення
@@ -73,10 +61,11 @@ return !elem.offsetWidth && !elem.offsetHeight;
       adaptivePurposeContainer();
       adaptiveContactContainer();
       adaptiveWorkContainer();
+      adaptiveLanguageContainer();
+      adaptiveProjectContainer()
       
       /* f() for make site beauty */
       correctExtraHeight();
-      adaptiveLanguageContainer();
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
@@ -193,7 +182,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
         } else if (i == sectionsArr.length - 1) {
           sectionsArr[i].style.height = windowInnerHeight - parseInt(footerStyle.height) - parseInt(footerStyle.paddingTop) - parseInt(footerStyle.paddingBottom) + "px";
         } else {
-          // sectionsArr[i].style.height = "100vh";
           sectionsArr[i].style.height = windowInnerHeight + "px";
         }
       }
@@ -214,6 +202,11 @@ return !elem.offsetWidth && !elem.offsetHeight;
     [...h3].forEach((elem) => {
       elem.style.fontSize = fontSize + 2 + "px";
     });
+
+    let buttonArr = document.getElementsByTagName("button");
+    for (let button of buttonArr) {
+      button.style.fontSize = fontSize + 2 + "px";
+    }
 
     let spanArr = document.getElementsByTagName("span");
     for (let span of spanArr) {
@@ -523,7 +516,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
     for(let span of contactSpanArr) {
       span.children[0].style.fontSize = fontSize + "px"; //link fontSize
-      span.style.marginLeft = parseInt(pageContent.style.width) * 0.1 + 1.5 * fontSize + "px"; //plot1 = 40% plot 2 = 50% разом 90% та додаю значення contacts.span::before.left
+      span.style.marginLeft = parseInt(pageContent.style.width) * 0.1 + fontSize + "px"; //plot1 = 40% plot 2 = 50% разом 90%, отже для симетрії 10% відступ. Також додаю значення contacts.span::before
     }
   }
 
@@ -543,7 +536,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     }
   }
 
-/* попробовать реализовать через css */
+
   function cardButton_clickHandler() {
     let section2 = document.getElementById("section-2");
     let cardContentArr = section2.querySelectorAll("div.card-content");
@@ -583,22 +576,26 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 
   function adaptiveLanguageContainer() {
-    let section2 = document.getElementById("section-2");
     let languageContainer = document.querySelector(".language");
 
-    languageContainer.style.left = parseInt(pageContent.style.width) / 2 - languageContainer.clientWidth / 2 + "px";
-    languageContainer.style.top = parseInt(section2.style.height) - parseInt(pageContent.style.width) / 3 + "px";
-
-    /*частково прибираю баг, який не розумію*/
-    if(firstLoadOrientation == "Vertical") {
-      if(drawDesignCount == 1 && innerHeight > innerWidth) {
-        elementStyleObj.langContain.positionLeft = languageContainer.style.left;
-      }
-      if(drawDesignCount != 1 && innerHeight > innerWidth) {
-        languageContainer.style.left = elementStyleObj.langContain.positionLeft;
-      }
+    if(userDevice == "Mobile" && innerHeight > innerWidth) {
+      languageContainer.style.top = "88%";
+    } else if (userDevice == "Mobile" && innerHeight < innerWidth) {
+      languageContainer.style.top = "80%";
     }
   }
+
+
+  function adaptiveProjectContainer() {
+    let section3 = document.getElementById("section-3");
+    let timerContainer = document.querySelector(".timer");
+    let timerContainerHeight = timerContainer.clientHeight + timerContainer.clientHeight / 2; //сам таймер буде додано пізніше, для розрахунку розмірів мені потрібні приблизні значення
+    let projectsContainer = document.querySelector(".projects");
+
+    if(timerContainerHeight + projectsContainer.clientHeight > section3.clientHeight) {
+      projectsContainer.classList.toggle("mobile");
+    }
+  }    
 
 
   function correctExtraHeight() {
@@ -633,7 +630,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
           break;
 
         case 2:
-
+          
           break;
       }
     }
@@ -755,5 +752,5 @@ return !elem.offsetWidth && !elem.offsetHeight;
     ctx.fill();
   }
 
-  return {headerStyle};
+  return {headerStyle, fontSize};
 }

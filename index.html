@@ -6,6 +6,7 @@
   <!-- <meta http-equiv="default-style" content="default style"> ЗАЧЕМ? ЗАЧЕМ? -->
   <link rel="stylesheet" href="styles/preloader.css">
   <link rel="stylesheet" href="styles/style.css" title = "default style">
+  <link rel="stylesheet" href="styles/countDown.css">
    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
   <base target="_blank">
   <title>Site Resume</title>
@@ -101,10 +102,10 @@
           <div class="card">
             <h3>SE "Ivchenko-Progress" - <i>research engineer</i></h3>
             <div class="card-moreInfo">
-              <button id="buttWork_moreInfo1" class="buttonCardInfo" type="button" name="buttonMoreInfo1">More info</button>
+              <button id="buttWork_moreInfo1" class="buttonCardInfo" type="button">More info</button>
             </div>
             <div class="card-lessInfo">
-              <button id="buttWork_lessInfo1" class="buttonCardInfo" type="button" name="buttonLessInfo1">Less info</button>
+              <button id="buttWork_lessInfo1" class="buttonCardInfo" type="button">Less info</button>
             </div>
             <div class="card-content">
               <ul>
@@ -119,10 +120,10 @@
           <div class="card">
             <h3>Genesis(Jiji) - <i>remote moderator</i></h3>
             <div class="card-moreInfo">
-              <button id="buttWork_moreInfo2" class="buttonCardInfo" type="button" name="buttonMoreInfo1">More info</button>
+              <button id="buttWork_moreInfo2" class="buttonCardInfo" type="button">More info</button>
             </div>
             <div class="card-lessInfo">
-              <button id="buttWork_lessInfo2" class="buttonCardInfo" type="button" name="buttonLessInfo2">Less info</button>
+              <button id="buttWork_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
             </div>
             <div class="card-content">
               <ul>
@@ -139,12 +140,18 @@
           <h2>Education</h2>
           <div class = "card">
             <h3>National University «Zaporizhzhia polytechnic»</h3>
-            <span>Master | artificial intelligence system</span>
+            <hr>
+            <span><b>Master:</b></span>
+            <span>
+              artificial intelligence system
+            </span>
             <p class="time"><time datetime="2021-12">September 2020 - December 2021</time></p>
           </div>
           <div class = "card">
             <h3>National University «Zaporizhzhia polytechnic»</h3>
-            <span>Bachelor | Software engineering</span>
+            <hr>
+            <span><b>Bachelor:</b></span>
+            <span>Software engineering</span>
             <p class="time"><time datetime="2020-07">September 2016 - July 2020</time></p>
           </div>
         </div>
@@ -163,29 +170,60 @@
       <canvas id="canvasS3"></canvas>
 
       <div class="plot-3-1">
-        <div class="timer"></div>
+        <div class="timer">
+          <h2>Do not miss the chance!</h2>
+          <p>Hire the promising employee. Time left:</p>
+        </div>
       </div>
 
       <div class="plot-3-2">
         <div class="projects">
+
           <div class="card resume">
-            <h2>Site Resume (ви тут)</h2>
-            <p>Мова: HTML5, CSS, JavaScript</p>
-            <p>Повністю адаптивний дизайн! Сайт підлаштовується під параметри вашого пристрою, що дозволяє точно передати мій задум на абсолютній більшості пристроїв:</p>
+            <h3>Site Resume</h3>
+            <p><b>Мова:</b> HTML5, CSS, JavaScript</p>
+            <p>Повністю адаптивний дизайн!</p>
             <p>телефон планшет компьютер</p>
-            <p class="time"><time datetime="2023-01">January 2022</time></p>
+            <div class="card-moreInfo">
+              <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>
+            </div>
+            <div class="card-lessInfo">
+              <button id="buttProj_lessInfo3" class="buttonCardInfo" type="button">Less info</button>
+            </div>
+            <div class="card-content">
+              </p>Сайт підлаштовується під параметри вашого пристрою, що дозволяє точно передати мій задум на абсолютній більшості пристроїв:</p>
+              <p class="time"><time datetime="2023-01">January 2022</time></p>
+            </div>
           </div>
+
           <div class="card dataCollectionSystem">
-            <h2>Систама збору даних з авіаційних двигунів</h2>
-            <p>Мова: LabVIEW</p>
-            <p>Може бути використана для збору, сбереження, відображення, обробки даних у реальному часі через інтерфейс RS232</p>
-            <p class="time"><time datetime="2021-12">December 2021</time></p>
+            <h3>Систама збору даних з авіаційних двигунів</h3>
+            <p><b>Мова:</b> LabVIEW</p>
+            <div class="card-moreInfo">
+              <button id="buttProj_moreInfo2" class="buttonCardInfo" type="button">More info</button>
+            </div>
+            <div class="card-lessInfo">
+              <button id="buttProj_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
+            </div>
+            <div class="card-content">
+              <p>Може бути використана для збору, сбереження, відображення, обробки даних у реальному часі через інтерфейс RS232</p>
+              <p class="time"><time datetime="2021-12">December 2021</time></p>
+            </div>
           </div>
+
           <div class="card smartHome">
-            <h2>Підсистема контролю стану електрощитового обладнання</h2>
-            <p>Мова: C++</p>
-            <p>Створено на основі Arduino з можливістю інтграції з системою управління розумним будинком "MyHome"</p>
-            <p class="time"><time datetime="2020-07">July 2020</time></p>
+            <h3>Підсистема контролю стану електрощитового обладнання</h3>
+            <p><b>Мова:</b> C++</p>
+            <div class="card-moreInfo">
+              <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>
+            </div>
+            <div class="card-lessInfo">
+              <button id="buttProj_lessInfo3" class="buttonCardInfo" type="button">Less info</button>
+            </div>
+            <div class="card-content">
+              <p>Створено на основі Arduino з можливістю інтграції з системою управління розумним будинком "MyHome"</p>
+              <p class="time"><time datetime="2020-07">July 2020</time></p>
+            </div>
           </div>
         </div>
       </div>
@@ -232,10 +270,27 @@
           }
         })
       }).then((resOfAdaptDesign) => {
-          console.log("'adaptive design' completed successfully");
-          return resOfAdaptDesign;
+          return new Promise((resolve, reject) => {
+            let script = document.createElement("script");
+            script.src = "scripts/countDown.js";
+            document.body.append(script);
+            
+            script.onload = () => {
+              console.log("'adaptive design' completed successfully");
+              let timer_result = createTimer(document.querySelector('.timer'), resOfAdaptDesign);
+              (timer_result instanceof Error) ? reject(timer_result) : resolve(timer_result);
+
+            }
+          }).then((timerInstance) => {
+            timerInstance.start();
+            return(resOfAdaptDesign);
+          })
+          // .catch((err) => {console.log("Error in Timer Function " + err.message);})
         })
-      // .then((res) => createBubbleAnimation(res))
+      .then((res) => {
+        // console.log(res);
+        // createBubbleAnimation(res);
+      })
       .catch((err) => {
         console.log(`Error in Adaptive Design: \n\n${err.stack}`);
         // window.onerror = err;

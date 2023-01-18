@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
 /* font-family: Georgia, "Times New Roman", Times, serif; */
 /* !импортировать прикольный шрифт! */
 
@@ -16,9 +17,6 @@
   box-sizing: content-box;
   margin: 0px;
   padding: 0px;
-  /* font-family: 'Roboto', sans-serif; */
-  /* font-size: 18px; */
-  /* font-weight: 300; */
 }
 
 svg {
@@ -42,20 +40,26 @@ section:first-child {margin-top: 0px;}
 h2 {
   text-align: center;
   font-weight: 700;
-  text-shadow: 2px 2px 2px #777;
+  /* text-shadow: 2px 5px 4px #777; */
 }
 h3 {
   text-align: center;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+hr {
+  border: none;
+  border-top: 3px double #333;
+  border-bottom: 3px dodgerblue;
+  color: #333;
+  margin-bottom: 0.3em;
 }
 
 button {
-  font-weight: 500;
-  font-size: 18px;
-}
-/*НЕ працью тому що заміняю кнопку, можливо варто реалізувати заміну лише картинки, щоб було видно анімацію кнопки*/
-button:active {
   border-style: inset;
+  border-radius: 6px;
+  padding: 0px 2px;
+  border-width: 3px;
 }
 
 ul {list-style-image: url("../images/list-marker.svg");}
@@ -63,16 +67,8 @@ time {color: gray;}
 
 
 .page {
-  /* width: 100%; */
-  /* height: 100vh; */
-  /* position: relative; */
-  /* background-image: url("../images/paper4.jpg"); */
-  /* background-size: cover; */
-  /* background-attachment: fixed; */
-  overflow-x:hidden;
   display: flex;
   flex-wrap: wrap;
-  /* font-family: 'Roboto', sans-serif; */
   font-size: 18px;
   font-weight: 300;
 }
@@ -138,12 +134,10 @@ time {color: gray;}
   width: 70%;
   background: #ddd;
   padding: 0.5em;
-  padding-left: 1em;
   margin: 14px auto;
   border-radius: 20px;
-  text-align: center;
 }
-
+.card button {text-align: center;}
 .card:before, .card:after {
   z-index: -1;
   position: absolute;
@@ -157,7 +151,6 @@ time {color: gray;}
   transform: rotate(-4deg);
   border-radius: 10px;
 }
-
 .card:after {
   transform: rotate(4deg);
   right: 10px;
@@ -213,22 +206,21 @@ time {color: gray;}
     .aim h2 {
       font-weight: 500;
       margin-bottom: 0.5em;
-      text-shadow: 2px 2px 2px #999;
+      /* text-shadow: 2px 2px 2px #999; */
     }
-    .aim span {font-style: italic;}
+    .aim span {font-style: italic;margin: auto 10px;}
     .contacts {
       display: flex;
       flex-direction: column;
-      /* margin-top: 2.5em; */
+      
     }
     .contacts h2 {
       font-weight: 500;
       margin-bottom: 0.8em;
-      text-shadow: 2px 2px 2px #999;
+      /* text-shadow: 2px 2px 2px #999; */
       margin-top: 2.42em;
     }
     .contacts span {
-      margin-left: 2em;
       margin-bottom: 5px;
       position: relative;
     }
@@ -269,15 +261,12 @@ time {color: gray;}
       margin-top: 0.5em;
       margin-left: 1.2em;
     }
+    .card-moreInfo, .card-lessInfo {display: none;}
+    .card .time {margin-top: 0.5em;}
+
     /*мобільна версія*/
-    .mobile button .buttonCardInfo {
-      position: relative;
-      border-radius: 6px;
-      padding: 0px 2px;
-      border-width: 2px;
-      margin-left: -1.2em;
-    }
-    .mobile button .buttonCardInfo::after {
+    .mobile .buttonCardInfo {margin-left: -1.2em;}
+    .mobile .buttonCardInfo::after {
       width: 1.2em;
       height: 1.2em;
       margin-left: 6px;
@@ -285,37 +274,40 @@ time {color: gray;}
       content: "";
       position: absolute;
     }
-    /* .mobile button .buttonCardInfo::after .moreInfo{background-image: url("../images/arrow-down.svg");} */
-    /* .mobile button .buttonCardInfo::after .lessInfo{background-image: url("../images/arrow-up.svg");} */
     #buttWork_moreInfo1::after, #buttWork_moreInfo2::after {background-image: url("../images/arrow-down.svg");}
     #buttWork_lessInfo1::after, #buttWork_lessInfo2::after {background-image: url("../images/arrow-up.svg");}
-    .card .time {margin-top: 0.5em;}
-    .card-moreInfo {display: none;}
-    .card-lessInfo {
-      display: none;
-      margin-top: 0.5em;
-    }
+
     .mobile .card-content {display: none;}
     .mobile .card-moreInfo {
       display: block;
       margin-top: 0.5em;
+      text-align: center;
     }
-
+    .mobile .card-lessInfo {
+      display: none;
+      margin-top: 0.5em;
+      text-align: center;
+    }
+    
   .plot-2-2 {
     z-index: 10;
     width: 50%;
   }
     .education {margin-top: 20px;}
     .education h3 {margin-bottom: 0.5em;}
+    .education .card {text-align: center;}
 
   .language {
+    top: 76%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
     color: white;
     position: absolute;
     text-align: center;
   }
   .language h2 {
     font-weight: 500;
-    text-shadow: 2px 2px 2px #999;
+    /* text-shadow: 2px 2px 2px #999; */
   }
   .language p {margin-top: 0.5em;}
 
@@ -328,22 +320,30 @@ time {color: gray;}
 }
 
 .plot-3-1 {
-  height: 30vh;
   width: inherit;
   z-index: 10;
-  /* border: 1px solid red; */
-  background-color: #fff;
+  color: #fff;
+  background-color: rgb(0, 0, 0);
 }
+  .timer {
+    text-align: center;
+    padding: 0.5em;
+  }
+  .timer p {padding: 0.5em;}
 
 .plot-3-2 { z-index: 10;}
-  .projects{
+  .projects {
     width: 90%;
     margin: auto;
   }
-  .projects .card {
-    width: 90%;
-  }
+  .projects .card {width: 90%;}
+  .projects h3 {margin-bottom: 0.5em;}
 
+  /*мобільна версія*/
+  #buttProj_moreInfo1::after, #buttProj_moreInfo2::after, #buttProj_moreInfo3::after {background-image: url("../images/arrow-down.svg");}
+  #buttProj_lessInfo1::after, #buttProj_lessInfo2::after, #buttProj_lessInfo3::after {
+    background-image: url("../images/arrow-up.svg");
+  }
 
 /* Section 4*/
 #section-4 {
@@ -356,12 +356,14 @@ time {color: gray;}
 .footer {
   background-color: #373540;
   color: #f2f2f2;
-  display: flex;
-  justify-content: space-evenly;
   padding-top: 12px;
   padding-bottom: 14px;
   font-size: 42px;
-  font-family: "Brush Script MT", Italic;
+  font-family: "Niconne", Italic;
   letter-spacing: 2px;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-wrap: wrap;
 }
-/* .yearOfCreation {} */
+
