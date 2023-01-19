@@ -79,14 +79,13 @@ return !elem.offsetWidth && !elem.offsetHeight;
         if(windowInnerWidth != document.documentElement.clientWidth) {//цікавить тільки зміна ширини
           window.onresize = "";
           background.style.zIndex = "50";
-          // preloaderControl.toggleOverlay(resolve);
           resolve("true");
+          // preloaderControl.toggleOverlay(resolve);
         }
       }
 
     }).then((res) => {
-      // preloaderControl = res;
-      /*чистка menu handler*/
+      /*чистка menu handler та інтервалів*/
       if(menu.classList.contains("burger-menu_active")) {
         let navigationBackground = document.querySelector(".burger-menu_nav");
         navigationBackground.style.transitionDuration = "0s";
@@ -96,21 +95,38 @@ return !elem.offsetWidth && !elem.offsetHeight;
       clearInterval(idInterval_blinkLine);
       document.querySelector(".burger-menu_button").innerHTML = '';
       buttonLines.length = 0;
-      for(let link of navigationLinkArr) {
+      for(const link of navigationLinkArr) {
         link.removeEventListener("click", animateMenuButton);
       }
       menuButton.onclick = '';
 
       /*чистка button handler в workContainer*/
       let workContainer = document.querySelector(".work-experience");
+      let workButtonArr = workContainer.querySelectorAll(".buttonCardInfo");
+
       if(workContainer.classList.contains("mobile")) {
         workContainer.classList.remove("mobile");
-      }
-      let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
-      for (let cardButton of cardButtonArr) {
-        cardButton.removeEventListener("click", cardButton_clickHandler);
+
+        for (const workButton of workButtonArr) {
+          workButton.removeEventListener("click", workButton_clickHandler);
+          workButton.style.display = "none";
+        }
       }
 
+      /*чистка button handler в projectsContainer*/
+      let projContainer = document.querySelector(".projects");
+      let projButtonArr = projContainer.querySelectorAll(".buttonCardInfo");
+
+      if(projContainer.classList.contains("mobile")) {
+        projContainer.classList.remove("mobile");
+
+        for (const projButton of projButtonArr) {
+          projButton.removeEventListener("click", projButton_clickHandler);
+          projButton.style.display = "none";
+        }
+      }
+
+      /*перемальовую дизайн сторінки*/
       drawDesign();
       console.log("complete succesfully");
       return("true");
@@ -524,24 +540,48 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptiveWorkContainer() {
     let section2 = document.getElementById("section-2");
     let workContainer = document.querySelector(".work-experience");
-
-    if(workContainer.clientHeight + parseInt(pageContent.style.width) / 3 > parseInt(section2.style.height)) {
+    let workButtonArr = workContainer.querySelectorAll(".buttonCardInfo");
+    let cardContentArr = section2.querySelectorAll("div.card-content");
+console.log(workContainer.clientHeight + parseInt(pageContent.style.width) / 2);
+    if(workContainer.clientHeight + parseInt(pageContent.style.width) / 2 > parseInt(section2.style.height)) {
       workContainer.classList.toggle("mobile");
-    }
 
-/*адаптація для мобільного дизайну*/
-    let cardButtonArr = document.querySelectorAll("button.buttonCardInfo");
-    for (let cardButton of cardButtonArr) {
-      cardButton.addEventListener("click", cardButton_clickHandler);
+      for (let workButton of workButtonArr) {
+        workButton.addEventListener("click", workButton_clickHandler);
+
+        if(workButton.id.includes("moreInfo")) {
+          workButton.style.display = "block";
+        } else {
+          workButton.style.display = "none";
+        }
+      }
+      for (const cardContent of cardContentArr) {
+        cardContent.style.display = "none";
+      }
+
+    } else {
+      for (const cardContent of cardContentArr) {
+        cardContent.style.display = "block";
+      }
     }
   }
 
 
-  function cardButton_clickHandler() {
+  function workButton_clickHandler() {
     let section2 = document.getElementById("section-2");
     let cardContentArr = section2.querySelectorAll("div.card-content");
-    let divMoreInfoArr = section2.querySelectorAll("div.card-moreInfo");
-    let divLessInfoArr = section2.querySelectorAll("div.card-lessInfo");
+    let workButtonArr = Array.from(section2.querySelectorAll(".buttonCardInfo"));
+    let divMoreInfoArr = [];
+    let divLessInfoArr = [];
+
+    for(let button of workButtonArr) {
+      if(button.id.includes("moreInfo")) {
+        divMoreInfoArr.push(button);
+      } else {
+        divLessInfoArr.push(button);
+      }
+    }
+
 
     switch (this.id) {
       case "buttWork_moreInfo1":
@@ -563,14 +603,14 @@ return !elem.offsetWidth && !elem.offsetHeight;
         divMoreInfoArr[0].style.display = "block";
         divMoreInfoArr[1].style.display = "block";
         cardContentArr[0].style.display = "none";
-        break
+        break;
 
       case "buttWork_lessInfo2":
         divLessInfoArr[1].style.display = "none";
         divMoreInfoArr[0].style.display = "block";
         divMoreInfoArr[1].style.display = "block";
         cardContentArr[1].style.display = "none";
-        break
+        break;
     }
   }
 
@@ -579,7 +619,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let languageContainer = document.querySelector(".language");
 
     if(userDevice == "Mobile" && innerHeight > innerWidth) {
-      languageContainer.style.top = "88%";
+      languageContainer.style.top = "90%";
     } else if (userDevice == "Mobile" && innerHeight < innerWidth) {
       languageContainer.style.top = "80%";
     }
@@ -591,11 +631,97 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let timerContainer = document.querySelector(".timer");
     let timerContainerHeight = timerContainer.clientHeight + timerContainer.clientHeight / 2; //сам таймер буде додано пізніше, для розрахунку розмірів мені потрібні приблизні значення
     let projectsContainer = document.querySelector(".projects");
+    let projButtonArr = projectsContainer.querySelectorAll(".buttonCardInfo");
+    let cardContentArr = section3.querySelectorAll("div.card-content");
 
     if(timerContainerHeight + projectsContainer.clientHeight > section3.clientHeight) {
       projectsContainer.classList.toggle("mobile");
+
+      for (const projButton of projButtonArr) {
+        projButton.addEventListener("click", projButton_clickHandler);
+
+        if(projButton.id.includes("moreInfo")) {
+          projButton.style.display = "block";
+        } else {
+          projButton.style.display = "none";
+        }
+      }
+      for (const cardContent of cardContentArr) {
+        cardContent.style.display = "none";
+      }
+    } else {
+      for (const cardContent of cardContentArr) {
+        cardContent.style.display = "block";
+      }
     }
-  }    
+  }
+
+
+  function projButton_clickHandler() {
+    let section3 = document.getElementById("section-3");
+    let cardContentArr = section3.querySelectorAll(".card-content");
+    let workButtonArr = Array.from(section3.querySelectorAll(".buttonCardInfo"));
+    let divMoreInfoArr = [];
+    let divLessInfoArr = [];
+
+    for(let button of workButtonArr) {
+      if(button.id.includes("moreInfo")) {
+        divMoreInfoArr.push(button);
+      } else {
+        divLessInfoArr.push(button);
+      }
+    }
+
+    switch (this.id) {
+      case "buttProj_moreInfo1":
+        divMoreInfoArr[0].style.display = "none";
+        divMoreInfoArr[1].style.display = "none";
+        divMoreInfoArr[2].style.display = "none";
+        divLessInfoArr[0].style.display = "block";
+        cardContentArr[0].style.display = "block";
+        break;
+
+      case "buttProj_moreInfo2":
+        divMoreInfoArr[0].style.display = "none";
+        divMoreInfoArr[1].style.display = "none";
+        divMoreInfoArr[2].style.display = "none";
+        divLessInfoArr[1].style.display = "block";
+        cardContentArr[1].style.display = "block";
+        break;
+
+      case "buttProj_moreInfo3":
+        divMoreInfoArr[0].style.display = "none";
+        divMoreInfoArr[1].style.display = "none";
+        divMoreInfoArr[2].style.display = "none";
+        divLessInfoArr[2].style.display = "block";
+        cardContentArr[2].style.display = "block";
+        break;
+
+      case "buttProj_lessInfo1":
+        divLessInfoArr[0].style.display = "none";
+        divMoreInfoArr[0].style.display = "block";
+        divMoreInfoArr[1].style.display = "block";
+        divMoreInfoArr[2].style.display = "block";
+        cardContentArr[0].style.display = "none";
+        break;
+
+      case "buttProj_lessInfo2":
+        divLessInfoArr[1].style.display = "none";
+        divMoreInfoArr[0].style.display = "block";
+        divMoreInfoArr[1].style.display = "block";
+        divMoreInfoArr[2].style.display = "block";
+        cardContentArr[1].style.display = "none";
+        break;
+
+      case "buttProj_lessInfo3":
+        divLessInfoArr[2].style.display = "none";
+        divMoreInfoArr[0].style.display = "block";
+        divMoreInfoArr[1].style.display = "block";
+        divMoreInfoArr[2].style.display = "block";
+        cardContentArr[2].style.display = "none";
+        break;
+    }
+  }
 
 
   function correctExtraHeight() {
@@ -647,10 +773,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
     canvas.height = parseInt(plot1Style.height);
 
     let backgroundWidth = parseInt(plot1Style.width);
-    cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Where x - stick; 0.5x - radiusOfCornerCircle
+    cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Де x - stick; 0.5x - radiusOfCornerCircle
     let backgroudStick = backgroundWidth / 2.5;
     let roundingRadius = 30; //коефіціент скруглення кутів
-    let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. Завдяки ньому знаходимо протилежний катет трикутника побудованого на радіусі кола що дотикаеться до 2 прямих які потрібно скруглити.(більш детально у README);
+    let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. (більш детально у README);
 
 /*Image Background*/
     ctx.fillStyle = backgroundColor;

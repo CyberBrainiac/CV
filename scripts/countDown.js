@@ -17,7 +17,7 @@ function createTimer(container, resOfAdaptDesign) {
         render() {
             let date = new Date();
             let days = '00';
-            let hours = date.getHours();
+            let hours = 24 - date.getHours();
             if (hours < 10) hours = '0' + hours;
             if (hours == 24) hours = '00';
             let mins = 60 - date.getMinutes();

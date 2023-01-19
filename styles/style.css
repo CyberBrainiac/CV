@@ -49,7 +49,7 @@ h3 {
 
 hr {
   border: none;
-  border-top: 3px double #333;
+  border-top: 2px solid #333;
   border-bottom: 3px dodgerblue;
   color: #333;
   margin-bottom: 0.3em;
@@ -134,10 +134,9 @@ time {color: gray;}
   width: 70%;
   background: #ddd;
   padding: 0.5em;
-  margin: 14px auto;
+  margin: 0.6em auto;
   border-radius: 20px;
 }
-.card button {text-align: center;}
 .card:before, .card:after {
   z-index: -1;
   position: absolute;
@@ -238,7 +237,7 @@ time {color: gray;}
       width: 1.3em;
       height: 1.3em;
       left: -1.7em;
-      top: -0.2em;
+      top: -0.1em;
     }
     .phone::before {background-image: url("../images/mobile-white.svg");}
     .resumeFile::before {background-image: url("../images/file-text-white.svg");}
@@ -256,46 +255,55 @@ time {color: gray;}
     z-index: 10;
     width: 50%;
   }
-    .work-experience {margin-top: 20px;}
+    .work-experience {margin-top: 0.6em;}
+    .work-experience h3 {margin-bottom: 0.4em;}
     .card ul li {
       margin-top: 0.5em;
       margin-left: 1.2em;
     }
-    .card-moreInfo, .card-lessInfo {display: none;}
+    /* .card-moreInfo, .card-lessInfo {display: none;} */
+    .buttonCardInfo {display: none;}
     .card .time {margin-top: 0.5em;}
+    .position {
+      font-weight: 700;
+      /* font-style: italic; */
+      text-align: center;
+    }
 
     /*мобільна версія*/
-    .mobile .buttonCardInfo {margin-left: -1.2em;}
+    .mobile .card-content {display: none;}
+    .mobile .card-moreInfo, .mobile .card-lessInfo {text-align: center;}
+    .mobile .buttonCardInfo {
+      margin: auto;
+      margin-top: 0.5em;
+      padding: 2px 0px 2px 2px;
+      padding-right: 1.5em;
+    }
     .mobile .buttonCardInfo::after {
       width: 1.2em;
       height: 1.2em;
-      margin-left: 6px;
+      margin-left: 4px;
       background-size: cover;
       content: "";
       position: absolute;
     }
     #buttWork_moreInfo1::after, #buttWork_moreInfo2::after {background-image: url("../images/arrow-down.svg");}
     #buttWork_lessInfo1::after, #buttWork_lessInfo2::after {background-image: url("../images/arrow-up.svg");}
-
-    .mobile .card-content {display: none;}
-    .mobile .card-moreInfo {
-      display: block;
-      margin-top: 0.5em;
-      text-align: center;
-    }
-    .mobile .card-lessInfo {
-      display: none;
-      margin-top: 0.5em;
-      text-align: center;
-    }
     
   .plot-2-2 {
     z-index: 10;
     width: 50%;
   }
-    .education {margin-top: 20px;}
-    .education h3 {margin-bottom: 0.5em;}
+    .education {margin-top: 0.6em;}
+    .education h3 {margin-bottom: 0.4em;}
     .education .card {text-align: center;}
+    .degree {
+      font-weight: 700;
+      /* font-style: italic; */
+      text-align: center;
+      margin-bottom: 0.5em;
+    }
+    .mobile .degree {margin-bottom: 0;}
 
   .language {
     top: 76%;
@@ -347,9 +355,27 @@ time {color: gray;}
 
 /* Section 4*/
 #section-4 {
-  color: #64a4ee;
-  text-shadow: 4px 4px 6px #fff;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
 }
+
+.plot-4-1 {
+  z-index: 10;
+  width: 100%;
+}
+  .simple-linear {
+    height: 30vh;
+    width: inherit;
+    /* border: 1px solid black; */
+    background: linear-gradient(#6D6363, 40%, white);
+  }
+
+.plot-4-2 {
+  z-index: 10;
+}
+  .about {
+    width: auto;
+  } 
 
 
 /* Нижний колонтитул */

@@ -100,13 +100,12 @@
           <h2>Work experience</h2>
 
           <div class="card">
-            <h3>SE "Ivchenko-Progress" - <i>research engineer</i></h3>
-            <div class="card-moreInfo">
-              <button id="buttWork_moreInfo1" class="buttonCardInfo" type="button">More info</button>
-            </div>
-            <div class="card-lessInfo">
-              <button id="buttWork_lessInfo1" class="buttonCardInfo" type="button">Less info</button>
-            </div>
+            <h3>SE "Ivchenko-Progress"</h3>
+            <hr>
+            <p class="position">Research engineer</p>
+            <button id="buttWork_moreInfo1" class="buttonCardInfo" type="button">More info</button>
+            <button id="buttWork_lessInfo1" class="buttonCardInfo" type="button">Less info</button>
+
             <div class="card-content">
               <ul>
                 <li>Pascal and LabVIEW programming</li>
@@ -118,13 +117,12 @@
           </div>
 
           <div class="card">
-            <h3>Genesis(Jiji) - <i>remote moderator</i></h3>
-            <div class="card-moreInfo">
-              <button id="buttWork_moreInfo2" class="buttonCardInfo" type="button">More info</button>
-            </div>
-            <div class="card-lessInfo">
-              <button id="buttWork_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
-            </div>
+            <h3>Genesis "Jiji"</h3>
+            <hr>
+            <p class="position">Remote moderator</p>
+            <button id="buttWork_moreInfo2" class="buttonCardInfo" type="button">More info</button>
+            <button id="buttWork_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
+
             <div class="card-content">
               <ul>
                 <li>Checking user content for compliance with the rules of the online marketplace</li>
@@ -141,17 +139,15 @@
           <div class = "card">
             <h3>National University «Zaporizhzhia polytechnic»</h3>
             <hr>
-            <span><b>Master:</b></span>
-            <span>
-              artificial intelligence system
-            </span>
+            <p class="degree">Master</p>
+            <p>"Computer sciences"</p>
             <p class="time"><time datetime="2021-12">September 2020 - December 2021</time></p>
           </div>
           <div class = "card">
             <h3>National University «Zaporizhzhia polytechnic»</h3>
             <hr>
-            <span><b>Bachelor:</b></span>
-            <span>Software engineering</span>
+            <p class="degree">Bachelor</p>
+            <p>"Software engineering"</p>
             <p class="time"><time datetime="2020-07">September 2016 - July 2020</time></p>
           </div>
         </div>
@@ -167,6 +163,12 @@
 
 
     <section id="section-3">
+      <!--
+      Навіщо мені тут канвас колі я можу просто задати Background color 
+                            ?
+                            ?
+                            ?
+      -->
       <canvas id="canvasS3"></canvas>
 
       <div class="plot-3-1">
@@ -183,13 +185,15 @@
             <h3>Site Resume</h3>
             <p><b>Мова:</b> HTML5, CSS, JavaScript</p>
             <p>Повністю адаптивний дизайн!</p>
-            <p>телефон планшет компьютер</p>
-            <div class="card-moreInfo">
-              <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>
-            </div>
-            <div class="card-lessInfo">
-              <button id="buttProj_lessInfo3" class="buttonCardInfo" type="button">Less info</button>
-            </div>
+            <p>
+              <img src="images/phone.svg" alt="mobile phone"> 
+              <img src="images/tablet.svg" alt="tablet"> 
+              <img src="images/computer.svg" alt="personal computer"> 
+            </p>
+            <span>mobile phone tablet personal computer</span>
+            <button id="buttProj_moreInfo1" class="buttonCardInfo" type="button">More info</button>
+            <button id="buttProj_lessInfo1" class="buttonCardInfo" type="button">Less info</button>
+
             <div class="card-content">
               </p>Сайт підлаштовується під параметри вашого пристрою, що дозволяє точно передати мій задум на абсолютній більшості пристроїв:</p>
               <p class="time"><time datetime="2023-01">January 2022</time></p>
@@ -199,12 +203,9 @@
           <div class="card dataCollectionSystem">
             <h3>Систама збору даних з авіаційних двигунів</h3>
             <p><b>Мова:</b> LabVIEW</p>
-            <div class="card-moreInfo">
-              <button id="buttProj_moreInfo2" class="buttonCardInfo" type="button">More info</button>
-            </div>
-            <div class="card-lessInfo">
-              <button id="buttProj_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
-            </div>
+            <button id="buttProj_moreInfo2" class="buttonCardInfo" type="button">More info</button>
+            <button id="buttProj_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
+
             <div class="card-content">
               <p>Може бути використана для збору, сбереження, відображення, обробки даних у реальному часі через інтерфейс RS232</p>
               <p class="time"><time datetime="2021-12">December 2021</time></p>
@@ -214,12 +215,9 @@
           <div class="card smartHome">
             <h3>Підсистема контролю стану електрощитового обладнання</h3>
             <p><b>Мова:</b> C++</p>
-            <div class="card-moreInfo">
-              <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>
-            </div>
-            <div class="card-lessInfo">
-              <button id="buttProj_lessInfo3" class="buttonCardInfo" type="button">Less info</button>
-            </div>
+            <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>
+            <button id="buttProj_lessInfo3" class="buttonCardInfo" type="button">Less info</button>
+
             <div class="card-content">
               <p>Створено на основі Arduino з можливістю інтграції з системою управління розумним будинком "MyHome"</p>
               <p class="time"><time datetime="2020-07">July 2020</time></p>
@@ -229,7 +227,19 @@
       </div>
     </section>
 
-    <section id="section-4">ABOUT ME</section>
+    <section id="section-4">
+      <div class="plot-4-1">
+        <div class="simple-linear"></div>
+      </div>
+      <div class="plot-4-2">
+        <div class="card about">
+          <h2>About me</h2>
+          <p>
+            Умею работать в команде, а так же, как самостоятельная единица. Имею опыт работы с подчинёнными. Внимательный к деталям, ответственный.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
 
