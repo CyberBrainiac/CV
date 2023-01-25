@@ -185,15 +185,22 @@
             <h3>Site Resume</h3>
             <p><b>Мова:</b> HTML5, CSS, JavaScript</p>
             <p>Повністю адаптивний дизайн!</p>
-            <p>
-              <img src="images/phone.svg" alt="mobile phone"> 
-              <img src="images/tablet.svg" alt="tablet"> 
-              <img src="images/computer.svg" alt="personal computer"> 
-            </p>
-            <span>mobile phone tablet personal computer</span>
+            <div class="img-proj-resume">
+              <figure id="projTablet">
+                <img src="images/tablet.svg" alt="tablet"> 
+                <figcaption>tablet</figcaption>
+              </figure>
+              <figure id="projPhone">
+                <img src="images/phone.svg" alt="mobile phone"> 
+                <figcaption>mobile</figcaption>
+              </figure>
+              <figure id="projComputer">
+                <img src="images/computer.svg" alt="personal computer"> 
+                <figcaption>computer</figcaption>
+              </figure>
+            </div>
             <button id="buttProj_moreInfo1" class="buttonCardInfo" type="button">More info</button>
             <button id="buttProj_lessInfo1" class="buttonCardInfo" type="button">Less info</button>
-
             <div class="card-content">
               </p>Сайт підлаштовується під параметри вашого пристрою, що дозволяє точно передати мій задум на абсолютній більшості пристроїв:</p>
               <p class="time"><time datetime="2023-01">January 2022</time></p>
@@ -205,7 +212,6 @@
             <p><b>Мова:</b> LabVIEW</p>
             <button id="buttProj_moreInfo2" class="buttonCardInfo" type="button">More info</button>
             <button id="buttProj_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
-
             <div class="card-content">
               <p>Може бути використана для збору, сбереження, відображення, обробки даних у реальному часі через інтерфейс RS232</p>
               <p class="time"><time datetime="2021-12">December 2021</time></p>
@@ -217,7 +223,6 @@
             <p><b>Мова:</b> C++</p>
             <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>
             <button id="buttProj_lessInfo3" class="buttonCardInfo" type="button">Less info</button>
-
             <div class="card-content">
               <p>Створено на основі Arduino з можливістю інтграції з системою управління розумним будинком "MyHome"</p>
               <p class="time"><time datetime="2020-07">July 2020</time></p>
@@ -232,7 +237,7 @@
         <div class="simple-linear"></div>
       </div>
       <div class="plot-4-2">
-        <div class="card about">
+        <div class="about">
           <h2>About me</h2>
           <p>
             Умею работать в команде, а так же, как самостоятельная единица. Имею опыт работы с подчинёнными. Внимательный к деталям, ответственный.

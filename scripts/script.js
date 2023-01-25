@@ -1,5 +1,8 @@
 "use strict";
+
+//DELETE ANOTATION
 document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);//для тестування
+//DELETE ALL ANOTATION
 
 function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error or null*/
   let navigationLinkArr = document.querySelectorAll(".burger-menu_nav > a");
@@ -14,7 +17,6 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let windowInnerHeight;
   let windowInnerWidth;
   let buttonLines = [];
-  let headerStyle;
   let footerStyle;
   let fontSize;
 
@@ -48,7 +50,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function drawDesign() {
     windowInnerWidth = document.documentElement.clientWidth;
     windowInnerHeight = document.documentElement.clientHeight;
-    headerStyle = getComputedStyle( document.querySelector("header"));
     footerStyle = getComputedStyle( document.querySelector("footer"));
     drawDesignCount++;
 
@@ -103,6 +104,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       /*чистка button handler в workContainer*/
       let workContainer = document.querySelector(".work-experience");
       let workButtonArr = workContainer.querySelectorAll(".buttonCardInfo");
+      let workCardContentArr = workContainer.querySelectorAll(".card-content");
 
       if(workContainer.classList.contains("mobile")) {
         workContainer.classList.remove("mobile");
@@ -111,11 +113,17 @@ return !elem.offsetWidth && !elem.offsetHeight;
           workButton.removeEventListener("click", workButton_clickHandler);
           workButton.style.display = "none";
         }
+
+        for (const cardContent of workCardContentArr) {
+          cardContent.style.display = "block";
+        }
       }
 
       /*чистка button handler в projectsContainer*/
       let projContainer = document.querySelector(".projects");
       let projButtonArr = projContainer.querySelectorAll(".buttonCardInfo");
+      let projCardContentArr = projContainer.querySelectorAll(".card-content");
+
 
       if(projContainer.classList.contains("mobile")) {
         projContainer.classList.remove("mobile");
@@ -123,6 +131,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
         for (const projButton of projButtonArr) {
           projButton.removeEventListener("click", projButton_clickHandler);
           projButton.style.display = "none";
+        }
+
+        for (const cardContent of projCardContentArr) {
+          cardContent.style.display = "block";
         }
       }
 
@@ -153,36 +165,36 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
   function adaptiveBodySize() {
     let sectionsArr = document.getElementsByTagName("section");
-    let header = document.querySelector(".header");
+    // let header = document.querySelector(".header");
     let footer = document.querySelector(".footer");
     sectionsArr = document.getElementsByTagName("section");
 
-    if(header.clientHeight < 100) {
-      header.style.height = "100px";
-    }
+    // if(header.clientHeight < 100) {
+    //   header.style.height = "100px";
+    // }
 
     if(windowInnerWidth > 990) {
       fontSize = 20;
       pageContent.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
       pageContent.style.width = "990px";
-      header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
-      header.style.width = "990px";
+      // header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
+      // header.style.width = "990px";
       footer.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
       footer.style.width = "990px";
     } else if(windowInnerWidth >= 660 && windowInnerWidth < 990 ) {
       fontSize = 18;
       pageContent.style.marginLeft = "0px";
       pageContent.style.width = windowInnerWidth + "px";
-      header.style.marginLeft = "0px";
-      header.style.width = windowInnerWidth + "px";
+      // header.style.marginLeft = "0px";
+      // header.style.width = windowInnerWidth + "px";
       footer.style.marginLeft = "0px";
       footer.style.width = windowInnerWidth + "px";
     } else {
       fontSize = 16;
       pageContent.style.marginLeft = "0px";
       pageContent.style.width = windowInnerWidth + "px";
-      header.style.marginLeft = "0px";
-      header.style.width = windowInnerWidth + "px";
+      // header.style.marginLeft = "0px";
+      // header.style.width = windowInnerWidth + "px";
       footer.style.marginLeft = "0px";
       footer.style.width = windowInnerWidth + "px";
     }
@@ -193,9 +205,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
       }
     } else {
       for(let i = 0; i < sectionsArr.length; i++) {
-        if(i == 0) {
-          sectionsArr[i].style.height = windowInnerHeight - parseInt(headerStyle.height) + "px";
-        } else if (i == sectionsArr.length - 1) {
+        // if(i == 0) {
+        //   sectionsArr[i].style.height = windowInnerHeight - parseInt(headerStyle.height) + "px";
+        // } else 
+        if (i == sectionsArr.length - 1) {
           sectionsArr[i].style.height = windowInnerHeight - parseInt(footerStyle.height) - parseInt(footerStyle.paddingTop) - parseInt(footerStyle.paddingBottom) + "px";
         } else {
           sectionsArr[i].style.height = windowInnerHeight + "px";
@@ -277,14 +290,14 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 
   function adaptiveBurgerMenu() {
-    let header = document.querySelector("header");
-    let headerOffset = elementOffset(header);
+    let pageContentStyle = getComputedStyle(pageContent);
+    let contentWidth = parseInt(pageContentStyle.width);
 
 /*Menu Button Style*/
-    menuButton.style.top = Math.trunc( parseInt(headerStyle.height) / 10) + "px";
+    menuButton.style.top = windowInnerHeight * 0.02 + "px";
     menuButton.style.left = Math.trunc(
-      (headerOffset.left + parseInt(headerStyle.width)) - (parseInt(headerStyle.width) / 8)) + "px";
-    menuButton.style.width = Math.trunc( parseInt(headerStyle.width) / 12) + "px";
+      (parseFloat(pageContent.style.marginLeft) + contentWidth) - contentWidth / 8) + "px";
+    menuButton.style.width = Math.trunc(contentWidth / 12) + "px";
 
     if( parseInt(menuButton.style.width) > 60) {
       menuButton.style.height = menuButton.style.width = "60px";
@@ -296,7 +309,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 /*Menu Navigation Style*/
     let menuNav = document.querySelector(".burger-menu_nav");
-    let menuNavWidth = parseInt(headerStyle.width) / 3;
+    let menuNavWidth = contentWidth / 3;
 
     if(menuNavWidth < 156) {
       menuNav.style.width = "156px";
@@ -304,7 +317,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       menuNav.style.width = menuNavWidth + "px";
     }
 
-    menuNav.style.left = headerOffset.left + (parseInt(headerStyle.width) - parseInt(menuNav.style.width)) + "px";
+    menuNav.style.left = parseFloat(pageContent.style.marginLeft) + (contentWidth - parseInt(menuNav.style.width)) + "px";
     let linksOffsetTop = parseInt(menuButton.style.top) * 4 + parseInt(menuButton.style.height) + "px";
     navigationLinkArr[0].style.marginTop = linksOffsetTop;
 
@@ -492,8 +505,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
           link.style.transitionDuration = "0.3s";
           link.style.fontSize = fontSize + "px";
           link.style.borderBottom = "1px solid black";
-          link.style.paddingTop = parseInt(headerStyle.height) / 10 + "px";
-          link.style.paddingBottom = parseInt(headerStyle.height) / 10 + "px";
+          link.style.paddingTop = windowInnerHeight * 0.02 + "px";
+          link.style.paddingBottom = windowInnerHeight * 0.02 + "px";
 
           setTimeout(() => link.style.color = "white", 50);
         }
@@ -542,8 +555,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let workContainer = document.querySelector(".work-experience");
     let workButtonArr = workContainer.querySelectorAll(".buttonCardInfo");
     let cardContentArr = section2.querySelectorAll("div.card-content");
-console.log(workContainer.clientHeight + parseInt(pageContent.style.width) / 2);
-    if(workContainer.clientHeight + parseInt(pageContent.style.width) / 2 > parseInt(section2.style.height)) {
+
+    if(workContainer.clientHeight + parseInt(pageContent.style.width) / 3 > parseInt(section2.style.height)) {
       workContainer.classList.toggle("mobile");
 
       for (let workButton of workButtonArr) {
@@ -744,8 +757,8 @@ console.log(workContainer.clientHeight + parseInt(pageContent.style.width) / 2);
           break;
 
         case 1:
-          let workContainerHeight = parseInt(getComputedStyle(document.querySelector(".work-experience")).height);
-          let educationContainerHeight = parseInt(getComputedStyle(document.querySelector(".education")).height);
+          let workContainerHeight = document.querySelector(".work-experience").clientHeight;
+          let educationContainerHeight = document.querySelector(".education").clientHeight;
           let maxContainersHeight = Math.max(workContainerHeight, educationContainerHeight);
           let plot2_1_width = parseInt(pageContent.style.width) / 2; //висота фонa-трикутника секції 2
           let section2Height = parseInt(sectionsArr[i].style.height);
@@ -756,7 +769,17 @@ console.log(workContainer.clientHeight + parseInt(pageContent.style.width) / 2);
           break;
 
         case 2:
-          
+          let plot3_1 = document.querySelector(".plot-3-1");
+          let plot3_1_height = plot3_1.clientHeight;
+          let projectsContainer = document.querySelector(".projects");
+          let projectsContainerHeight = projectsContainer.clientHeight;
+
+          if(plot3_1_height + plot3_1_height / 2 + projectsContainerHeight > parseInt(sectionsArr[i].style.height)) {
+            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + "px";
+
+          } else if(parseInt(sectionsArr[i].style.height) - (plot3_1_height + plot3_1_height / 2 + projectsContainerHeight) > legalExtraHeight) {
+            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + "px";
+          }
           break;
       }
     }
@@ -878,5 +901,7 @@ console.log(workContainer.clientHeight + parseInt(pageContent.style.width) / 2);
     ctx.fill();
   }
 
-  return {headerStyle, fontSize};
+  return {
+    fontSize,
+    };
 }
