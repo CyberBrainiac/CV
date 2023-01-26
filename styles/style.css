@@ -24,7 +24,17 @@ svg {
     height: 0;
 }
 
-/* header {height: 20vh;} */
+header {text-align: center;}
+.title {
+  font-size: 42px;
+  font-family: "Niconne", Italic;
+  letter-spacing: 2px;
+  background-color: white;
+}
+#headerCanvas {
+  position: absolute;
+  z-index: 0;
+}
 
 section {
   display: flex;
@@ -217,7 +227,7 @@ time {color: gray;}
       margin-top: 2.42em;
     }
     .contacts span {
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       position: relative;
     }
     .contacts a {
@@ -318,10 +328,9 @@ time {color: gray;}
 
 
 /* Section 3*/
-#section-3 {flex-direction: column;}
-#canvasS3{
-  position: absolute;
-  z-index: 0;
+#section-3 {
+  background-color: #6D6363;
+  flex-direction: column;
 }
 
 .plot-3-1 {

@@ -17,7 +17,6 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let windowInnerHeight;
   let windowInnerWidth;
   let buttonLines = [];
-  let footerStyle;
   let fontSize;
 
   const userDevice = function checkUserDev() {
@@ -30,7 +29,36 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   }()
 
   const language = {
-    en: {},
+    en: {
+      "header": {
+        "title": "Resume",
+        "burger-menu": {"a": ["Scills & contact", "Work & education", "My projects", "About Me",]},
+      },
+      
+      "section-1": {
+        "plot-1-1": {
+          "name": "Arkhipov Arsenii",
+          "status-cont": "Intern web developer",
+          "scills": {
+            "h2": "Scills",
+            "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
+          },
+        },
+        "plot-1-2": {
+          "aim": {
+            "h2": "My purpose",
+            "span": "Build a brilliant career in IT",
+          },
+          "contacts": {
+            "h2": "Contact",
+            "phone": "Phone",
+            "resumeFile": "Resume",
+            "gitHub": "GitHub",
+            "mail": "Email",
+          },
+        }
+      },
+    },
     ua: {},
   }
 
@@ -50,8 +78,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function drawDesign() {
     windowInnerWidth = document.documentElement.clientWidth;
     windowInnerHeight = document.documentElement.clientHeight;
-    footerStyle = getComputedStyle( document.querySelector("footer"));
-    drawDesignCount++;
 
     try {
       /* f() for build content */
@@ -70,7 +96,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
-      drawBackgroundS3();
     } catch (error) {
       return(error); //realise my class for Error
     }
@@ -147,9 +172,11 @@ return !elem.offsetWidth && !elem.offsetHeight;
       console.log("Error in window resize Promise \n" + err.message);
     })
 
-    if(drawDesignCount == 1) {
+    if(drawDesignCount == 0) {
+      drawDesignCount++;
       preloaderControl.toggleOverlay();
     } else {
+      drawDesignCount++;
       background.style.zIndex = "-1";
     }
   }
@@ -165,36 +192,31 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
   function adaptiveBodySize() {
     let sectionsArr = document.getElementsByTagName("section");
-    // let header = document.querySelector(".header");
+    let header = document.querySelector(".header");
     let footer = document.querySelector(".footer");
+    let footerStyle = getComputedStyle( document.querySelector("footer"));
     sectionsArr = document.getElementsByTagName("section");
 
-    // if(header.clientHeight < 100) {
-    //   header.style.height = "100px";
-    // }
+
 
     if(windowInnerWidth > 990) {
       fontSize = 20;
-      pageContent.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
-      pageContent.style.width = "990px";
-      // header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
-      // header.style.width = "990px";
+      pageContent.style.marginLeft = header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
+      pageContent.style.width = header.style.width = "990px";
       footer.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
       footer.style.width = "990px";
+
     } else if(windowInnerWidth >= 660 && windowInnerWidth < 990 ) {
       fontSize = 18;
-      pageContent.style.marginLeft = "0px";
-      pageContent.style.width = windowInnerWidth + "px";
-      // header.style.marginLeft = "0px";
-      // header.style.width = windowInnerWidth + "px";
+      pageContent.style.marginLeft = header.style.marginLeft = "0px";
+      pageContent.style.width = header.style.width = windowInnerWidth + "px";
       footer.style.marginLeft = "0px";
       footer.style.width = windowInnerWidth + "px";
+
     } else {
       fontSize = 16;
-      pageContent.style.marginLeft = "0px";
-      pageContent.style.width = windowInnerWidth + "px";
-      // header.style.marginLeft = "0px";
-      // header.style.width = windowInnerWidth + "px";
+      pageContent.style.marginLeft = header.style.marginLeft = "0px";
+      pageContent.style.width = header.style.width = windowInnerWidth + "px";
       footer.style.marginLeft = "0px";
       footer.style.width = windowInnerWidth + "px";
     }
@@ -203,13 +225,15 @@ return !elem.offsetWidth && !elem.offsetHeight;
       for(let section of sectionsArr) {
         section.style.height = "720px";
       }
+
     } else {
       for(let i = 0; i < sectionsArr.length; i++) {
-        // if(i == 0) {
-        //   sectionsArr[i].style.height = windowInnerHeight - parseInt(headerStyle.height) + "px";
-        // } else 
-        if (i == sectionsArr.length - 1) {
+        if(i == 0) {
+          sectionsArr[i].style.height = windowInnerHeight - header.clientHeight + "px";
+
+        } else if (i == sectionsArr.length - 1) {
           sectionsArr[i].style.height = windowInnerHeight - parseInt(footerStyle.height) - parseInt(footerStyle.paddingTop) - parseInt(footerStyle.paddingBottom) + "px";
+
         } else {
           sectionsArr[i].style.height = windowInnerHeight + "px";
         }
@@ -259,14 +283,18 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 /*Add unique Font Size*/
     let footerP = footer.querySelectorAll("p");
+    let headerT = header.querySelector(".title");
     if(windowInnerWidth >= 500) {
       for (const p of footerP) {
         p.style.fontSize = "42px";
       }
+      headerT.style.fontSize = "42px";
+
     } else {
       for (const p of footerP) {
         p.style.fontSize = "32px";
       }
+      headerT.style.fontSize = "32px";
     }
   }
 
@@ -336,6 +364,9 @@ return !elem.offsetWidth && !elem.offsetHeight;
     for(let i = 0; i < 3; i++) { //початкове положення ліній
       buttonLines[i].style.top = buttonLinesTopOffset + "px";
       buttonLines[i].style.width = menuButton.style.width;
+      buttonLines[i].style.left = Math.trunc(
+        (parseFloat(pageContent.style.marginLeft) + contentWidth) - contentWidth / 8) + "px";
+        
       setTimeout(() => {buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px", 10});
     }
     idInterval_blinkLine = createBlinkEffect(buttonLines); //очищую інтервал мерехтіння кнопки меню
@@ -642,13 +673,14 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptiveProjectContainer() {
     let section3 = document.getElementById("section-3");
     let timerContainer = document.querySelector(".timer");
-    let timerContainerHeight = timerContainer.clientHeight + timerContainer.clientHeight / 2; //сам таймер буде додано пізніше, для розрахунку розмірів мені потрібні приблизні значення
+    let timerContainerHeight = timerContainer.clientHeight + timerContainer.clientHeight / 1.5; //сам таймер буде додано пізніше, для розрахунку розмірів мені потрібні приблизні значення
     let projectsContainer = document.querySelector(".projects");
     let projButtonArr = projectsContainer.querySelectorAll(".buttonCardInfo");
     let cardContentArr = section3.querySelectorAll("div.card-content");
 
     if(timerContainerHeight + projectsContainer.clientHeight > section3.clientHeight) {
       projectsContainer.classList.toggle("mobile");
+      console.log("mobile");
 
       for (const projButton of projButtonArr) {
         projButton.addEventListener("click", projButton_clickHandler);
@@ -775,10 +807,13 @@ return !elem.offsetWidth && !elem.offsetHeight;
           let projectsContainerHeight = projectsContainer.clientHeight;
 
           if(plot3_1_height + plot3_1_height / 2 + projectsContainerHeight > parseInt(sectionsArr[i].style.height)) {
-            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + "px";
+            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 20 + "px";
 
-          } else if(parseInt(sectionsArr[i].style.height) - (plot3_1_height + plot3_1_height / 2 + projectsContainerHeight) > legalExtraHeight) {
-            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + "px";
+          } else if(parseInt(sectionsArr[i].style.height) - (plot3_1_height + plot3_1_height / 2 + projectsContainerHeight) > legalExtraHeight && userDevice === "PC") {
+            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 10 + "px";
+
+          } else if(parseInt(sectionsArr[i].style.height) - (plot3_1_height + plot3_1_height / 2 + projectsContainerHeight) > legalExtraHeight && drawDesignCount) {
+            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 20 + "px";
           }
           break;
       }
@@ -789,11 +824,20 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function drawBackgroundS1_P1() {
     let plot1 = document.querySelector(".plot-1-1");
     let plot1Style = getComputedStyle(plot1);
+    let header = document.getElementById("header");
+    let headerStyle = getComputedStyle(header);
 
     const canvas = document.getElementById("canvasS1-P1");
     const ctx = canvas.getContext("2d");
     canvas.width = parseInt(plot1Style.width);
     canvas.height = parseInt(plot1Style.height);
+
+    const headerCanvas = document.getElementById("headerCanvas");
+    const headerCtx = headerCanvas.getContext("2d");
+    headerCanvas.width = parseInt(pageContent.style.width);
+    headerCanvas.height = parseInt(headerStyle.height);
+    headerCanvas.style.top = "0px";
+    headerCanvas.style.left = pageContent.style.marginLeft;
 
     let backgroundWidth = parseInt(plot1Style.width);
     cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Де x - stick; 0.5x - radiusOfCornerCircle
@@ -816,6 +860,16 @@ return !elem.offsetWidth && !elem.offsetHeight;
     ctx.lineTo(0, backgroudStick * 1.5);
     ctx.lineTo(0, 0);
     ctx.fill();
+
+/*Heder Background*/
+    headerCtx.fillStyle = backgroundColor;
+    headerCtx.beginPath();
+    headerCtx.moveTo(0, 0);
+    headerCtx.lineTo(0, headerCanvas.height);
+    headerCtx.lineTo(backgroudStick * 1.5, headerCanvas.height);
+    headerCtx.lineTo(backgroudStick * 1.5 - headerCanvas.height, 0);
+    headerCtx.lineTo(0, 0);
+    headerCtx.fill();
   }
 
 
@@ -868,38 +922,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
     ctx.fill();
   }
 
-
-  function drawBackgroundS3() {
-    let section3 = document.getElementById("section-3");
-    const canvas = document.getElementById("canvasS3");
-    const ctx = canvas.getContext("2d");
-    canvas.width = parseInt(pageContent.style.width);
-    canvas.height = section3.clientHeight;
-
-// /*triangle*/
-//     ctx.fillStyle = backgroundColor;
-//     ctx.beginPath();
-//     ctx.moveTo(0, 0);
-//     ctx.lineTo(canvas.width / 2, canvas.width / 2);
-//     ctx.lineTo(canvas.width, 0);
-//     ctx.fill();
-
-// /*central line*/
-//     ctx.strokeStyle = backgroundColor;
-//     ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
-//     ctx.beginPath();
-//     ctx.moveTo(canvas.width / 2, canvas.width / 2 - 1);
-//     ctx.lineTo(canvas.width / 2, canvas.height);
-//     ctx.stroke();
-
-    ctx.fillStyle = "#6D6363";
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(canvas.width, 0);
-    ctx.lineTo(canvas.width, canvas.height);
-    ctx.lineTo(0, canvas.height);
-    ctx.fill();
-  }
 
   return {
     fontSize,
