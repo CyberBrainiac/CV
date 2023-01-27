@@ -82,7 +82,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     try {
       /* f() for build content */
       adaptiveBodySize();
-      adaptiveHeader();
+      // adaptiveHeader();
       adaptiveImage();
       adaptiveBurgerMenu();
       adaptiveScillsContainer();
@@ -844,7 +844,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     headerCanvas.width = parseInt(pageContent.style.width);
     headerCanvas.height = parseInt(headerStyle.height);
     headerCanvas.style.top = "0px";
-    headerCanvas.style.left = pageContent.style.marginLeft;
+    headerCanvas.style.left = "0px";
 
     let backgroundWidth = parseInt(plot1Style.width);
     cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Де x - stick; 0.5x - radiusOfCornerCircle

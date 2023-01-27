@@ -27,7 +27,7 @@ svg {
 header {
   text-align: center;
   position: relative;
-  /* top: 2px; */
+  /* height: 10vh; */
   z-index: 20;
 }
 .title {
@@ -35,7 +35,7 @@ header {
   font-family: "Niconne", Italic;
   letter-spacing: 2px;
   background-color: white;
-  padding: 10px;
+  padding-top: 10px;
 }
 
 #headerCanvas {
