@@ -830,7 +830,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     const canvas = document.getElementById("canvasS1-P1");
     const ctx = canvas.getContext("2d");
     canvas.width = parseInt(plot1Style.width);
-    canvas.height = parseInt(plot1Style.height);
+    canvas.height = parseInt(plot1Style.height) + 2;
 
     const headerCanvas = document.getElementById("headerCanvas");
     const headerCtx = headerCanvas.getContext("2d");

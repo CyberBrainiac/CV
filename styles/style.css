@@ -30,7 +30,10 @@ header {text-align: center;}
   font-family: "Niconne", Italic;
   letter-spacing: 2px;
   background-color: white;
+  padding: 10px;
 }
+
+.title {}
 #headerCanvas {
   position: absolute;
   z-index: 0;
