@@ -24,7 +24,12 @@ svg {
     height: 0;
 }
 
-header {text-align: center;}
+header {
+  text-align: center;
+  position: relative;
+  /* top: 2px; */
+  z-index: 20;
+}
 .title {
   font-size: 42px;
   font-family: "Niconne", Italic;
@@ -33,7 +38,6 @@ header {text-align: center;}
   padding: 10px;
 }
 
-.title {}
 #headerCanvas {
   position: absolute;
   z-index: 0;
@@ -97,6 +101,7 @@ time {color: gray;}
   position: fixed;
   z-index: 30;
   cursor: pointer;
+  text-align: left;
 }
   .burger-menu_lines {
     transition: 0.4s;
@@ -400,9 +405,11 @@ time {color: gray;}
 }
   .about {
     width: auto;
-    padding: 1em;
-    margin: 0.6em auto;
+    padding: 0 3em;
+    /* margin: 0.6em auto; */
   } 
+    .about h2 {padding-bottom: 0.5em;}
+    .about p {text-indent: 10%;}
 
 
 /* Нижний колонтитул */

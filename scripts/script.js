@@ -82,6 +82,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     try {
       /* f() for build content */
       adaptiveBodySize();
+      adaptiveHeader();
       adaptiveImage();
       adaptiveBurgerMenu();
       adaptiveScillsContainer();
@@ -299,6 +300,14 @@ return !elem.offsetWidth && !elem.offsetHeight;
   }
 
 
+  function adaptiveHeader() {
+/*виключенно для фіксу багу відображення на телефоні*/
+    let header = document.getElementById("header");
+    header.style.height = header.clientHeight + 2 + "px";
+    header.style.backgroundColor = "red";
+  }
+
+
   function adaptiveImage() {
     let imgContainer = document.querySelector(".plot-1-1");
     let imgContainer_width = parseInt( getComputedStyle(imgContainer).width);
@@ -364,8 +373,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
     for(let i = 0; i < 3; i++) { //початкове положення ліній
       buttonLines[i].style.top = buttonLinesTopOffset + "px";
       buttonLines[i].style.width = menuButton.style.width;
-      buttonLines[i].style.left = Math.trunc(
-        (parseFloat(pageContent.style.marginLeft) + contentWidth) - contentWidth / 8) + "px";
         
       setTimeout(() => {buttonLines[i].style.marginTop = buttonLinesOffset * (i + 1) + "px", 10});
     }
