@@ -11,6 +11,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let pageContent = document.querySelector(".pageContent");
   let menu = document.querySelector(".burger-menu");
   let backgroundColor = "#6D6363";
+  let cardContentHeight;
   let idInterval_blinkLine;
   let drawDesignCount = 0;
   let cornerCircleRadius;
@@ -27,40 +28,6 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
     return "PC";
   }
   }()
-
-  const language = {
-    en: {
-      "header": {
-        "title": "Resume",
-        "burger-menu": {"a": ["Scills & contact", "Work & education", "My projects", "About Me",]},
-      },
-      
-      "section-1": {
-        "plot-1-1": {
-          "name": "Arkhipov Arsenii",
-          "status-cont": "Intern web developer",
-          "scills": {
-            "h2": "Scills",
-            "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
-          },
-        },
-        "plot-1-2": {
-          "aim": {
-            "h2": "My purpose",
-            "span": "Build a brilliant career in IT",
-          },
-          "contacts": {
-            "h2": "Contact",
-            "phone": "Phone",
-            "resumeFile": "Resume",
-            "gitHub": "GitHub",
-            "mail": "Email",
-          },
-        }
-      },
-    },
-    ua: {},
-  }
 
 /* Перевірка єлементу на відображення
 
@@ -197,17 +164,17 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let footerStyle = getComputedStyle( document.querySelector("footer"));
     sectionsArr = document.getElementsByTagName("section");
 
+// width 768 IPad
 
-
-    if(windowInnerWidth > 990) {
-      fontSize = 20;
+    if(windowInnerWidth >= 990) {
+      fontSize = 22;
       pageContent.style.marginLeft = header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
       pageContent.style.width = header.style.width = "990px";
       footer.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
       footer.style.width = "990px";
 
-    } else if(windowInnerWidth >= 660 && windowInnerWidth < 990 ) {
-      fontSize = 18;
+    } else if(windowInnerWidth >= 768) {
+      fontSize = 20;
       pageContent.style.marginLeft = header.style.marginLeft = "0px";
       pageContent.style.width = header.style.width = windowInnerWidth + "px";
       footer.style.marginLeft = "0px";
@@ -677,8 +644,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let cardContentArr = section3.querySelectorAll("div.card-content");
 
     if(timerContainerHeight + projectsContainer.clientHeight > section3.clientHeight) {
+      cardContentHeight = Math.max(... [... cardContentArr].map((elem) => { return elem.clientHeight;}));
       projectsContainer.classList.toggle("mobile");
-      console.log("mobile");
 
       for (const projButton of projButtonArr) {
         projButton.addEventListener("click", projButton_clickHandler);
@@ -692,6 +659,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       for (const cardContent of cardContentArr) {
         cardContent.style.display = "none";
       }
+
     } else {
       for (const cardContent of cardContentArr) {
         cardContent.style.display = "block";
@@ -768,8 +736,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 
   function correctExtraHeight() {
-    let sectionsArr = document.getElementsByTagName("section");
-    let legalExtraHeight = 40;
+    const sectionsArr = document.getElementsByTagName("section");
+    const legalExtraHeight = 40;
 
     for(let i = 0; i < sectionsArr.length; i++) {
       switch (i) { //підлаштування висоти для кожної секції сайту
@@ -784,36 +752,58 @@ return !elem.offsetWidth && !elem.offsetHeight;
           } else if((parseInt(sectionsArr[i].style.height) - photoContainHeight - scillsContainHeight) > legalExtraHeight) {
             sectionsArr[i].style.height = photoContainHeight + scillsContainHeight + legalExtraHeight + "px";
           }
-          break;
+        break;
 
         case 1:
           let workContainerHeight = document.querySelector(".work-experience").clientHeight;
           let educationContainerHeight = document.querySelector(".education").clientHeight;
           let maxContainersHeight = Math.max(workContainerHeight, educationContainerHeight);
-          let plot2_1_width = parseInt(pageContent.style.width) / 2; //висота фонa-трикутника секції 2
+          let plot2_1_width = parseInt(pageContent.style.width) / 3; //висота фонa-трикутника секції 2
           let section2Height = parseInt(sectionsArr[i].style.height);
 
           if(section2Height - maxContainersHeight - plot2_1_width > legalExtraHeight) {
             sectionsArr[i].style.height = maxContainersHeight + plot2_1_width + legalExtraHeight + "px";
           }
-          break;
+        break;
 
         case 2:
+          let section3 = sectionsArr[i];
+          let section3Height = parseInt(section3.style.height);
           let plot3_1 = document.querySelector(".plot-3-1");
           let plot3_1_height = plot3_1.clientHeight;
           let projectsContainer = document.querySelector(".projects");
           let projectsContainerHeight = projectsContainer.clientHeight;
 
-          if(plot3_1_height + plot3_1_height / 2 + projectsContainerHeight > parseInt(sectionsArr[i].style.height)) {
-            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 20 + "px";
+          // if(plot3_1_height + plot3_1_height / 2 + projectsContainerHeight > section3Height) {
+          //   section3.style.height = plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight + legalExtraHeight + 20 + "px";
 
-          } else if(parseInt(sectionsArr[i].style.height) - (plot3_1_height + plot3_1_height / 2 + projectsContainerHeight) > legalExtraHeight && userDevice === "PC") {
-            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 10 + "px";
+          // } else 
 
-          } else if(parseInt(sectionsArr[i].style.height) - (plot3_1_height + plot3_1_height / 2 + projectsContainerHeight) > legalExtraHeight && drawDesignCount) {
-            sectionsArr[i].style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 20 + "px";
+          if(projectsContainer.classList.contains("mobile")) {
+            if(section3Height - plot3_1_height - plot3_1_height / 1.5 - projectsContainerHeight < cardContentHeight) {
+              section3.style.height = plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight + cardContentHeight + "px";
+            }
           }
-          break;
+
+          else if(section3Height - (plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight) > legalExtraHeight) {
+            section3.style.height = plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight + legalExtraHeight + "px";
+          } 
+          
+          // projectsContainerHeight
+          // else if(section3Height - (plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight) > legalExtraHeight && drawDesignCount) {
+          //   section3.style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 20 + "px";
+          // }
+        break;
+
+        case 3:
+          let section4 = sectionsArr[i];
+          let plot4_1 = document.querySelector(".plot-4-1");
+          let plot4_2 = document.querySelector(".plot-4-2");
+
+          if(parseInt(section4.style.height) - plot4_1.clientHeight - plot4_2.clientHeight > legalExtraHeight * 2) {
+            section4.style.height = plot4_1.clientHeight + plot4_2.clientHeight + legalExtraHeight * 2 + "px";
+          }
+        break;
       }
     }
   }
@@ -839,8 +829,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let roundingRadius = 30; //коефіціент скруглення кутів
     let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. (більш детально у README);
 
-    headerCanvas.width = backgroudStick * 1.5 + 2; //створюю ефект накладання canvas на наступну секцію на 2 px для фіксу багу на смартфоні
-    headerCanvas.height = parseInt(headerStyle.height) + 2;
+    headerCanvas.width = backgroudStick * 1.5 + 1; //створюю ефект накладання canvas на наступну секцію на 2 px для фіксу багу на смартфоні
+    headerCanvas.height = parseInt(headerStyle.height) + 1;
     headerCanvas.style.top = "0px";
     headerCanvas.style.left = pageContent.style.marginLeft;
     
@@ -865,8 +855,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
     headerCtx.beginPath();
     headerCtx.moveTo(0, 0);
     headerCtx.lineTo(0, headerCanvas.height);
-    headerCtx.lineTo(backgroudStick * 1.5 + 2, headerCanvas.height);
-    headerCtx.lineTo(backgroudStick * 1.5 - headerCanvas.height + 2, 0);
+    headerCtx.lineTo(backgroudStick * 1.5 + 1, headerCanvas.height);
+    headerCtx.lineTo(backgroudStick * 1.5 - headerCanvas.height + 1, 0);
     headerCtx.lineTo(0, 0);
     headerCtx.fill();
   }
