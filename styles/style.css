@@ -27,8 +27,7 @@ svg {
 header {
   text-align: center;
   position: relative;
-  /* height: 10vh; */
-  z-index: 20;
+  z-index: 10;
 }
 .title {
   font-size: 42px;
@@ -40,7 +39,7 @@ header {
 
 #headerCanvas {
   position: absolute;
-  z-index: 0;
+  z-index: 11;
 }
 
 section {

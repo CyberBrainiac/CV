@@ -82,7 +82,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
     try {
       /* f() for build content */
       adaptiveBodySize();
-      // adaptiveHeader();
       adaptiveImage();
       adaptiveBurgerMenu();
       adaptiveScillsContainer();
@@ -300,14 +299,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
   }
 
 
-  function adaptiveHeader() {
-/*виключенно для фіксу багу відображення на телефоні*/
-    let header = document.getElementById("header");
-    header.style.height = header.clientHeight + 2 + "px";
-    header.style.backgroundColor = "red";
-  }
-
-
   function adaptiveImage() {
     let imgContainer = document.querySelector(".plot-1-1");
     let imgContainer_width = parseInt( getComputedStyle(imgContainer).width);
@@ -316,8 +307,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let statusContent = document.querySelector(".status-cont");
 
     let photo = document.querySelector('.myPhoto');
-    photo.style.height = imgContainer_width / 1.4 + "px";
-    photo.style.width = imgContainer_width / 1.4 + "px";
+    photo.style.height = imgContainer_width / 1.3 + "px";
+    photo.style.width = imgContainer_width / 1.3 + "px";
     let imgRadius = parseInt(photo.style.width) / 2;
 
     photo.style.marginTop = (imgContainer_center.y - imgRadius) + "px";
@@ -834,24 +825,25 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let header = document.getElementById("header");
     let headerStyle = getComputedStyle(header);
 
+    const headerCanvas = document.getElementById("headerCanvas");
+    const headerCtx = headerCanvas.getContext("2d");
     const canvas = document.getElementById("canvasS1-P1");
     const ctx = canvas.getContext("2d");
     canvas.width = parseInt(plot1Style.width);
-    canvas.height = parseInt(plot1Style.height) + 2;
+    canvas.height = parseInt(plot1Style.height);
 
-    const headerCanvas = document.getElementById("headerCanvas");
-    const headerCtx = headerCanvas.getContext("2d");
-    headerCanvas.width = parseInt(pageContent.style.width);
-    headerCanvas.height = parseInt(headerStyle.height);
-    headerCanvas.style.top = "0px";
-    headerCanvas.style.left = "0px";
-
+    
     let backgroundWidth = parseInt(plot1Style.width);
     cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Де x - stick; 0.5x - radiusOfCornerCircle
     let backgroudStick = backgroundWidth / 2.5;
     let roundingRadius = 30; //коефіціент скруглення кутів
     let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. (більш детально у README);
 
+    headerCanvas.width = backgroudStick * 1.5 + 2; //створюю ефект накладання canvas на наступну секцію на 2 px для фіксу багу на смартфоні
+    headerCanvas.height = parseInt(headerStyle.height) + 2;
+    headerCanvas.style.top = "0px";
+    headerCanvas.style.left = pageContent.style.marginLeft;
+    
 /*Image Background*/
     ctx.fillStyle = backgroundColor;
     ctx.beginPath();
@@ -873,8 +865,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
     headerCtx.beginPath();
     headerCtx.moveTo(0, 0);
     headerCtx.lineTo(0, headerCanvas.height);
-    headerCtx.lineTo(backgroudStick * 1.5, headerCanvas.height);
-    headerCtx.lineTo(backgroudStick * 1.5 - headerCanvas.height, 0);
+    headerCtx.lineTo(backgroudStick * 1.5 + 2, headerCanvas.height);
+    headerCtx.lineTo(backgroudStick * 1.5 - headerCanvas.height + 2, 0);
     headerCtx.lineTo(0, 0);
     headerCtx.fill();
   }
