@@ -57,6 +57,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       adaptiveContactContainer();
       adaptiveWorkContainer();
       adaptiveLanguageContainer();
+      createTimer();
       adaptiveProjectContainer()
       
       /* f() for make site beauty */
@@ -95,6 +96,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       }
       menuButton.onclick = '';
       document.getElementById("changeLanguageBut").onclick = '';
+      document.getElementById("changeLanguageBut").removeEventListener("click", animateMenuButton);
 
 
       /*чистка button handler в workContainer*/
@@ -168,8 +170,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let footerStyle = getComputedStyle( document.querySelector("footer"));
     sectionsArr = document.getElementsByTagName("section");
 
-// width 768 IPad
-
     if(windowInnerWidth >= 990) {
       fontSize = 22;
       pageContent.style.marginLeft = header.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
@@ -193,8 +193,12 @@ return !elem.offsetWidth && !elem.offsetHeight;
     }
 
     if(windowInnerHeight < 660) {
-      for(let section of sectionsArr) {
-        section.style.height = "720px";
+      for(let i = 0; i < sectionsArr.length; i++) {
+        if(i == 0) {
+          sectionsArr[i].style.height = "720px";
+        } else {
+          sectionsArr[i].style.height = "660px";
+        }
       }
 
     } else {
@@ -224,7 +228,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
     let h3 = document.getElementsByTagName("h3");
     [...h3].forEach((elem) => {
-      elem.style.fontSize = fontSize + 2 + "px";
+      elem.style.fontSize = fontSize + 3 + "px";
     });
 
     let buttonArr = document.getElementsByTagName("button");
@@ -255,6 +259,12 @@ return !elem.offsetWidth && !elem.offsetHeight;
 /*Add unique Font Size*/
     let footerP = footer.querySelectorAll("p");
     let headerT = header.querySelector(".title");
+    let aboutPArr = document.querySelectorAll(".about > p");
+    let languagePArr = document.querySelectorAll(".language > p");
+    let nameContainer = document.querySelector(".name");
+    nameContainer.style.fontSize = fontSize + 2 + "px";
+    let figcaptionArr = document.querySelectorAll(".img-proj-resume > figure > figcaption");
+
     if(windowInnerWidth >= 500) {
       for (const p of footerP) {
         p.style.fontSize = "42px";
@@ -266,6 +276,18 @@ return !elem.offsetWidth && !elem.offsetHeight;
         p.style.fontSize = "32px";
       }
       headerT.style.fontSize = "32px";
+    }
+
+    for (const aboutP of aboutPArr) {
+      aboutP.style.fontSize = fontSize + 2 + "px";
+    }
+
+    for (const languageP of languagePArr) {
+      languageP.style.fontSize = fontSize + 2 + "px";
+    }
+
+    for (const figcaption of figcaptionArr) {
+      figcaption.style.fontSize = fontSize - 2 + "px";
     }
   }
 
@@ -360,6 +382,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 /*Menu Button Handlers*/
     menuButton.onclick = () => animateMenuButton();
+    changeLanguageBut.addEventListener("click", animateMenuButton);
     for(let link of navigationLinkArr) {
       link.addEventListener("click", animateMenuButton);
     }
@@ -547,12 +570,15 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptivePurposeContainer() {
 
     let purposeContainer = document.querySelector(".aim");
-    let purposeTextContent = document.querySelector(".aim span");
     let pageContentOffset = elementOffset(document.querySelector(".pageContent"));
     let imgCaptionContainerOffset = elementOffset(document.querySelector(".img-caption"));
-
-    purposeContainer.style.marginTop = imgCaptionContainerOffset.top - pageContentOffset.top + "px"; //розміщую на одній висоті з блоком imgCaption
-    // purposeTextContent.style.fontSize = fontSize - 2 + "px";
+    let nameHeight = document.querySelector(".name").clientHeight;
+  
+    if(nameHeight > fontSize + 10) {
+      purposeContainer.style.marginTop = imgCaptionContainerOffset.top + nameHeight / 2 - pageContentOffset.top + "px"; //розміщую на одній висоті з 2 рядком блока imgCaption
+    } else {
+      purposeContainer.style.marginTop = imgCaptionContainerOffset.top - pageContentOffset.top + "px"; //розміщую на одній висоті з блоком imgCaption
+    }
   }
 
 
@@ -655,10 +681,67 @@ return !elem.offsetWidth && !elem.offsetHeight;
   }
 
 
+  function createTimer() {
+    class Clock {
+      constructor(container) {
+          this.name = "clock";
+          this.template = "d:h:m:sec";
+          this.currentDate = new Date();
+          this.container = container;
+      }
+
+      render() {
+          let date = new Date();
+          let days = '00';
+          let hours = 24 - date.getHours();
+          if (hours < 10) hours = '0' + hours;
+          if (hours == 24) hours = '00';
+          let mins = 60 - date.getMinutes();
+          if (mins < 10) mins = '0' + mins;
+          if (mins == 60) mins = '00';
+          let secs = 60 - date.getSeconds();
+          if (secs < 10) secs = '0' + secs;
+          if (secs == 60) secs = '00';
+          let output = this.template
+              .replace('d', days)
+              .replace('h', hours)
+              .replace('m', mins)
+              .replace('sec', secs);
+          this.container.textContent = output;
+
+          this.container.classList.add("blink");
+          setTimeout(() => {
+              this.container.classList.remove("blink");
+          }, 100);
+      }
+
+      stop() {
+          clearInterval(this.timer);
+      }
+
+      start() {
+          this.render();
+          this.timer = setInterval(() => this.render(), 1000);
+      }
+    }
+
+    if(drawDesignCount === 0) {
+      let container = document.querySelector('.timer');
+      let timerContainer = document.createElement("div");
+      timerContainer.classList.add("timerStyle");
+      timerContainer.style.fontSize = fontSize * 3 + "px";
+      container.appendChild(timerContainer);
+
+      let clock = new Clock(timerContainer);
+      clock.start();
+    }
+  }
+
+
   function adaptiveProjectContainer() {
     let section3 = document.getElementById("section-3");
     let timerContainer = document.querySelector(".timer");
-    let timerContainerHeight = timerContainer.clientHeight + timerContainer.clientHeight / 1.5; //сам таймер буде додано пізніше, для розрахунку розмірів мені потрібні приблизні значення
+    let timerContainerHeight = timerContainer.clientHeight;
     let projectsContainer = document.querySelector(".projects");
     let projButtonArr = projectsContainer.querySelectorAll(".buttonCardInfo");
     let cardContentArr = section3.querySelectorAll("div.card-content");
@@ -776,43 +859,33 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
         case 1:
           let workContainerHeight = document.querySelector(".work-experience").clientHeight;
+          let languageContainer = document.querySelector(".language");
           let educationContainerHeight = document.querySelector(".education").clientHeight;
           let maxContainersHeight = Math.max(workContainerHeight, educationContainerHeight);
-          let plot2_1_width = parseInt(pageContent.style.width) / 3; //висота фонa-трикутника секції 2
+          let plot2_1_width = parseInt(pageContent.style.width) / 2; //висота фонa-трикутника секції 2
           let section2Height = parseInt(sectionsArr[i].style.height);
 
           if(section2Height - maxContainersHeight - plot2_1_width > legalExtraHeight) {
             sectionsArr[i].style.height = maxContainersHeight + plot2_1_width + legalExtraHeight + "px";
+          }
+
+          if(plot2_1_width / languageContainer.clientHeight > 2) {
+            languageContainer.style.top = "80%";
           }
         break;
 
         case 2:
           let section3 = sectionsArr[i];
           let section3Height = parseInt(section3.style.height);
-          let plot3_1 = document.querySelector(".plot-3-1");
-          let plot3_1_height = plot3_1.clientHeight;
-          let projectsContainer = document.querySelector(".projects");
-          let projectsContainerHeight = projectsContainer.clientHeight;
-
-          // if(plot3_1_height + plot3_1_height / 2 + projectsContainerHeight > section3Height) {
-          //   section3.style.height = plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight + legalExtraHeight + 20 + "px";
-
-          // } else 
-
-          if(projectsContainer.classList.contains("mobile")) {
-            if(section3Height - plot3_1_height - plot3_1_height / 1.5 - projectsContainerHeight < cardContentHeight) {
-              section3.style.height = plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight + cardContentHeight + "px";
-            }
-          }
-
-          else if(section3Height - (plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight) > legalExtraHeight) {
-            section3.style.height = plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight + legalExtraHeight + "px";
-          } 
+          let timerContainerHeight = document.querySelector(".timer").clientHeight;
+          let plot3_2 = document.querySelector(".plot-3-2");
+          let plot3_2Height = plot3_2.clientHeight;
+          let someProjButtonHeight = document.getElementById("buttProj_moreInfo1").clientHeight;
+          cardContentHeight = cardContentHeight - someProjButtonHeight * 2; //зайвий розмір кнопок що будуть видалені
           
-          // projectsContainerHeight
-          // else if(section3Height - (plot3_1_height + plot3_1_height / 1.5 + projectsContainerHeight) > legalExtraHeight && drawDesignCount) {
-          //   section3.style.height = plot3_1_height + plot3_1_height / 2 + projectsContainerHeight + legalExtraHeight + 20 + "px";
-          // }
+          if(section3Height - timerContainerHeight - plot3_2Height != cardContentHeight) {
+            section3.style.height = timerContainerHeight + plot3_2Height + cardContentHeight + "px";
+          }
         break;
 
         case 3:
@@ -933,7 +1006,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
 
   return {
-    fontSize,
-    userDevice,
+    // fontSize,
+    // userDevice,
+    pageLanguage,
     };
 }

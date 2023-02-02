@@ -88,13 +88,58 @@ function changeLanguage(lang) {
   for(let i = 0; i < pArrLanguage.length; i++) {
     pArrLanguage[i].textContent = vocabulary[lang]["section-2"]["language"].p[i];
   }
+
+/*Change Section-3 language*/
+  document.querySelector(".timer > h2").textContent = vocabulary[lang]["section-3"].timer.h2;
+  document.querySelector(".timer > p").textContent = vocabulary[lang]["section-3"].timer.p;
+  document.querySelector(".resume > h3").textContent = vocabulary[lang]["section-3"].projects.resume.h3;
+  document.querySelector(".resume .projectLanguage > span > b").textContent = vocabulary[lang]["section-3"].projects.resume.projectLanguage;
+  document.querySelector(".resume .projectLanguage .projLang").textContent = vocabulary[lang]["section-3"].projects.resume.projLang;
+  document.querySelector(".visibleCaption").textContent = vocabulary[lang]["section-3"].projects.resume.visibleCaption;
+
+  let figcaptionArr = document.querySelectorAll(".img-proj-resume > figure > figcaption");
+
+  for(let i = 0; i < figcaptionArr.length; i++) {
+    figcaptionArr[i].textContent = vocabulary[lang]["section-3"].projects.resume["img-proj-resume"][i];
+  }
+
+  document.querySelector(".resume .card-content .project-description > p").textContent = vocabulary[lang]["section-3"].projects.resume["card-content"]["project-description"];
+  document.querySelector(".resume .card-content .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.resume["card-content"].projectLink.a;
+  document.querySelector(".resume .card-content .time").textContent = vocabulary[lang]["section-3"].projects.resume["card-content"].time;
+
+  document.querySelector(".dataCollectionSystem > h3").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.h3;
+  document.querySelector(".dataCollectionSystem .projectLanguage > p > span > b").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.projectLanguage;
+  document.querySelector(".dataCollectionSystem .projectLanguage .projLang").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.projLang;
+  document.querySelector(".dataCollectionSystem .card-content .project-description > p").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem["card-content"]["project-description"];
+  document.querySelector(".dataCollectionSystem .card-content .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem["card-content"].projectLink.a;
+  document.querySelector(".dataCollectionSystem .card-content .time").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem["card-content"].time;
+
+  document.querySelector(".smartHome > h3").textContent = vocabulary[lang]["section-3"].projects.smartHome.h3;
+  document.querySelector(".smartHome .projectLanguage > p > span > b").textContent = vocabulary[lang]["section-3"].projects.smartHome.projectLanguage;
+  document.querySelector(".smartHome .projectLanguage .projLang").textContent = vocabulary[lang]["section-3"].projects.smartHome.projLang;
+  document.querySelector(".smartHome .card-content .project-description > p").textContent = vocabulary[lang]["section-3"].projects.smartHome["card-content"]["project-description"];
+  document.querySelector(".smartHome .card-content .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.smartHome["card-content"].projectLink.a;
+  document.querySelector(".smartHome .card-content .time").textContent = vocabulary[lang]["section-3"].projects.smartHome["card-content"].time;
+
+/*Change Section-4 language*/
+  document.querySelector(".about > h2").textContent =  vocabulary[lang]["section-4"].about.h2;
+  let aboutPArr = document.querySelectorAll(".about > p");
+  for(let i = 0; i < aboutPArr.length; i++) {
+    aboutPArr[i].textContent = vocabulary[lang]["section-4"].about.p[i];
+  }
+
+/*Change footer language*/
+  let footerPArr = document.querySelectorAll(".footer .footerMessage");
+  for(let i = 0; i < footerPArr.length; i++) {
+    footerPArr[i].textContent = vocabulary[lang].footer.footerMessage;
+  }
 }
 
 const vocabulary = {
   en: {
     "header": {
       "title": "Resume",
-      "burger_menu_link": ["Scills & contact", "Work & education", "My projects", "About me",],
+      "burger_menu_link": ["Scills & contacts", "Work & education", "My projects", "About me",],
       "changeLanguageBut": "Change language",
     },
     
@@ -158,7 +203,7 @@ const vocabulary = {
       },
       "language": {
         "h2": "Languages",
-        "p": ["English - intermediate", "Ukrainian - fluently", "Russian -fluently",],
+        "p": ["Ukrainian - fluently", "Russian - fluently", "English - intermediate",],
       }
     },
 
@@ -170,36 +215,48 @@ const vocabulary = {
       "projects": {
         "resume": {
           "h3": "Site resume",
-          "projectLanguage": ["Language:", "HTML, CSS, JavaScript",],
+          "projectLanguage": "Language: ",
+          "projLang": "HTML, CSS, JavaScript",
           "visibleCaption": "The design of this site adapts to the position of your device",
           "img-proj-resume": ["tablet", "mobile", "computer"],
           "buttProj_moreInfo1": "More info",
           "buttProj_lessInfo1": "Less info",
           "card-content": {
             "project-description": "The position of the design elements and their sizes are calculated relative to the dimensions of the user's device. Combined with the «Mobile First» design principle, which allows the site design to scale from smartphone to tablet to computer, the site adapts to the size and position of your device. That makes it possible to convey the idea on the absolute majority of devices.",
-            "projectLink": "GitHub: ",
+            "projectLink": {
+              "span": "GitHub: ",
+              "a": "project link",
+            },
             "time": "January 2022",
           },
         },
         "dataCollectionSystem": {
           "h3": "Aircraft engine data collection system",
-          "projectLanguage": ["Language:", "LabVIEW",],
+          "projectLanguage": "Language: ",
+          "projLang": "LabVIEW",
           "buttProj_moreInfo2": "More info",
           "buttProj_lessInfo2": "Less info",
           "card-content": {
             "project-description": "The system for collecting data from sensors (temperature, humidity, pressure) is designed for their storage, graphical presentation in the form of a graph in real time. It has a subsystem for post-processing and visualization of measured data using averaging, interpolation and approximation algorithms.",
-            "projectLink": "GitHub: ",
+            "projectLink": {
+              "span": "GitHub: ",
+              "a": "project link",
+            },
             "time": "December 2021",
           },
         },
         "smartHome": {
           "h3": "The device for monitoring the state of the switchboard equipment",
-          "projectLanguage": ["Language:", "C++",],
+          "projectLanguage": "Language: ",
+          "projLang": "C++",
           "buttProj_moreInfo3": "More info",
           "buttProj_lessInfo3": "Less info",
           "card-content": {
             "project-description": "Compact device for protection against fires, flooding, condensation. Installed in industrial or household electrical panels. It has the possibility of emergency power off in the electrical network. Measures temperature and humidity. In an emergency situation, sends SMS, MMS, and makes a call to the client's mobile phone.",
-            "projectLink": "GitHub: ",
+            "projectLink": {
+              "span": "GitHub: ",
+              "a": "project link",
+            },
             "time": "July 2020",
           },
         }
@@ -214,18 +271,15 @@ const vocabulary = {
     },
 
     "footer": {
-      "p": "Power of enthusiasm",
+      "footerMessage": "Power of enthusiasm",
     },
   },
-
-
-
 
 
   ua: {
     "header": {
       "title": "Резюме",
-      "burger_menu_link": ["Навички та контакти", "Робота та освіта", "Мої проекти", "Про мене",],
+      "burger_menu_link": ["Навички та контакти", "Робота та освіта", "Мої проєкти", "Про мене",],
       "changeLanguageBut": "Змінити мову",
     },
     
@@ -287,8 +341,8 @@ const vocabulary = {
         },
       },
       "language": {
-        "h2": "Мови",
-        "p": ["Англійська - середній", "Українська - вільно", "Російська - вільно",],
+        "h2": "Мої мови",
+        "p": ["Українська - вільно", "Російська - вільно", "Англійська - intermediate",],
       }
     },
 
@@ -300,36 +354,48 @@ const vocabulary = {
       "projects": {
         "resume": {
           "h3": "Сайт резюме",
-          "projectLanguage": ["Мова", "HTML, CSS, JavaScript",],
+          "projectLanguage": "Мова: ",
+          "projLang": "HTML, CSS, JavaScript",
           "visibleCaption": "Дизайн цього сайту адаптується під положення вашого пристрою",
           "img-proj-resume": ["планшет", "мобільний", "комп'ютер"],
           "buttProj_moreInfo1": "More info",
           "buttProj_lessInfo1": "Less info",
           "card-content": {
             "project-description": "Завдяки розрахунку розмірів пристрою користувача, обчислюється положення елементів дизайну та їх розміри. У поєднанні з принципом розробки «Mobile First», який дозволяє масштабувати дизайн сайту від смартфона до планшета далі до компьютера, сайт підлаштовується під розміри та положення вашого пристрою. Що дає можливість передати задум на абсолютній більшості пристроїв.",
-            "projectLink": "GitHub: ",
+            "projectLink": {
+              "span": "GitHub: ",
+              "a": "посилання на проєкт",
+            },
             "time": "Січень 2022",
           },
         },
         "dataCollectionSystem": {
           "h3": "Система збору даних з авіаційних двигунів",
-          "projectLanguage": ["Мова", "LabVIEW",],
+          "projectLanguage": "Мова: ",
+          "projLang": "LabVIEW",
           "buttProj_moreInfo2": "More info",
           "buttProj_lessInfo2": "Less info",
           "card-content": {
             "project-description": "Система збору данних з датчиків (температури, вологи, тиску) призначена для їх збереження, графічного подання у вігляді графіку в режимі реального часу. Має підсистему постобробки та візуалізації збережених до бази даних показників за алгоритмами усереднення, інтерполяції та апроксимації.",
-            "projectLink": "GitHub: ",
+            "projectLink": {
+              "span": "GitHub: ",
+              "a": "посилання на проєкт",
+            },
             "time": "Грудень 2021",
           },
         },
         "smartHome": {
           "h3": "Пристрій контролю стану електрощитового обладнання",
-          "projectLanguage": ["Мова", "С++",],
+          "projectLanguage": "Мова: ",
+          "projLang": "C++",
           "buttProj_moreInfo3": "More info",
           "buttProj_lessInfo3": "Less info",
           "card-content": {
             "project-description": "Компактний пристрій для захисту від пожеж, затоплень, конденсату. Встановлюється в промислові чи побутові електричні щити. Має можливість аварійного вимкнення живлення в мережі. Вимірює показники температури та вологи. У аварійній ситуації передає SMS, MMS, та робить виклик на мобільний телефон клієнта.",
-            "projectLink": "GitHub: ",
+            "projectLink": {
+              "span": "GitHub: ",
+              "a": "посилання на проєкт",
+            },
             "time": "Липень 2020",
           },
         }
@@ -344,7 +410,7 @@ const vocabulary = {
     },
 
     "footer": {
-      "p": "Power of enthusiasm",
+      "footerMessage": "Сила натхнення",
     },
   },
 }

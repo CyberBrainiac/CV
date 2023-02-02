@@ -6,8 +6,6 @@
   <!-- <meta http-equiv="default-style" content="default style"> ЗАЧЕМ? ЗАЧЕМ? -->
   <link rel="stylesheet" href="styles/preloader.css">
   <link rel="stylesheet" href="styles/style.css" title = "default style">
-  <link rel="stylesheet" href="styles/countDown.css">
-   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
   <base target="_blank">
   <title>Site Resume</title>
 </head>
@@ -55,10 +53,10 @@
       <div class="plot-1-1">
         <canvas id="canvasS1-P1"></canvas>
         <figure class="photo">
-          <img class="myPhoto" src="images/Greed.svg" alt="photo of pretty man">
+          <!-- <img class="myPhoto" src="images/Greed.svg" alt="photo of pretty man"> -->
+          <img class="myPhoto" src="images/my-photo.jpg" alt="photo of pretty man">
           <figcaption class="img-caption">
-            <!-- <h2>Arkhipov Arsenii</h2> -->
-            <h2 class="name">Some text</h2>
+            <h2 class="name">Arkhipov Arsenii</h2>
             <span class="status-cont">Intern web developer</span>
           </figcaption>
         </figure>
@@ -158,9 +156,9 @@
 
       <div class="language">
         <h2>Languages</h2>
-          <p>English - intermediate</p>
-          <p>Ukrainian - fluently</p>
-          <p>Russian - fluently</p>
+        <p>Ukrainian - fluently</p>
+        <p>Russian - fluently</p>
+        <p>English - intermediate</p>
       </div>
     </section>
 
@@ -180,8 +178,8 @@
             <h3>Site resume</h3>
             <hr>
             <div class="projectLanguage">
-              <span><b>Language:</b></span>
-              <span>HTML, CSS, JavaScript</span>
+              <span><b>Language: </b></span>
+              <span class="projLang">HTML, CSS, JavaScript</span>
             </div>
             <p class="visibleCaption">The design of this site adapts to the position of your device</p>
             <div class="img-proj-resume">
@@ -202,7 +200,10 @@
             <button id="buttProj_lessInfo1" class="buttonCardInfo" type="button">Less info</button>
             <div class="card-content">
               <div class="project-description"><p>The position of the design elements and their sizes are calculated relative to the dimensions of the user's device. Combined with the «Mobile First» design principle, which allows the site design to scale from smartphone to tablet to computer, the site adapts to the size and position of your device. That makes it possible to convey the idea on the absolute majority of devices.</p></div>
-              <p class="projectLink">GitHub: <a href="https://github.com/PoziTronAr/PoziTronAr.github.io">project link</a></p>
+              <p class="projectLink">
+                <span>GitHub: </span>
+                <a href="https://github.com/PoziTronAr/PoziTronAr.github.io">project link</a>
+              </p>
               <p class="time"><time datetime="2023-01">January 2022</time></p>
             </div>
           </div>
@@ -211,14 +212,17 @@
             <h3>Aircraft engine data collection system</h3>
             <hr>
             <div class="projectLanguage"><p>
-              <span><b>Language:</b></span>
-              <span>LabVIEW</span>
+              <span><b>Language: </b></span>
+              <span class="projLang">LabVIEW</span>
             </p></div>
             <button id="buttProj_moreInfo2" class="buttonCardInfo" type="button">More info</button>
             <button id="buttProj_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
             <div class="card-content">
               <div class="project-description"><p>The system for collecting data from sensors (temperature, humidity, pressure) is designed for their storage, graphical presentation in the form of a graph in real time. It has a subsystem for post-processing and visualization of measured data using averaging, interpolation and approximation algorithms.</p></div>
-              <p class="projectLink">GitHub: <a href="https://google.com">project link</a></p>
+              <p class="projectLink">
+                <span>GitHub: </span>
+                <a href="https://google.com">project link</a>
+              </p>
               <p class="time"><time datetime="2021-12">December 2021</time></p>
             </div>
           </div>
@@ -227,14 +231,17 @@
             <h3>The device for monitoring the state of the switchboard equipment</h3>
             <hr>
             <div class="projectLanguage"><p>
-              <span><b>Language:</b></span>
-               <span>C++</span>
+              <span><b>Language: </b></span>
+               <span class="projLang">C++</span>
             </p></div>
             <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>
             <button id="buttProj_lessInfo3" class="buttonCardInfo" type="button">Less info</button>
             <div class="card-content">
               <div class="project-description"><p>Compact device for protection against fires, flooding, condensation. Installed in industrial or household electrical panels. It has the possibility of emergency power off in the electrical network. Measures temperature and humidity. In an emergency situation, sends SMS, MMS, and makes a call to the client's mobile phone.</p></div>
-              <p class="projectLink">GitHub: <a href="https://google.com">project link</a></p>
+              <p class="projectLink">
+                <span>GitHub: </span>
+                <a href="https://google.com">project link</a>
+              </p>
               <p class="time"><time datetime="2020-07">July 2020</time></p>
             </div>
           </div>
@@ -295,25 +302,8 @@
             (adaptiveDesign_result instanceof Error) ? reject(adaptiveDesign_result) :  resolve(adaptiveDesign_result);
           }
         })
-      }).then((resOfAdaptDesign) => {
-          return new Promise((resolve, reject) => {
-            let script = document.createElement("script");
-            script.src = "scripts/countDown.js";
-            document.body.append(script);
-            
-            script.onload = () => {
-              console.log("'adaptive design' completed successfully");
-              let timer_result = createTimer(document.querySelector('.timer'), resOfAdaptDesign);
-              (timer_result instanceof Error) ? reject(timer_result) : resolve(timer_result);
 
-            }
-          }).then((timerInstance) => {
-            timerInstance.start();
-            return(resOfAdaptDesign);
-          })
-          // .catch((err) => {console.log("Error in Timer Function " + err.message);})
-        })
-      .then((res) => {
+      }).then((resOfAdaptDesign) => {
         // console.log(res);
         // createBubbleAnimation(res);
 
@@ -324,13 +314,13 @@
             
             script.onload = () => {
               console.log("the script 'error' is successfully connected");
-              resolve(res);
+              resolve(resOfAdaptDesign);
             }
           })
-      })
-      .then((res) => {
-        // console.log(res);
-        // createBubbleAnimation(res);
+          
+      }).then((resOfAdaptDesign) => {
+        // console.log(resOfAdaptDesign);
+        // createBubbleAnimation(resOfAdaptDesign);
 
         return new Promise((resolve, reject) => {
             let script = document.createElement("script");
@@ -338,12 +328,13 @@
             document.body.append(script);
             
             script.onload = () => {
+              changeLanguage(resOfAdaptDesign.pageLanguage);
               console.log("the script 'language' is successfully connected");
-              resolve(res);
+              resolve(resOfAdaptDesign);
             }
           })
       })
-      .then((res) => {
+      .then((resOfAdaptDesign) => {
         // return new Promise((resolve, reject) => {
         //   setTimeout(() => {throw new Error("myError")}, 1000);
         // }); 

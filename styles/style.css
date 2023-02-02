@@ -5,7 +5,7 @@
 /*УДАЛИТЬ РУЛЕТКУ!*/
 .horizontal-ruler {
   position: absolute;
-  top: 1657px;
+  top: 363px;
   width: 100vw;
   border: 1px solid red;
   z-index: 100;
@@ -164,7 +164,7 @@ time {/* color: gray; *//* opacity: 50%; */}
 
 .card {
   position: relative;
-  width: 70%;
+  width: 78%;
   background: #ddd;
   padding: 0.5em;
   margin: 0.6em auto;
@@ -351,7 +351,7 @@ time {/* color: gray; *//* opacity: 50%; */}
     font-weight: 500;
     /* text-shadow: 2px 2px 2px #999; */
   }
-  .language p {margin-top: 0.5em;}
+  .language p {margin-top: 0.3em;}
 
 
 /* Section 3*/
@@ -382,7 +382,7 @@ time {/* color: gray; *//* opacity: 50%; */}
   .projects p {margin-top: 0.5em;}
   .visibleCaption {text-align: center;}
   .projectLanguage {text-align: center;}
-  .project-description {text-indent: 2em;}
+  .project-description {text-indent: 1.2em;}
   .projects .card-content {padding: 0 6px;}
   .img-proj-resume {
     display: flex;
@@ -394,22 +394,13 @@ time {/* color: gray; *//* opacity: 50%; */}
     .resume figure {
       width: 56px;
       height: 56px;
-      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-      #projPhone {top: 4px}
-      #projComputer figcaption {
-        position: relative;
-        top: -7px;
-        right: 8px;
-      }
-      #projTablet figcaption {
-        position: relative;
-        left: 5px;
-      }
-      #projPhone figcaption {
-        position: relative;
-        left: 3px;
-      }
+    .resume figure figcaption {position: relative;}
+    #projTablet figcaption {top: 7px;}
+    #projPhone figcaption {top: 6px;}
 
   /*мобільна версія*/
   #buttProj_moreInfo1::after, #buttProj_moreInfo2::after, #buttProj_moreInfo3::after {background-image: url("../images/arrow-down.svg");}
@@ -443,7 +434,7 @@ time {/* color: gray; *//* opacity: 50%; */}
     /* margin: 0.6em auto; */
   } 
     .about h2 {padding-bottom: 0.5em;}
-    .about p {text-indent: 2em;}
+    .about p {text-indent: 1.2em;}
 
 
 /* Нижний колонтитул */
