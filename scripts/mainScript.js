@@ -876,6 +876,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
           let maxContainersHeight = Math.max(workContainerHeight, educationContainerHeight);
           let plot2_1_width = parseInt(pageContent.style.width) / 2; //висота фонa-трикутника секції 2
           let section2Height = parseInt(sectionsArr[i].style.height);
+          cardContentWorkHeight = cardContentWorkHeight + fontSize + 10;
 
           if(section2Height - maxContainersHeight - plot2_1_width > legalExtraHeight) {
             sectionsArr[i].style.height = maxContainersHeight + plot2_1_width + legalExtraHeight + "px";

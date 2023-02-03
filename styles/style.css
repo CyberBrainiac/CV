@@ -178,7 +178,6 @@ ul {list-style-image: url("../images/list-marker.svg");}
   left: 10px;
   width: 50%;
   top: 60%;
-  background: rgba(0, 0, 0, 0.7);
   box-shadow: 0 15px 8px rgba(0, 0, 0, 0.7);
   transform: rotate(-4deg);
   border-radius: 10px;
@@ -393,6 +392,23 @@ ul {list-style-image: url("../images/list-marker.svg");}
     margin: auto;
   }
   .projects .card {width: 90%;}
+  .projects .card:before, .projects .card:after {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    top: 60%;
+    box-shadow: 0 15px 8px rgba(222, 222, 222, 0.7);
+    transform: rotate(-4deg);
+    border-radius: 10px;
+  }
+  .projects .card:after {
+    transform: rotate(4deg);
+    right: 10px;
+    left: auto;
+  }
   .projects p {margin-top: 0.5em;}
   .visibleCaption {text-align: center;}
   .projectLanguage {text-align: center;}
