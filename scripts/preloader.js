@@ -1,6 +1,6 @@
 "use strict";
 
-function addPreloader(callback = () => {}) { //Returns {} with preloader control
+function addPreloader(callback = () => {}) { //Return{preloader control}
   let preloaderControl = {
     toggleOverlay,
     get state() {return _preloaderState},
@@ -26,8 +26,13 @@ function addPreloader(callback = () => {}) { //Returns {} with preloader control
   gear.style.left = "-2px";
   gear.style.top = "-20px";
   biggear.onload = () => {
-    gearAnimation() //коли остання картинка завантажиться, починаю анімацію
+    try {
+      gearAnimation() //коли остання картинка завантажиться, починаю анімацію
+    } catch (err) {
+     console.log(`GearAnimationError > ${err.stack}`);
+    }
   };
+
 
   preloadHeader.textContent = "LOADING";
   overlayContent.classList.add("overlayContent");
@@ -39,10 +44,10 @@ function addPreloader(callback = () => {}) { //Returns {} with preloader control
   overlayContent.style.left = document.documentElement.clientWidth / 2 - parseInt(overlayContentStyle.width) / 2 + "px";
 
 
+
   function gearAnimation() {
     const step = 10;
     let deg = 0;
-
     let gearAnimIntervalId = setInterval(() => {
       if(_preloaderState) {
         deg += step;

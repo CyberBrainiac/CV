@@ -156,8 +156,8 @@
 
       <div class="language">
         <h2>Languages</h2>
-        <p>Ukrainian - fluently</p>
         <p>Russian - fluently</p>
+        <p>Ukrainian - fluently</p>
         <p>English - intermediate</p>
       </div>
     </section>
@@ -221,7 +221,7 @@
               <div class="project-description"><p>The system for collecting data from sensors (temperature, humidity, pressure) is designed for their storage, graphical presentation in the form of a graph in real time. It has a subsystem for post-processing and visualization of measured data using averaging, interpolation and approximation algorithms.</p></div>
               <p class="projectLink">
                 <span>GitHub: </span>
-                <a href="https://google.com">project link</a>
+                <a href="https://github.com/PoziTronAr/Master-s-Diploma">project link</a>
               </p>
               <p class="time"><time datetime="2021-12">December 2021</time></p>
             </div>
@@ -240,7 +240,7 @@
               <div class="project-description"><p>Compact device for protection against fires, flooding, condensation. Installed in industrial or household electrical panels. It has the possibility of emergency power off in the electrical network. Measures temperature and humidity. In an emergency situation, sends SMS, MMS, and makes a call to the client's mobile phone.</p></div>
               <p class="projectLink">
                 <span>GitHub: </span>
-                <a href="https://google.com">project link</a>
+                <a href="https://github.com/PoziTronAr/Baccalaureate-Diploma">project link</a>
               </p>
               <p class="time"><time datetime="2020-07">July 2020</time></p>
             </div>
@@ -266,82 +266,70 @@
   </main>
 
 
-  <footer class="footer">
+  <footer class="footer" id="footer">
       <p class="footerMessage">Power of enthusiasm</p>
       <p class="yearOfCreation">2022</p>
   </footer>
 
   <script>
+    "use strict"
+
+    window.addEventListener('unhandledrejection', function(event) {
+      alert(`Sorry there was an error: \n\n${event.reason.message}`); 
+    });
+
     window.onload = () => {
       new Promise((resolve, reject) => {
-        let scriptPreloader = document.createElement("script");
-        scriptPreloader.src = "scripts/preloader.js";
-        document.body.append(scriptPreloader);
+        let preloaderScript = document.createElement("script");
+        preloaderScript.src = "scripts/preloader.js";
+        document.body.append(preloaderScript);
 
-        scriptPreloader.onload = () => {
-          addPreloader(resolve);
-          // try {addPreloader(resolve);}
-          // catch(err) {console.log(`Preloader Error: \n\n${err}`);}
-
-          /*
-          Важливо!
-          Відтестувати які помилки я можу ловити, та як їх обробляти
-          Важливо!
-          */
+        preloaderScript.onload = () => {
+          try {addPreloader(resolve);}
+          catch(err) {console.log(`PreloaderError > ${err.stack}`);}
         }
-        scriptPreloader.onerror = (err) => {console.log("Failed loaded preloader.js ");}
+        preloaderScript.onerror = (err) => {console.log("Failed loaded preloader.js ");}
 
       }).then((preloaderControl) => {
         return new Promise((resolve, reject) => {
-          let script = document.createElement("script");
-          script.src = "scripts/mainScript.js";
-          document.body.append(script);
+          let mainScript = document.createElement("script");
+          mainScript.src = "scripts/mainScript.js";
+          document.body.append(mainScript);
           
-          script.onload = () => {
-            let adaptiveDesign_result = adaptiveDesign(preloaderControl);
-            (adaptiveDesign_result instanceof Error) ? reject(adaptiveDesign_result) :  resolve(adaptiveDesign_result);
+          mainScript.onload = () => {
+            try {
+              let adaptiveDesignStyle = adaptiveDesign(preloaderControl);
+              resolve([preloaderControl, adaptiveDesignStyle]);
+            }
+            catch(err) {
+              console.log(`MainScriptError > ${err.stack}`);
+              reject(err);
+            }
           }
+          mainScript.onerror = (err) => {console.log("Failed loaded mainScript.js ");}
         })
 
-      }).then((resOfAdaptDesign) => {
-        // console.log(res);
-        // createBubbleAnimation(res);
-
+      }).then(([preloaderControl, adaptiveDesignStyle]) => {
         return new Promise((resolve, reject) => {
-            let script = document.createElement("script");
-            script.src = "scripts/myErrorClass.js";
-            document.body.append(script);
+            let changeLanguageScript = document.createElement("script");
+            changeLanguageScript.src = "scripts/changeLanguage.js";
+            document.body.append(changeLanguageScript);
             
-            script.onload = () => {
-              console.log("the script 'error' is successfully connected");
-              resolve(resOfAdaptDesign);
+            changeLanguageScript.onload = () => {
+              try {
+                changeLanguage(adaptiveDesignStyle, preloaderControl);
+                resolve(adaptiveDesignStyle);
+              } catch (err) {
+                console.log(`ChangeLanguageError > ${err.stack}`);
+                reject(err);
+              }
             }
-          })
-          
-      }).then((resOfAdaptDesign) => {
-        // console.log(resOfAdaptDesign);
-        // createBubbleAnimation(resOfAdaptDesign);
-
-        return new Promise((resolve, reject) => {
-            let script = document.createElement("script");
-            script.src = "scripts/changeLanguage.js";
-            document.body.append(script);
-            
-            script.onload = () => {
-              changeLanguage(resOfAdaptDesign.pageLanguage);
-              console.log("the script 'language' is successfully connected");
-              resolve(resOfAdaptDesign);
-            }
+            changeLanguageScript.onerror = (err) => {console.log("Failed loaded changeLanguage.js ");}
           })
       })
-      .then((resOfAdaptDesign) => {
-        // return new Promise((resolve, reject) => {
-        //   setTimeout(() => {throw new Error("myError")}, 1000);
-        // }); 
-      })
+
       .catch((err) => {
-        console.log(`Error in Adaptive Design: \n\n${err.stack}`);
-        // window.onerror = err;
+        alert(`Site was broke :( \n\n${err.stack}`);
       })
     }
   </script>

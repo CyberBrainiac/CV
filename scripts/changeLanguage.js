@@ -1,7 +1,10 @@
 "use strict"
 
-function changeLanguage(lang) {
+function changeLanguage(adaptiveDesignStyle, preloaderControl) {
+  let lang = adaptiveDesignStyle.pageLanguage;
   let supportLanguages = Object.keys(vocabulary);
+  let drawDesignCount = adaptiveDesignStyle.drawDesignCount;
+
   if(!supportLanguages.includes(lang)) {
     throw new Error(`'${lang}' language is not supported`);
   }
@@ -133,7 +136,18 @@ function changeLanguage(lang) {
   for(let i = 0; i < footerPArr.length; i++) {
     footerPArr[i].textContent = vocabulary[lang].footer.footerMessage;
   }
+
+/*Turn off Overlay*/
+  if(drawDesignCount === 1) {
+
+    try {
+      preloaderControl.toggleOverlay();
+    } catch (error) {
+      alert("Sorry the site broke");
+    }
+  }
 }
+
 
 const vocabulary = {
   en: {
@@ -203,7 +217,7 @@ const vocabulary = {
       },
       "language": {
         "h2": "Languages",
-        "p": ["Ukrainian - fluently", "Russian - fluently", "English - intermediate",],
+        "p": ["Russian - fluently", "Ukrainian - fluently", "English - intermediate",],
       }
     },
 
@@ -342,7 +356,7 @@ const vocabulary = {
       },
       "language": {
         "h2": "Мої мови",
-        "p": ["Українська - вільно", "Російська - вільно", "Англійська - intermediate",],
+        "p": ["Російська - вільно", "Українська - вільно", "Англійська - intermediate",],
       }
     },
 

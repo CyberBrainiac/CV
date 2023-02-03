@@ -10,12 +10,17 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let background = document.querySelector(".pageBackground");
   let pageContent = document.querySelector(".pageContent");
   let menu = document.querySelector(".burger-menu");
-  let backgroundColor = "#6D6363";
+  let darkBackgroundColor = "#1B262C";
+  let lightBackgroundColor = "#BBE1FA";
+  let additionalLightBackgroundColor = "#3CAE8D5";
+  let additionalDarkBackgroundColor = "#28016B";
+  let contrastColor = "#E08316";
   let idInterval_blinkLine;
   let pageLanguage = "ua";
   let drawDesignCount = 0;
   let cornerCircleRadius;
-  let cardContentHeight;
+  let cardContentWorkHeight;
+  let cardContentProjHeight;
   let windowInnerHeight;
   let windowInnerWidth;
   let buttonLines = [];
@@ -37,11 +42,8 @@ return !elem.offsetWidth && !elem.offsetHeight;
 }
 */
 
-  let err = drawDesign();
-  if(err instanceof Error) {
-    return err;
-  }
 
+  drawDesign();
 
   function drawDesign() {
     windowInnerWidth = document.documentElement.clientWidth;
@@ -62,11 +64,16 @@ return !elem.offsetWidth && !elem.offsetHeight;
       
       /* f() for make site beauty */
       correctExtraHeight();
+      drawHeaderBackground();
+      drawBackgroundS1();
       drawBackgroundS1_P1();
       drawBackgroundS1_P2();
       drawBackgroundS2();
+      drawBackgroundS3();
+      drawBackgroundS4();
+      drawFooterBackground();
     } catch (error) {
-      return(error); //realise my class for Error
+      console.log(`drawDesign > ${error.stack}`);
     }
 
     let mainPromise = new Promise( (resolve, reject) => {
@@ -147,7 +154,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
     if(drawDesignCount == 0) {
       drawDesignCount++;
-      preloaderControl.toggleOverlay();
+      // preloaderControl.toggleOverlay();
     } else {
       drawDesignCount++;
       background.style.zIndex = "-1";
@@ -333,24 +340,26 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let menuNavWidth = contentWidth / 3;
     let changeLanguageBut = document.getElementById("changeLanguageBut");
 
+
     if(menuNavWidth < 156) {
       menuNav.style.width = "156px";
     } else {
       menuNav.style.width = menuNavWidth + "px";
     }
 
+    menuNav.style.backgroundColor = additionalDarkBackgroundColor;
     menuNav.style.left = parseFloat(pageContent.style.marginLeft) + (contentWidth - parseInt(menuNav.style.width)) + "px";
     let linksOffsetTop = parseInt(menuButton.style.top) * 4 + parseInt(menuButton.style.height) + "px";
     navigationLinkArr[0].style.marginTop = linksOffsetTop;
 
     changeLanguageBut.onclick = () => {
       (pageLanguage === "ua") ? pageLanguage = "en" : pageLanguage = "ua";
-      changeLanguage(pageLanguage);
+      changeLanguage({pageLanguage});
 
-      if(userDevice === "Mobile") {
-        changeLanguageBut.style.borderLeftColor = "lightgray";
-        changeLanguageBut.style.borderTopColor = "lightgray";
-      }
+      // if(userDevice === "Mobile") {
+      //   changeLanguageBut.style.borderLeftColor = "lightgray";
+      //   changeLanguageBut.style.borderTopColor = "lightgray";
+      // }
     };
 
 /*Create Lines*/
@@ -360,6 +369,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     for(let i = 0; i < 3; i++) {
       let line = document.createElement("span");
       line.classList.add("burger-menu_lines");
+      // line.style.backgroundColor = contrastColor;
       if(buttonLinesOffset < 12) line.style.height = "4px";
       buttonLines.push(line);
       menuButton.appendChild(line);
@@ -439,7 +449,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
               break;
             case 1:
             buttonLines[i].style.marginLeft = "0px";
-            buttonLines[i].style.backgroundColor = "gray";
+            buttonLines[i].style.backgroundColor = contrastColor;
             buttonLines[i].style.borderTop = "1px solid white";
             buttonLines[i].style.borderBottom = "1px solid white";
               break;
@@ -531,7 +541,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
       navigationBackground.ontransitionend = () => {
         navigationBackground.ontransitionend = "";
-        navigationLinkArr[0].style.borderTop = "1px solid black";
+        navigationLinkArr[0].style.borderTop = "1px solid white";
 
         navigationLinkArr[navigationLinkArr.length - 1].ontransitionend = () => {
           navigationLinkArr[navigationLinkArr.length - 1].ontransitionend = "";
@@ -541,7 +551,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
         for(let link of navigationLinkArr) {
           link.style.transitionDuration = "0.3s";
           link.style.fontSize = fontSize + "px";
-          link.style.borderBottom = "1px solid black";
+          link.style.borderBottom = '1px solid white';
           link.style.paddingTop = windowInnerHeight * 0.02 + "px";
           link.style.paddingBottom = windowInnerHeight * 0.02 + "px";
 
@@ -597,6 +607,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let workContainer = document.querySelector(".work-experience");
     let workButtonArr = workContainer.querySelectorAll(".buttonCardInfo");
     let cardContentArr = section2.querySelectorAll("div.card-content");
+    cardContentWorkHeight = Math.max(... [... cardContentArr].map((elem) => { return elem.clientHeight;}));
 
     if(workContainer.clientHeight + parseInt(pageContent.style.width) / 3 > parseInt(section2.style.height)) {
       workContainer.classList.toggle("mobile");
@@ -731,6 +742,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
       timerContainer.classList.add("timerStyle");
       timerContainer.style.fontSize = fontSize * 3 + "px";
       container.appendChild(timerContainer);
+      container.style.backgroundColor = darkBackgroundColor;
 
       let clock = new Clock(timerContainer);
       clock.start();
@@ -747,7 +759,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let cardContentArr = section3.querySelectorAll("div.card-content");
 
     if(timerContainerHeight + projectsContainer.clientHeight > section3.clientHeight) {
-      cardContentHeight = Math.max(... [... cardContentArr].map((elem) => { return elem.clientHeight;}));
+      cardContentProjHeight = Math.max(... [... cardContentArr].map((elem) => { return elem.clientHeight;}));
       projectsContainer.classList.toggle("mobile");
 
       for (const projButton of projButtonArr) {
@@ -867,7 +879,14 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
           if(section2Height - maxContainersHeight - plot2_1_width > legalExtraHeight) {
             sectionsArr[i].style.height = maxContainersHeight + plot2_1_width + legalExtraHeight + "px";
+
+          } else if (section2Height - workContainerHeight - cardContentWorkHeight < 0) {
+            sectionsArr[i].style.height = workContainerHeight + cardContentWorkHeight + "px";
+
+          } else if(section2Height - maxContainersHeight - languageContainer.clientHeight * 1.5 < 0) {
+            sectionsArr[i].style.height = maxContainersHeight + languageContainer.clientHeight * 1.5 + "px";
           }
+
 
           if(plot2_1_width / languageContainer.clientHeight > 2) {
             languageContainer.style.top = "80%";
@@ -880,11 +899,11 @@ return !elem.offsetWidth && !elem.offsetHeight;
           let timerContainerHeight = document.querySelector(".timer").clientHeight;
           let plot3_2 = document.querySelector(".plot-3-2");
           let plot3_2Height = plot3_2.clientHeight;
-          let someProjButtonHeight = document.getElementById("buttProj_moreInfo1").clientHeight;
-          cardContentHeight = cardContentHeight - someProjButtonHeight * 2; //зайвий розмір кнопок що будуть видалені
+          // let someProjButtonHeight = document.getElementById("buttProj_moreInfo1").clientHeight;
+          cardContentProjHeight = cardContentProjHeight - fontSize * 2; //зайвий розмір кнопок що будуть видалені
           
-          if(section3Height - timerContainerHeight - plot3_2Height != cardContentHeight) {
-            section3.style.height = timerContainerHeight + plot3_2Height + cardContentHeight + "px";
+          if(section3Height - timerContainerHeight - plot3_2Height != cardContentProjHeight) {
+            section3.style.height = timerContainerHeight + plot3_2Height + cardContentProjHeight + "px";
           }
         break;
 
@@ -899,6 +918,23 @@ return !elem.offsetWidth && !elem.offsetHeight;
         break;
       }
     }
+  }
+
+
+  function drawHeaderBackground() {
+    let header = document.getElementById("header");
+    header.style.backgroundColor = lightBackgroundColor;
+
+    let cardArr = document.querySelectorAll(".card");
+    for (const card of cardArr) {
+      card.style.backgroundColor = additionalLightBackgroundColor;
+    }
+  }
+
+
+  function drawBackgroundS1() {
+    let section1 = document.getElementById("section-1");
+    section1.style.backgroundColor = lightBackgroundColor;
   }
 
 
@@ -928,7 +964,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     headerCanvas.style.left = pageContent.style.marginLeft;
     
 /*Image Background*/
-    ctx.fillStyle = backgroundColor;
+    ctx.fillStyle = darkBackgroundColor;
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(backgroudStick * 1.5, 0);
@@ -944,7 +980,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     ctx.fill();
 
 /*Heder Background*/
-    headerCtx.fillStyle = backgroundColor;
+    headerCtx.fillStyle = darkBackgroundColor;
     headerCtx.beginPath();
     headerCtx.moveTo(0, 0);
     headerCtx.lineTo(0, headerCanvas.height);
@@ -968,7 +1004,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let backgroundWidth = parseInt(plot2Style.width);
     // let sectionHeight = parseInt(sectionStyle.height);
 
-    ctx.fillStyle = backgroundColor;
+    ctx.fillStyle = darkBackgroundColor;
     ctx.beginPath();
     ctx.moveTo(backgroundWidth, 0);
     ctx.lineTo(cornerCircleRadius / 2.3, backgroundWidth - cornerCircleRadius / 2.3);
@@ -986,8 +1022,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
     canvas.width = parseInt(pageContent.style.width);
     canvas.height = section2.clientHeight;
 
+    section2.style.backgroundColor = lightBackgroundColor;
+
 /*central line*/
-    ctx.strokeStyle = backgroundColor;
+    ctx.strokeStyle = darkBackgroundColor;
     ctx.lineWidth = (canvas.width % 2 == 1) ? 3 : 2;
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2, 0);
@@ -995,7 +1033,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     ctx.stroke();
 
 /*triangle*/
-    ctx.fillStyle = backgroundColor;
+    ctx.fillStyle = darkBackgroundColor;
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2, canvas.height - canvas.width / 2);
     ctx.lineTo(0, canvas.height);
@@ -1005,9 +1043,29 @@ return !elem.offsetWidth && !elem.offsetHeight;
   }
 
 
+  function drawBackgroundS3() {
+    let section3 = document.getElementById("section-3");
+    section3.style.backgroundColor = darkBackgroundColor;
+  }
+
+
+  function drawBackgroundS4() {
+    let gradientContainer = document.querySelector(".simple-linear");
+    let section4 = document.getElementById("section-4");
+
+    gradientContainer.style.background = `linear-gradient(${darkBackgroundColor}, 40%, ${lightBackgroundColor})`;
+    section4.style.backgroundColor = lightBackgroundColor;
+  }
+
+
+  function drawFooterBackground() {
+    let footer = document.getElementById("footer");
+    footer.style.backgroundColor = darkBackgroundColor;
+  }
+
+
   return {
-    // fontSize,
-    // userDevice,
     pageLanguage,
-    };
+    drawDesignCount,
+  }
 }
