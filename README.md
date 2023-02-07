@@ -22,3 +22,4 @@ git commit
 The background color should be `#ffffff` for light mode and `#0d1117` for dark mode.
 
 https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+[my link (https://google.com)
