@@ -24,3 +24,5 @@ The background color should be `#ffffff` for light mode and `#0d1117` for dark m
 https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 
 [my link](https://google.com)
+
+![This is my image](images_Readme/definitionOfEqualSegments.PNG)
