@@ -25,6 +25,6 @@ https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-wr
 
 [my link](https://google.com)
 
-![This is my image](images_Readme/definitionOfEqualSegments.PNG)
+![This is my image](images_Readme/circleTangentToAnObtuseAngle.png)
 
 
