@@ -2,17 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-
-/*УДАЛИТЬ РУЛЕТКУ!*/
-.horizontal-ruler {
-  position: absolute;
-  top: 363px;
-  width: 100vw;
-  border: 1px solid red;
-  z-index: 100;
-  display: none;
-} 
-
 * {
   box-sizing: content-box;
   margin: 0px;
@@ -34,9 +23,7 @@ header {
   font-size: 42px;
   font-family: 'Marck Script', cursive;
   letter-spacing: 2px;
-  /* background-color: white; */
   margin: auto;
-  /* padding: 10px 0; */
 }
 
 #headerCanvas {
@@ -55,7 +42,6 @@ section:first-child {margin-top: 0px;}
 h2 {
   text-align: center;
   font-weight: 700;
-  /* text-shadow: 2px 5px 4px #777; */
 }
 h3 {
   text-align: center;
@@ -63,33 +49,31 @@ h3 {
 }
 
 hr {
-  /* border: none; */
-  /* border-top: 2px solid #333; */
-  /* border-bottom: 3px dodgerblue; */
   border: 1px dashed black;
-  /* color: #333; */
   margin-bottom: 0.3em;
   margin-top: 0.3em;
 }
 
 button {
-  /* border-style: ridge; */
-  border-left-color: rgb(180, 180, 180);
-  border-top-color: rgb(180, 180, 180);
-  border-radius: 6px;
   padding: 3px;
+  border-color: rgb(70, 1, 190);
+  border-radius: 6px;
   border-width: 3px;
+  color: rgb(40, 1, 107);
 }
 
 button:hover {
-  border-left-color: black;
-  border-top-color: black;
+  border-left-color: rgb(40, 1, 107);
+  border-top-color: rgb(40, 1, 107);
+  filter: brightness(0.7);
 }
 button:active{
   opacity: 20%;
 }
 
-ul {list-style-image: url("../images/list-marker.svg");}
+ul {
+  list-style-image: url("../images/circle.svg");
+}
 
 .page {
   display: flex;
@@ -157,17 +141,22 @@ ul {list-style-image: url("../images/list-marker.svg");}
 #changeLanguageBut {
   display: none;
   margin: 0 auto;
-  margin-top: 2em;
+  margin-top: 1em;
   width: 80%;
+  font-weight: 600;
+  border: none;
 }
-
+.changeLanguageBut img {
+  width: 60%;
+  height: 60%;
+}
 
 .card {
   position: relative;
   width: 78%;
   background: #ddd;
   padding: 0.5em;
-  margin: 0.6em auto;
+  margin: 1em auto;
   border-radius: 20px;
 }
 .card:before, .card:after {
@@ -212,14 +201,13 @@ ul {list-style-image: url("../images/list-marker.svg");}
       margin-left: 1em;
     }
     .img-caption h2 {margin-bottom: 0.4em;}
-    .status-cont {font-style: italic;}
     .scills h2 {margin-top: 2.5em;}
     .scills ul {
       margin-top: 0.8em;
       border-right: 6px double black;
     }
     .scills ul li {
-      margin-left: 2em;
+      margin-left: 32px;
       margin-bottom: 5px;
     }
 
@@ -236,8 +224,7 @@ ul {list-style-image: url("../images/list-marker.svg");}
     .aim {text-align: center;}
     .aim h2 {
       font-weight: 700;
-      margin-bottom: 0.5em;
-      /* text-shadow: 2px 2px 2px #999; */
+      margin-bottom: 0.36em;
     }
     .aim span {font-style: italic;margin: auto 10px;}
     .contacts {
@@ -248,7 +235,6 @@ ul {list-style-image: url("../images/list-marker.svg");}
     .contacts h2 {
       font-weight: 700;
       margin-bottom: 0.8em;
-      /* text-shadow: 2px 2px 2px #999; */
       margin-top: 2.42em;
     }
     .contacts p {
@@ -277,12 +263,10 @@ ul {list-style-image: url("../images/list-marker.svg");}
     .mail::before {background-image: url("../images/mail-white.svg");}
 
 /*Section 2*/
-/* #section-2 {} */
 #canvasS2{
   position: absolute;
   z-index: 0;
 }
-
   .plot-2-1 {
     z-index: 10;
     width: 50%;
@@ -294,22 +278,19 @@ ul {list-style-image: url("../images/list-marker.svg");}
       margin-left: 1.2em;
     }
       .card-content {display: block;}
-    /* .card-moreInfo, .card-lessInfo {display: none;} */
     .buttonCardInfo {display: none;}
     .card .time {margin-top: 0.5em;opacity: 50%;}
     .position {
       font-weight: 700;
-      /* font-style: italic; */
       text-align: center;
     }
 
     /*мобільна версія*/
-    .mobile .card-content {display: none;/* padding: 0 6px; */}
+    .mobile .card-content {display: none;}
     .mobile .card-moreInfo, .mobile .card-lessInfo {text-align: center;}
     .mobile .buttonCardInfo {
       margin: auto;
       margin-top: 0.5em;
-      /* padding: 2px 0px 2px 2px; */
       padding-right: 1.5em;
     }
     .mobile .buttonCardInfo::after {
@@ -347,18 +328,12 @@ ul {list-style-image: url("../images/list-marker.svg");}
     text-align: center;
     width: 100%;
   }
-  .language h2 {
-    font-weight: 700;
-    /* text-shadow: 2px 2px 2px #999; */
-  }
+  .language h2 {font-weight: 700;}
   .language p {margin-top: 0.3em;}
 
 
 /* Section 3*/
-#section-3 {
-  /* background-color: #6D6363; */
-  flex-direction: column;
-}
+#section-3 {flex-direction: column;}
 
 .plot-3-1 {
   width: inherit;
@@ -368,7 +343,7 @@ ul {list-style-image: url("../images/list-marker.svg");}
 }
   .timer {
     text-align: center;
-    padding: 0.5em;
+    padding: 1em;
   }
   .timer p {padding: 0.5em;}
   .timerStyle {
@@ -381,6 +356,7 @@ ul {list-style-image: url("../images/list-marker.svg");}
     transition-duration: 0.1s;
     transition-timing-function: ease;
   }
+  .myProjectsTitle {margin-bottom: 1em;}
   .blink {
       color: red;
       opacity: 40%;
@@ -400,7 +376,7 @@ ul {list-style-image: url("../images/list-marker.svg");}
     left: 10px;
     width: 50%;
     top: 60%;
-    box-shadow: 0 15px 8px rgba(222, 222, 222, 0.7);
+    box-shadow: 0 15px 8px rgba(160, 160, 160, 0.7);
     transform: rotate(-4deg);
     border-radius: 10px;
   }
@@ -409,6 +385,7 @@ ul {list-style-image: url("../images/list-marker.svg");}
     right: 10px;
     left: auto;
   }
+  .projects .card:first-child {margin-top: 0;}
   .projects p {margin-top: 0.5em;}
   .visibleCaption {text-align: center;}
   .projectLanguage {text-align: center;}
@@ -434,15 +411,10 @@ ul {list-style-image: url("../images/list-marker.svg");}
 
   /*мобільна версія*/
   #buttProj_moreInfo1::after, #buttProj_moreInfo2::after, #buttProj_moreInfo3::after {background-image: url("../images/arrow-down.svg");}
-  #buttProj_lessInfo1::after, #buttProj_lessInfo2::after, #buttProj_lessInfo3::after {
-    background-image: url("../images/arrow-up.svg");
-  }
+  #buttProj_lessInfo1::after, #buttProj_lessInfo2::after, #buttProj_lessInfo3::after {background-image: url("../images/arrow-up.svg");}
 
 /* Section 4*/
-#section-4 {
-  flex-direction: column;
-  /* flex-wrap: wrap; */
-}
+#section-4 {flex-direction: column;}
 
 .plot-4-1 {
   z-index: 10;
@@ -451,7 +423,6 @@ ul {list-style-image: url("../images/list-marker.svg");}
   .simple-linear {
     height: 20vh;
     width: inherit;
-    /* background: linear-gradient(#6D6363, 40%, white); */
   }
 
 .plot-4-2 {
@@ -460,7 +431,6 @@ ul {list-style-image: url("../images/list-marker.svg");}
   .about {
     width: auto;
     padding: 0 3em;
-    /* margin: 0.6em auto; */
   } 
     .about h2 {padding-bottom: 0.5em;}
     .about p {text-indent: 1.2em;}

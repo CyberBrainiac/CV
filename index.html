@@ -12,11 +12,6 @@
 
 
 <body class="page">
-  <!-- Лінійку потрібно буде видалити -->
-  <div class="horizontal-ruler"></div>
-  <!-- Лінійку потрібно буде видалити -->
-  <!--Додати прелоадер! коло у якому кружляє дуга, допоки не завантажиться сторінка-->
-
   <div class="pageBackground"></div>
   <div class="overlay" id="overlay"></div>
 
@@ -41,7 +36,10 @@
         <a href="#section-2" class="burger_menu_link" target="_self">Work & education</a>
         <a href="#section-3" class="burger_menu_link" target="_self">My projects</a>
         <a href="#section-4" class="burger_menu_link" target="_self">About me</a>
-        <button class="changeLanguageBut" id="changeLanguageBut" type="button">Change language</button>
+        <button class="changeLanguageBut" id="changeLanguageBut" type="button">
+          <span>Change language</span>
+          <img class="changeLanguageButImg" src="images/ukraine-flag-icon.svg" alt="english language">
+        </button>
       </nav>
     </div>
   </header>
@@ -53,11 +51,10 @@
       <div class="plot-1-1">
         <canvas id="canvasS1-P1"></canvas>
         <figure class="photo">
-          <!-- <img class="myPhoto" src="images/Greed.svg" alt="photo of pretty man"> -->
           <img class="myPhoto" src="images/my-photo.jpg" alt="photo of pretty man">
           <figcaption class="img-caption">
             <h2 class="name">Arkhipov Arsenii</h2>
-            <span class="status-cont">Intern web developer</span>
+            <span class="status-cont">Intern JavaScript developer</span>
           </figcaption>
         </figure>
 
@@ -85,9 +82,9 @@
           <h2>Contacts</h2>
           <p class="phone"><span>Phone: </span><a href="tel:+38-096-809-87-37" target="_self">(+38) 0968098737</a></p>
           <p class="resumeFile"><span>Resume: </span><a href="https://docs.google.com/document/d/1mVNu_hvkYGotuiJspQmokRyUf_wGpLxoB7I1VpieQiQ/edit?usp=sharing">pdf file</a></p>
-          <p class="gitHub"><span>GitHub: </span><a href="https://github.com/PoziTronAr/PoziTronAr.github.io">project</a></p>
+          <p class="gitHub"><span>GitHub: </span><a href="https://github.com/PoziTronAr">project</a></p>
           <p class="mail"><span>Email: </span><a href="mailto:arsenij.arxipov.1998@gmail.com">address</a></p>
-          <!-- <p class="linkedin"></p>   NEEED TO BE CREATE!!!-->
+          <!-- <p claspositions="linkedin"></p>   NEEED TO BE CREATE!!!-->
         </div>
       </div>
     </section>
@@ -103,7 +100,7 @@
           <div class="card progress">
             <h3>SE «Ivchenko-Progress»</h3>
             <hr>
-            <p class="position">Research engineer</p>
+            <p class="position">Software engineer</p>
             <button id="buttWork_moreInfo1" class="buttonCardInfo" type="button">More info</button>
             <button id="buttWork_lessInfo1" class="buttonCardInfo" type="button">Less info</button>
 
@@ -166,7 +163,8 @@
     <section id="section-3">
       <div class="plot-3-1">
         <div class="timer">
-          <h2>Do not miss the chance!</h2>
+          <h2 class="myProjectsTitle">My projects</h2>
+          <h3 class="timerTitle">Do not miss the chance!</h3>
           <p>Hire the promising employee. Time left:</p>
         </div>
       </div>
@@ -178,7 +176,7 @@
             <h3>Site resume</h3>
             <hr>
             <div class="projectLanguage">
-              <span><b>Language: </b></span>
+              <span><b>Technology stack: </b></span>
               <span class="projLang">HTML, CSS, JavaScript</span>
             </div>
             <p class="visibleCaption">The design of this site adapts to the position of your device</p>
@@ -212,7 +210,7 @@
             <h3>Aircraft engine data collection system</h3>
             <hr>
             <div class="projectLanguage"><p>
-              <span><b>Language: </b></span>
+              <span><b>Programming language: </b></span>
               <span class="projLang">LabVIEW</span>
             </p></div>
             <button id="buttProj_moreInfo2" class="buttonCardInfo" type="button">More info</button>
@@ -231,7 +229,7 @@
             <h3>The device for monitoring the state of the switchboard equipment</h3>
             <hr>
             <div class="projectLanguage"><p>
-              <span><b>Language: </b></span>
+              <span><b>Programming language: </b></span>
                <span class="projLang">C++</span>
             </p></div>
             <button id="buttProj_moreInfo3" class="buttonCardInfo" type="button">More info</button>

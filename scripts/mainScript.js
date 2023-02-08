@@ -1,9 +1,5 @@
 "use strict";
 
-//DELETE ANOTATION
-document.onclick = (elem) => console.log(`X:${elem.clientX} Y:${elem.clientY}`);//для тестування
-//DELETE ALL ANOTATION
-
 function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error or null*/
   let navigationLinkArr = document.querySelectorAll(".burger-menu_nav > a");
   let menuButton = document.querySelector(".burger-menu_button");
@@ -33,15 +29,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   } else {
     return "PC";
   }
-  }()
-
-/* Перевірка єлементу на відображення
-
-function isHidden(elem) {
-return !elem.offsetWidth && !elem.offsetHeight;
-}
-*/
-
+  }();
 
   drawDesign();
 
@@ -145,7 +133,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
       /*перемальовую дизайн сторінки*/
       drawDesign();
-      console.log("complete succesfully");
       return("true");
 
     }).catch((err) => {
@@ -166,7 +153,10 @@ return !elem.offsetWidth && !elem.offsetHeight;
     let el = elem.getBoundingClientRect();
     let scrolltop = Math.round(document.body.scrollTop + el.top);
     let scrollleft = Math.round(document.body.scrollLeft + el.left);
-    return {top: scrolltop, left: scrollleft}; //повертає реальне положення елемента на сторінці
+    let bottom = Math.round(el.bottom);
+    let right = Math.round(el.right);
+
+    return {top: scrolltop, left: scrollleft, bottom: bottom, right: right}; //повертає реальне положення елемента на сторінці
   }
 
 
@@ -274,15 +264,15 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
     if(windowInnerWidth >= 500) {
       for (const p of footerP) {
-        p.style.fontSize = "42px";
+        p.style.fontSize = "36px";
       }
-      headerT.style.fontSize = "42px";
+      headerT.style.fontSize = "52px";
 
     } else {
       for (const p of footerP) {
-        p.style.fontSize = "32px";
+        p.style.fontSize = "26px";
       }
-      headerT.style.fontSize = "32px";
+      headerT.style.fontSize = "42px";
     }
 
     for (const aboutP of aboutPArr) {
@@ -355,11 +345,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
     changeLanguageBut.onclick = () => {
       (pageLanguage === "ua") ? pageLanguage = "en" : pageLanguage = "ua";
       changeLanguage({pageLanguage});
-
-      // if(userDevice === "Mobile") {
-      //   changeLanguageBut.style.borderLeftColor = "lightgray";
-      //   changeLanguageBut.style.borderTopColor = "lightgray";
-      // }
     };
 
 /*Create Lines*/
@@ -567,7 +552,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function adaptiveScillsContainer() {
     let liOffset = elementOffset(document.querySelector(".status-cont")).left - parseInt(pageContent.style.marginLeft);
 
-    if(liOffset >= 20) { //щоб не загубити маркування списку
+    if(liOffset > 32) { //щоб не загубити маркування списку
       let scillsLiArr = document.querySelectorAll(".scills > ul > li");
 
       for (let li of scillsLiArr) {
@@ -703,7 +688,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
 
       render() {
           let date = new Date();
-          let days = '00';
+          let days = '01';
           let hours = 24 - date.getHours();
           if (hours < 10) hours = '0' + hours;
           if (hours == 24) hours = '00';
@@ -900,7 +885,6 @@ return !elem.offsetWidth && !elem.offsetHeight;
           let timerContainerHeight = document.querySelector(".timer").clientHeight;
           let plot3_2 = document.querySelector(".plot-3-2");
           let plot3_2Height = plot3_2.clientHeight;
-          // let someProjButtonHeight = document.getElementById("buttProj_moreInfo1").clientHeight;
           cardContentProjHeight = cardContentProjHeight - fontSize * 2; //зайвий розмір кнопок що будуть видалені
           
           if(section3Height - timerContainerHeight - plot3_2Height != cardContentProjHeight) {
@@ -957,7 +941,7 @@ return !elem.offsetWidth && !elem.offsetHeight;
     cornerCircleRadius = backgroundWidth / 5; //x+x+0.5x = FullSide; x = FullSide/2,5; 0.5x = FullSide/5; Де x - stick; 0.5x - radiusOfCornerCircle
     let backgroudStick = backgroundWidth / 2.5;
     let roundingRadius = 30; //коефіціент скруглення кутів
-    let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу. (більш детально у README);
+    let roundingLeg = roundingRadius / 2.414; //цей коэфіцієнт, означає значення тангенсу кута протилежного до радіусу
 
     headerCanvas.width = backgroudStick * 1.5 + 1; //створюю ефект накладання canvas на наступну секцію на 2 px для фіксу багу на смартфоні
     headerCanvas.height = parseInt(headerStyle.height) + 1;
@@ -995,15 +979,12 @@ return !elem.offsetWidth && !elem.offsetHeight;
   function drawBackgroundS1_P2() {
     let plot2 = document.querySelector(".plot-1-2");
     let plot2Style = getComputedStyle(plot2);
-    // let sectionStyle = getComputedStyle(document.getElementById("section-1"));
+    let backgroundWidth = parseInt(plot2Style.width); 
 
     const canvas = document.getElementById("canvasS1-P2");
     const ctx = canvas.getContext("2d");
     canvas.width = parseInt(plot2Style.width);
     canvas.height = parseInt(plot2Style.height);
-
-    let backgroundWidth = parseInt(plot2Style.width);
-    // let sectionHeight = parseInt(sectionStyle.height);
 
     ctx.fillStyle = darkBackgroundColor;
     ctx.beginPath();

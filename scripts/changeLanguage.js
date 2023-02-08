@@ -25,7 +25,8 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   for(let i = 0; i < links.length; i++) {
     links[i].textContent = vocabulary[lang].header.burger_menu_link[i];
   }
-  document.getElementById("changeLanguageBut").textContent = vocabulary[lang].header.changeLanguageBut;
+  document.querySelector(".changeLanguageBut > span").textContent = vocabulary[lang].header.changeLanguageBut.span;
+  document.querySelector(".changeLanguageBut > img").src =  vocabulary[lang].header.changeLanguageBut.img;
 
 /*Change Section-1 language*/
   document.querySelector(".name").textContent = vocabulary[lang]["section-1"]["plot-1-1"].name;
@@ -38,7 +39,7 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   }
 
   document.querySelector(".aim > h2").textContent = vocabulary[lang]["section-1"]["plot-1-2"].aim.h2;
-  document.querySelector(".aim > span").textContent = vocabulary[lang]["section-1"]["plot-1-2"].aim.span;
+  document.querySelector(".aim > .aim-text").textContent = vocabulary[lang]["section-1"]["plot-1-2"].aim["aim-text"];
   document.querySelector(".contacts > h2").textContent = vocabulary[lang]["section-1"]["plot-1-2"].contacts.h2;
 
   let spanArr = document.querySelectorAll(".contacts > p > span");
@@ -93,7 +94,8 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   }
 
 /*Change Section-3 language*/
-  document.querySelector(".timer > h2").textContent = vocabulary[lang]["section-3"].timer.h2;
+  document.querySelector(".myProjectsTitle").textContent = vocabulary[lang]["section-3"].timer.myProjectsTitle;
+  document.querySelector(".timerTitle").textContent = vocabulary[lang]["section-3"].timer.timerTitle;
   document.querySelector(".timer > p").textContent = vocabulary[lang]["section-3"].timer.p;
   document.querySelector(".resume > h3").textContent = vocabulary[lang]["section-3"].projects.resume.h3;
   document.querySelector(".resume .projectLanguage > span > b").textContent = vocabulary[lang]["section-3"].projects.resume.projectLanguage;
@@ -154,13 +156,16 @@ const vocabulary = {
     "header": {
       "title": "Resume",
       "burger_menu_link": ["Scills & contacts", "Work & education", "My projects", "About me",],
-      "changeLanguageBut": "Change language",
+      "changeLanguageBut": {
+        "span": "Change language",
+        "img": "images/ukraine-flag-icon.svg",
+      },
     },
     
     "section-1": {
       "plot-1-1": {
         "name": "Arkhipov Arsenii",
-        "status-cont": "Intern web developer",
+        "status-cont": "Intern JavaScript developer",
         "scills": {
           "h2": "Scills",
           "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
@@ -169,7 +174,7 @@ const vocabulary = {
       "plot-1-2": {
         "aim": {
           "h2": "My purpose",
-          "span": "Build a brilliant career in IT",
+          "aim-text": "Build a brilliant career in IT",
         },
         "contacts": {
           "h2": "Contact",
@@ -184,7 +189,7 @@ const vocabulary = {
         "h2": "Work experience",
         "progress": {
           "h3": "SE «Ivchenko-Progress»",
-          "position": "Research engineer",
+          "position": "Software engineer",
           "buttWork_moreInfo1": "More info",
           "buttWork_lessInfo1": "Less info",
           "card-content": ["Pascal and LabVIEW programming", "Aircraft engine test systems management",
@@ -223,13 +228,14 @@ const vocabulary = {
 
     "section-3": {
       "timer": {
-        "h2": "Do not miss the chance!",
+        "myProjectsTitle": "My projects",
+        "timerTitle": "Do not miss the chance!",
         "p": "Hire the promising employee. Time left:",
       }, 
       "projects": {
         "resume": {
           "h3": "Site resume",
-          "projectLanguage": "Language: ",
+          "projectLanguage": "Technology stack: ",
           "projLang": "HTML, CSS, JavaScript",
           "visibleCaption": "The design of this site adapts to the position of your device",
           "img-proj-resume": ["tablet", "mobile", "computer"],
@@ -246,7 +252,7 @@ const vocabulary = {
         },
         "dataCollectionSystem": {
           "h3": "Aircraft engine data collection system",
-          "projectLanguage": "Language: ",
+          "projectLanguage": "Programming language: ",
           "projLang": "LabVIEW",
           "buttProj_moreInfo2": "More info",
           "buttProj_lessInfo2": "Less info",
@@ -261,7 +267,7 @@ const vocabulary = {
         },
         "smartHome": {
           "h3": "The device for monitoring the state of the switchboard equipment",
-          "projectLanguage": "Language: ",
+          "projectLanguage": "Programming language: ",
           "projLang": "C++",
           "buttProj_moreInfo3": "More info",
           "buttProj_lessInfo3": "Less info",
@@ -294,13 +300,16 @@ const vocabulary = {
     "header": {
       "title": "Резюме",
       "burger_menu_link": ["Навички та контакти", "Робота та освіта", "Мої проєкти", "Про мене",],
-      "changeLanguageBut": "Змінити мову",
+      "changeLanguageBut": {
+        "span": "Змінити мову",
+        "img": "images/flag-united-kingdom.svg",
+      },
     },
     
     "section-1": {
       "plot-1-1": {
         "name": "Архипов Арсеній",
-        "status-cont": "Інтерн веб-розробник",
+        "status-cont": "Інтерн JavaScript розробник",
         "scills": {
           "h2": "Навички",
           "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
@@ -309,7 +318,7 @@ const vocabulary = {
       "plot-1-2": {
         "aim": {
           "h2": "Моя мета",
-          "span": "Побудувати блискучу кар'єру в IT",
+          "aim-text": "Збудувати блискучу кар'єру в IT",
         },
         "contacts": {
           "h2": "Контакти",
@@ -324,7 +333,7 @@ const vocabulary = {
         "h2": "Досвід роботи",
         "progress": {
           "h3": "ДП «Івченко-Прогрес»",
-          "position": "Інженер - дослідник",
+          "position": "Інженер - програміст",
           "buttWork_moreInfo1": "Детальніше",
           "buttWork_lessInfo1": "Загальніше",
           "card-content": ["Програмування на Pascal, LabVIEW", "Управління системами для випробувань авіаційних двигунів", "Організація процесу підготовки авіадвигуна до випробувань",],
@@ -350,7 +359,7 @@ const vocabulary = {
         "bachelor": {
           "h3": "Національний університет «Запорізька політехніка»",
           "degree": "Бакалавр",
-          "subjectArea": "Розробка програмного забезпечення",
+          "subjectArea": "Інженерія програмного забезпечення",
           "time": "Вересень 2016 - Липень 2020",
         },
       },
@@ -362,13 +371,14 @@ const vocabulary = {
 
     "section-3": {
       "timer": {
-        "h2": "Не прогавте можливість!",
+        "myProjectsTitle": "Мої проєкти",
+        "timerTitle": "Не прогавте можливість!",
         "p": "Найміть перспективного співробітника. Часу залишилося:",
       }, 
       "projects": {
         "resume": {
           "h3": "Сайт резюме",
-          "projectLanguage": "Мова: ",
+          "projectLanguage": "Стек технологій: ",
           "projLang": "HTML, CSS, JavaScript",
           "visibleCaption": "Дизайн цього сайту адаптується під положення вашого пристрою",
           "img-proj-resume": ["планшет", "мобільний", "комп'ютер"],
@@ -385,7 +395,7 @@ const vocabulary = {
         },
         "dataCollectionSystem": {
           "h3": "Система збору даних з авіаційних двигунів",
-          "projectLanguage": "Мова: ",
+          "projectLanguage": "Мова програмування: ",
           "projLang": "LabVIEW",
           "buttProj_moreInfo2": "More info",
           "buttProj_lessInfo2": "Less info",
@@ -400,7 +410,7 @@ const vocabulary = {
         },
         "smartHome": {
           "h3": "Пристрій контролю стану електрощитового обладнання",
-          "projectLanguage": "Мова: ",
+          "projectLanguage": "Мова програмування: ",
           "projLang": "C++",
           "buttProj_moreInfo3": "More info",
           "buttProj_lessInfo3": "Less info",
