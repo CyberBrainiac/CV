@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
-@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 * {
@@ -16,12 +16,11 @@ svg {
 header {
   text-align: center;
   position: relative;
-  height: 52px;
   background-color: #fff;
 }
 .title {
   font-size: 42px;
-  font-family: 'Marck Script', cursive;
+  font-family: 'Pacifico', cursive;
   letter-spacing: 2px;
   margin: auto;
 }
@@ -201,12 +200,13 @@ ul {
       margin-left: 1em;
     }
     .img-caption h2 {margin-bottom: 0.4em;}
-    .scills h2 {margin-top: 2.5em;}
-    .scills ul {
+    .status-cont {font-style: italic;}
+    .skills h2 {margin-top: 2em;}
+    .skills ul {
       margin-top: 0.8em;
       border-right: 6px double black;
     }
-    .scills ul li {
+    .skills ul li {
       margin-left: 32px;
       margin-bottom: 5px;
     }
@@ -230,12 +230,11 @@ ul {
     .contacts {
       display: flex;
       flex-direction: column;
-      
     }
     .contacts h2 {
       font-weight: 700;
       margin-bottom: 0.8em;
-      margin-top: 2.42em;
+      margin-top: 2em;
     }
     .contacts p {
       margin-bottom: 10px;
@@ -334,35 +333,12 @@ ul {
 
 /* Section 3*/
 #section-3 {flex-direction: column;}
-
-.plot-3-1 {
-  width: inherit;
-  z-index: 10;
-  color: #fff;
-  background-color: rgb(0, 0, 0);
-}
-  .timer {
-    text-align: center;
-    padding: 1em;
+  .plot-3-1 { z-index: 10;}
+  .myProjectsTitle {
+    color: #fff;
+    margin-bottom: 1em;
+    margin-top: 0.6em;
   }
-  .timer p {padding: 0.5em;}
-  .timerStyle {
-    width: inherit;
-    height: inherit;
-    font-size: 20px;
-    font-family: "VT323", monospace;
-    transition-property: color, opacity;
-    color: #E08316;
-    transition-duration: 0.1s;
-    transition-timing-function: ease;
-  }
-  .myProjectsTitle {margin-bottom: 1em;}
-  .blink {
-      color: red;
-      opacity: 40%;
-  }
-
-.plot-3-2 { z-index: 10;}
   .projects {
     width: 90%;
     margin: auto;
@@ -417,22 +393,51 @@ ul {
 #section-4 {flex-direction: column;}
 
 .plot-4-1 {
+  width: inherit;
+  z-index: 10;
+  color: #fff;
+  background-color: rgb(0, 0, 0);
+}
+  .timer {
+    text-align: center;
+    padding: 1em;
+  }
+  .timer p {padding: 0.5em;}
+  .timerStyle {
+    width: inherit;
+    height: inherit;
+    font-size: 20px;
+    font-family: "VT323", monospace;
+    transition-property: color, opacity;
+    color: #E08316;
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
+  }
+  .blink {
+    color: red;
+    opacity: 40%;
+  }
+
+.plot-4-2 {
   z-index: 10;
   width: 100%;
 }
   .simple-linear {
-    height: 20vh;
+    height: 8vh;
     width: inherit;
   }
 
-.plot-4-2 {
+.plot-4-3 {
   z-index: 10;
 }
   .about {
     width: auto;
     padding: 0 3em;
   } 
-    .about h2 {padding-bottom: 0.5em;}
+    .about h2 {
+      padding-bottom: 1em;
+      padding-top: 1em;
+    }
     .about p {text-indent: 1.2em;}
 
 
@@ -443,7 +448,7 @@ ul {
   padding-top: 12px;
   padding-bottom: 14px;
   font-size: 42px;
-  font-family: 'Marck Script', cursive;
+  font-family: 'Pacifico', cursive;
   letter-spacing: 2px;
   display: flex;
   justify-content: space-evenly;

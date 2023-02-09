@@ -12,7 +12,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let additionalDarkBackgroundColor = "#28016B";
   let contrastColor = "#E08316";
   let idInterval_blinkLine;
-  let pageLanguage = "ua";
+  let pageLanguage = "en";
   let drawDesignCount = 0;
   let cornerCircleRadius;
   let cardContentWorkHeight;
@@ -42,7 +42,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
       adaptiveBodySize();
       adaptiveImage();
       adaptiveBurgerMenu();
-      adaptiveScillsContainer();
+      adaptiveSkillsContainer();
       adaptivePurposeContainer();
       adaptiveContactContainer();
       adaptiveWorkContainer();
@@ -173,6 +173,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
       pageContent.style.width = header.style.width = "990px";
       footer.style.marginLeft = (windowInnerWidth - 990) / 2 + "px";
       footer.style.width = "990px";
+      header.style.height = fontSize * 4 + "px";
 
     } else if(windowInnerWidth >= 768) {
       fontSize = 20;
@@ -180,6 +181,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
       pageContent.style.width = header.style.width = windowInnerWidth + "px";
       footer.style.marginLeft = "0px";
       footer.style.width = windowInnerWidth + "px";
+      header.style.height = fontSize * 4 + "px";
 
     } else {
       fontSize = 16;
@@ -187,6 +189,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
       pageContent.style.width = header.style.width = windowInnerWidth + "px";
       footer.style.marginLeft = "0px";
       footer.style.width = windowInnerWidth + "px";
+      header.style.height = fontSize * 4 + "px";
     }
 
     if(windowInnerHeight < 660) {
@@ -264,15 +267,14 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
 
     if(windowInnerWidth >= 500) {
       for (const p of footerP) {
-        p.style.fontSize = "36px";
+        p.style.fontSize = "34px";
       }
-      headerT.style.fontSize = "52px";
-
+      headerT.style.fontSize = "46px";
     } else {
       for (const p of footerP) {
-        p.style.fontSize = "26px";
+        p.style.fontSize = "24px";
       }
-      headerT.style.fontSize = "42px";
+      headerT.style.fontSize = "36px";
     }
 
     for (const aboutP of aboutPArr) {
@@ -294,7 +296,6 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
     let imgContainer_width = parseInt( getComputedStyle(imgContainer).width);
     let imgContainer_center = {x: imgContainer_width / 2, y: imgContainer_width / 2} // background image намальований під кутом 45 градусів, довжина = ширені.
     let imgCaption = document.querySelector(".img-caption");
-    let statusContent = document.querySelector(".status-cont");
 
     let photo = document.querySelector('.myPhoto');
     photo.style.height = imgContainer_width / 1.3 + "px";
@@ -549,13 +550,13 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   }
 
 
-  function adaptiveScillsContainer() {
+  function adaptiveSkillsContainer() {
     let liOffset = elementOffset(document.querySelector(".status-cont")).left - parseInt(pageContent.style.marginLeft);
 
     if(liOffset > 32) { //щоб не загубити маркування списку
-      let scillsLiArr = document.querySelectorAll(".scills > ul > li");
+      let skillsLiArr = document.querySelectorAll(".skills > ul > li");
 
-      for (let li of scillsLiArr) {
+      for (let li of skillsLiArr) {
         li.style.marginLeft = liOffset + "px";
       }
     }
@@ -568,11 +569,22 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
     let pageContentOffset = elementOffset(document.querySelector(".pageContent"));
     let imgCaptionContainerOffset = elementOffset(document.querySelector(".img-caption"));
     let nameHeight = document.querySelector(".name").clientHeight;
+    let aimContainer = document.querySelector(".aim-container");
+    let statusContainer = document.querySelector(".status-container");
   
     if(nameHeight > fontSize + 10) {
       purposeContainer.style.marginTop = imgCaptionContainerOffset.top + nameHeight / 2 - pageContentOffset.top + "px"; //розміщую на одній висоті з 2 рядком блока imgCaption
     } else {
       purposeContainer.style.marginTop = imgCaptionContainerOffset.top - pageContentOffset.top + "px"; //розміщую на одній висоті з блоком imgCaption
+    }
+
+    if(fontSize === 16 & windowInnerHeight > windowInnerWidth) {
+      aimContainer.style.height = "65px";
+      statusContainer.style.height = "65px";
+
+    } else if(fontSize === 16 & windowInnerHeight < windowInnerWidth) {
+      aimContainer.style.height = "auto";
+      statusContainer.style.height = "auto";
     }
   }
 
@@ -844,13 +856,13 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
 
         case 0:
           let photoContainHeight = parseInt(getComputedStyle(document.querySelector(".photo")).height);
-          let scillsContainHeight = parseInt(getComputedStyle(document.querySelector(".scills")).height);
+          let skillsContainHeight = parseInt(getComputedStyle(document.querySelector(".skills")).height);
 
-          if(photoContainHeight + scillsContainHeight > parseInt(sectionsArr[i].style.height)) {
-            sectionsArr[i].style.height = photoContainHeight + scillsContainHeight + legalExtraHeight / 2 + "px";
+          if(photoContainHeight + skillsContainHeight > parseInt(sectionsArr[i].style.height)) {
+            sectionsArr[i].style.height = photoContainHeight + skillsContainHeight + legalExtraHeight / 2 + "px";
 
-          } else if((parseInt(sectionsArr[i].style.height) - photoContainHeight - scillsContainHeight) > legalExtraHeight) {
-            sectionsArr[i].style.height = photoContainHeight + scillsContainHeight + legalExtraHeight + "px";
+          } else if((parseInt(sectionsArr[i].style.height) - photoContainHeight - skillsContainHeight) > legalExtraHeight) {
+            sectionsArr[i].style.height = photoContainHeight + skillsContainHeight + legalExtraHeight + "px";
           }
         break;
 
@@ -881,25 +893,21 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
 
         case 2:
           let section3 = sectionsArr[i];
-          let section3Height = parseInt(section3.style.height);
-          let timerContainerHeight = document.querySelector(".timer").clientHeight;
-          let plot3_2 = document.querySelector(".plot-3-2");
-          let plot3_2Height = plot3_2.clientHeight;
+          let plot3_2Height = document.querySelector(".plot-3-1").clientHeight;
+
           cardContentProjHeight = cardContentProjHeight - fontSize * 2; //зайвий розмір кнопок що будуть видалені
           
-          if(section3Height - timerContainerHeight - plot3_2Height != cardContentProjHeight) {
-            section3.style.height = timerContainerHeight + plot3_2Height + cardContentProjHeight + "px";
-          }
+          section3.style.height = plot3_2Height + cardContentProjHeight + "px";
+
         break;
 
         case 3:
           let section4 = sectionsArr[i];
-          let plot4_1 = document.querySelector(".plot-4-1");
+          let timerContainerHeight = document.querySelector(".timer").clientHeight;
           let plot4_2 = document.querySelector(".plot-4-2");
+          let plot4_3 = document.querySelector(".plot-4-3");
 
-          if(parseInt(section4.style.height) - plot4_1.clientHeight - plot4_2.clientHeight > legalExtraHeight * 2) {
-            section4.style.height = plot4_1.clientHeight + plot4_2.clientHeight + legalExtraHeight * 2 + "px";
-          }
+          section4.style.height = timerContainerHeight + plot4_2.clientHeight + plot4_3.clientHeight + legalExtraHeight - 10 + "px";
         break;
       }
     }
@@ -964,7 +972,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
     ctx.lineTo(0, 0);
     ctx.fill();
 
-/*Heder Background*/
+/*Header Background*/
     headerCtx.fillStyle = darkBackgroundColor;
     headerCtx.beginPath();
     headerCtx.moveTo(0, 0);

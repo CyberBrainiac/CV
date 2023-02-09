@@ -31,15 +31,15 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
 /*Change Section-1 language*/
   document.querySelector(".name").textContent = vocabulary[lang]["section-1"]["plot-1-1"].name;
   document.querySelector(".status-cont").textContent = vocabulary[lang]["section-1"]["plot-1-1"]["status-cont"];
-  document.querySelector(".scills > h2").textContent = vocabulary[lang]["section-1"]["plot-1-1"].scills.h2;
+  document.querySelector(".skills > h2").textContent = vocabulary[lang]["section-1"]["plot-1-1"].skills.h2;
 
-  let liArrScills = document.querySelectorAll(".scills > li");
-  for(let i = 0; i < liArrScills.length; i++) {
-    liArrScills[i].textContent = vocabulary[lang]["section-1"]["plot-1-1"].scills.li[i];
+  let liArrSkills = document.querySelectorAll(".skills > li");
+  for(let i = 0; i < liArrSkills.length; i++) {
+    liArrSkills[i].textContent = vocabulary[lang]["section-1"]["plot-1-1"].skills.li[i];
   }
 
   document.querySelector(".aim > h2").textContent = vocabulary[lang]["section-1"]["plot-1-2"].aim.h2;
-  document.querySelector(".aim > .aim-text").textContent = vocabulary[lang]["section-1"]["plot-1-2"].aim["aim-text"];
+  document.querySelector(".aim .aim-container .aim-text").textContent = vocabulary[lang]["section-1"]["plot-1-2"].aim["aim-text"];
   document.querySelector(".contacts > h2").textContent = vocabulary[lang]["section-1"]["plot-1-2"].contacts.h2;
 
   let spanArr = document.querySelectorAll(".contacts > p > span");
@@ -94,13 +94,11 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   }
 
 /*Change Section-3 language*/
-  document.querySelector(".myProjectsTitle").textContent = vocabulary[lang]["section-3"].timer.myProjectsTitle;
-  document.querySelector(".timerTitle").textContent = vocabulary[lang]["section-3"].timer.timerTitle;
-  document.querySelector(".timer > p").textContent = vocabulary[lang]["section-3"].timer.p;
+  document.querySelector(".myProjectsTitle").textContent = vocabulary[lang]["section-3"].myProjectsTitle;
   document.querySelector(".resume > h3").textContent = vocabulary[lang]["section-3"].projects.resume.h3;
   document.querySelector(".resume .projectLanguage > span > b").textContent = vocabulary[lang]["section-3"].projects.resume.projectLanguage;
   document.querySelector(".resume .projectLanguage .projLang").textContent = vocabulary[lang]["section-3"].projects.resume.projLang;
-  document.querySelector(".visibleCaption").textContent = vocabulary[lang]["section-3"].projects.resume.visibleCaption;
+  document.querySelector(".visibleCaption > b").textContent = vocabulary[lang]["section-3"].projects.resume.visibleCaption;
 
   let figcaptionArr = document.querySelectorAll(".img-proj-resume > figure > figcaption");
 
@@ -127,6 +125,8 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   document.querySelector(".smartHome .card-content .time").textContent = vocabulary[lang]["section-3"].projects.smartHome["card-content"].time;
 
 /*Change Section-4 language*/
+  document.querySelector(".timerTitle").textContent = vocabulary[lang]["section-4"].timer.timerTitle;
+  document.querySelector(".timer > p").textContent = vocabulary[lang]["section-4"].timer.p;
   document.querySelector(".about > h2").textContent =  vocabulary[lang]["section-4"].about.h2;
   let aboutPArr = document.querySelectorAll(".about > p");
   for(let i = 0; i < aboutPArr.length; i++) {
@@ -154,8 +154,8 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
 const vocabulary = {
   en: {
     "header": {
-      "title": "Resume",
-      "burger_menu_link": ["Scills & contacts", "Work & education", "My projects", "About me",],
+      "title": "CV",
+      "burger_menu_link": ["Skills & contacts", "Work & education", "My projects", "About me",],
       "changeLanguageBut": {
         "span": "Change language",
         "img": "images/ukraine-flag-icon.svg",
@@ -166,8 +166,8 @@ const vocabulary = {
       "plot-1-1": {
         "name": "Arkhipov Arsenii",
         "status-cont": "Intern JavaScript developer",
-        "scills": {
-          "h2": "Scills",
+        "skills": {
+          "h2": "Skills",
           "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
         },
       },
@@ -178,7 +178,7 @@ const vocabulary = {
         },
         "contacts": {
           "h2": "Contact",
-          "span": ["Phone: ", "Resume: ", "GitHub: ", "Email: ",],
+          "span": ["Phone: ", "GitHub: ", "Email: ", "CV: ",],
           "a": ["(+38) 0968098737", "pdf file", "project", "address",],
         },
       }
@@ -222,32 +222,28 @@ const vocabulary = {
       },
       "language": {
         "h2": "Languages",
-        "p": ["Russian - fluently", "Ukrainian - fluently", "English - intermediate",],
+        "p": ["Russian - native", "Ukrainian - native", "English - intermediate",],
       }
     },
 
     "section-3": {
-      "timer": {
-        "myProjectsTitle": "My projects",
-        "timerTitle": "Do not miss the chance!",
-        "p": "Hire the promising employee. Time left:",
-      }, 
+      "myProjectsTitle": "My projects",
       "projects": {
         "resume": {
-          "h3": "Site resume",
+          "h3": "Site CV",
           "projectLanguage": "Technology stack: ",
-          "projLang": "HTML, CSS, JavaScript",
-          "visibleCaption": "The design of this site adapts to the position of your device",
+          "projLang": "HTML 5, CSS 3, JavaScript",
+          "visibleCaption": "Responsive site design!",
           "img-proj-resume": ["tablet", "mobile", "computer"],
           "buttProj_moreInfo1": "More info",
           "buttProj_lessInfo1": "Less info",
           "card-content": {
-            "project-description": "The position of the design elements and their sizes are calculated relative to the dimensions of the user's device. Combined with the «Mobile First» design principle, which allows the site design to scale from smartphone to tablet to computer, the site adapts to the size and position of your device. That makes it possible to convey the idea on the absolute majority of devices.",
+            "project-description": "The site calculates the type of user's device, its size, and position in space. Based on this data, design elements are placed and their styles are created. Responsive design allows the site to look equally good on the vast majority of devices. The project was created using the «Mobile First» development principle.",
             "projectLink": {
               "span": "GitHub: ",
               "a": "project link",
             },
-            "time": "January 2022",
+            "time": "February 2023",
           },
         },
         "dataCollectionSystem": {
@@ -266,7 +262,7 @@ const vocabulary = {
           },
         },
         "smartHome": {
-          "h3": "The device for monitoring the state of the switchboard equipment",
+          "h3": "Device for monitoring the state of the switchboard equipment",
           "projectLanguage": "Programming language: ",
           "projLang": "C++",
           "buttProj_moreInfo3": "More info",
@@ -284,6 +280,10 @@ const vocabulary = {
     },
 
     "section-4": {
+      "timer": {
+        "timerTitle": "Do not miss the chance!",
+        "p": "Hire the promising employee. Time left:",
+      }, 
       "about": {
         "h2": "About me",
         "p": ["I can study independently. Worked for himself and in a team. I have 3 years of remote work experience. There are skills in managing a team of subordinates. I have ambitions to manage my own IT business. I critically evaluate sources of knowledge, I use reliable information for my professional growth in the field of web development. I quickly adapt to changes in a turbulent time.", "I live in Ukraine in the city of Zaporizhzhia.",],
@@ -310,7 +310,7 @@ const vocabulary = {
       "plot-1-1": {
         "name": "Архипов Арсеній",
         "status-cont": "Інтерн JavaScript розробник",
-        "scills": {
+        "skills": {
           "h2": "Навички",
           "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
         },
@@ -322,7 +322,7 @@ const vocabulary = {
         },
         "contacts": {
           "h2": "Контакти",
-          "span": ["Телефон: ", "Резюме: ", "GitHub: ", "Пошта: ",],
+          "span": ["Телефон: ", "GitHub: ", "Пошта: ", "Резюме: ",],
           "a": ["(+38) 0968098737", "pdf файл", "проєкт", "адреса",],
         },
       }
@@ -370,27 +370,23 @@ const vocabulary = {
     },
 
     "section-3": {
-      "timer": {
-        "myProjectsTitle": "Мої проєкти",
-        "timerTitle": "Не прогавте можливість!",
-        "p": "Найміть перспективного співробітника. Часу залишилося:",
-      }, 
+      "myProjectsTitle": "Мої проєкти",
       "projects": {
         "resume": {
           "h3": "Сайт резюме",
           "projectLanguage": "Стек технологій: ",
-          "projLang": "HTML, CSS, JavaScript",
-          "visibleCaption": "Дизайн цього сайту адаптується під положення вашого пристрою",
+          "projLang": "HTML 5, CSS 3, JavaScript",
+          "visibleCaption": "Адаптивний дизайн сайту!",
           "img-proj-resume": ["планшет", "мобільний", "комп'ютер"],
           "buttProj_moreInfo1": "More info",
           "buttProj_lessInfo1": "Less info",
           "card-content": {
-            "project-description": "Завдяки розрахунку розмірів пристрою користувача, обчислюється положення елементів дизайну та їх розміри. У поєднанні з принципом розробки «Mobile First», який дозволяє масштабувати дизайн сайту від смартфона до планшета далі до компьютера, сайт підлаштовується під розміри та положення вашого пристрою. Що дає можливість передати задум на абсолютній більшості пристроїв.",
+            "project-description": "Сайт обчислює тип пристрою користувача, його розміри, та положення у просторі. На основі цих данних розміщуються елементи дизайну, та створюються їх стилі. Адаптивний дизайн дозволяє сайту виглядати однаково гарно на абсолютній більшості пристроїв. При створенні проєкту використовувався принцип розробки «Mobile First».",
             "projectLink": {
               "span": "GitHub: ",
               "a": "посилання на проєкт",
             },
-            "time": "Січень 2022",
+            "time": "Лютий 2023",
           },
         },
         "dataCollectionSystem": {
@@ -427,6 +423,10 @@ const vocabulary = {
     },
 
     "section-4": {
+      "timer": {
+        "timerTitle": "Не прогавте можливість!",
+        "p": "Найміть перспективного співробітника. Часу залишилося:",
+      }, 
       "about": {
         "h2": "Про мене",
         "p": ["Вмію навчатися самостійно. Працював на себе та в команді. Маю 3 роки досвіду віддалиної праці. Є навички управління командою підлеглих. Маю амбіції керувати власним IT бізнесом. Критично оцінюю джерела знань, достовірну інформацію використовую для свого професійного зростання у сфері веб-розробки. Швидко пристосовуюсь до змін у бурхливий час.", "Проживаю в Україні в місті Запоріжжя.",],

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles/preloader.css">
   <link rel="stylesheet" href="styles/style.css" title = "default style">
   <base target="_blank">
-  <title>Site Resume</title>
+  <title>Site CV</title>
 </head>
 
 
@@ -27,12 +27,12 @@
 
 
   <header class="header" id="header">
-    <div class="title">Resume</div>
+    <div class="title">CV</div>
     <div class="burger-menu">
       <div class="burger-menu_button"></div>
       <div class="buttonOverlay"></div>
       <nav class="burger-menu_nav">
-        <a href="#header" class="burger_menu_link" target="_self">Scills & contacts</a>
+        <a href="#header" class="burger_menu_link" target="_self">Skills & contacts</a>
         <a href="#section-2" class="burger_menu_link" target="_self">Work & education</a>
         <a href="#section-3" class="burger_menu_link" target="_self">My projects</a>
         <a href="#section-4" class="burger_menu_link" target="_self">About me</a>
@@ -54,12 +54,14 @@
           <img class="myPhoto" src="images/my-photo.jpg" alt="photo of pretty man">
           <figcaption class="img-caption">
             <h2 class="name">Arkhipov Arsenii</h2>
-            <span class="status-cont">Intern JavaScript developer</span>
+            <div class="status-container">
+              <span class="status-cont">Intern JavaScript developer</span>
+            </div>
           </figcaption>
         </figure>
 
-        <div class="scills">
-          <h2>Scills</h2>
+        <div class="skills">
+          <h2>Skills</h2>
           <ul>
             <li>Mocha framework</li>
             <li>JavaScript</li>
@@ -75,16 +77,18 @@
         <canvas id="canvasS1-P2"></canvas>
         <div class="aim">
           <h2>My purpose</h2>
-          <span class="aim-text">Build a brilliant career in IT</span>
+          <div class="aim-container">
+            <span class="aim-text">Build a brilliant career in IT</span>
+          </div>
         </div>
 
         <div class="contacts">
           <h2>Contacts</h2>
           <p class="phone"><span>Phone: </span><a href="tel:+38-096-809-87-37" target="_self">(+38) 0968098737</a></p>
-          <p class="resumeFile"><span>Resume: </span><a href="https://docs.google.com/document/d/1XYR23U--y9OkdMXTzegT11pSRye0m5CvZGvTcGH-9dc/edit?usp=sharing">pdf file</a></p>
           <p class="gitHub"><span>GitHub: </span><a href="https://github.com/PoziTronAr">project</a></p>
           <p class="mail"><span>Email: </span><a href="mailto:arsenij.arxipov.1998@gmail.com">address</a></p>
-          <!-- <p claspositions="linkedin"></p> -->
+          <p class="resumeFile"><span>CV: </span><a href="https://docs.google.com/document/d/1mVNu_hvkYGotuiJspQmokRyUf_wGpLxoB7I1VpieQiQ/edit?usp=sharing">pdf file</a></p>
+          <!-- <p claspositions="linkedin"></p>   NEEED TO BE CREATE!!!-->
         </div>
       </div>
     </section>
@@ -153,8 +157,8 @@
 
       <div class="language">
         <h2>Languages</h2>
-        <p>Russian - fluently</p>
-        <p>Ukrainian - fluently</p>
+        <p>Russian - native</p>
+        <p>Ukrainian - native</p>
         <p>English - intermediate</p>
       </div>
     </section>
@@ -162,24 +166,17 @@
 
     <section id="section-3">
       <div class="plot-3-1">
-        <div class="timer">
-          <h2 class="myProjectsTitle">My projects</h2>
-          <h3 class="timerTitle">Do not miss the chance!</h3>
-          <p>Hire the promising employee. Time left:</p>
-        </div>
-      </div>
-
-      <div class="plot-3-2">
+        <h2 class="myProjectsTitle">My projects</h2>
         <div class="projects">
 
           <div class="card resume">
-            <h3>Site resume</h3>
+            <h3>Site CV</h3>
             <hr>
             <div class="projectLanguage">
               <span><b>Technology stack: </b></span>
-              <span class="projLang">HTML, CSS, JavaScript</span>
+              <span class="projLang">HTML 5, CSS 3, JavaScript</span>
             </div>
-            <p class="visibleCaption">The design of this site adapts to the position of your device</p>
+            <p class="visibleCaption"><b>Responsive site design!</b></p>
             <div class="img-proj-resume">
               <figure id="projTablet">
                 <img src="images/tablet.svg" alt="tablet"> 
@@ -202,7 +199,7 @@
                 <span>GitHub: </span>
                 <a href="https://github.com/PoziTronAr/PoziTronAr.github.io">project link</a>
               </p>
-              <p class="time"><time datetime="2023-01">January 2022</time></p>
+              <p class="time"><time datetime="2023-01">February 2023</time></p>
             </div>
           </div>
 
@@ -216,7 +213,7 @@
             <button id="buttProj_moreInfo2" class="buttonCardInfo" type="button">More info</button>
             <button id="buttProj_lessInfo2" class="buttonCardInfo" type="button">Less info</button>
             <div class="card-content">
-              <div class="project-description"><p>The system for collecting data from sensors (temperature, humidity, pressure) is designed for their storage, graphical presentation in the form of a graph in real time. It has a subsystem for post-processing and visualization of measured data using averaging, interpolation and approximation algorithms.</p></div>
+              <div class="project-description"><p>The site calculates the type of user's device, its size, and position in space. Based on this data, design elements are placed and their styles are created. Responsive design allows the site to look equally good on the vast majority of devices. The project was created using the «Mobile First» development principle.</p></div>
               <p class="projectLink">
                 <span>GitHub: </span>
                 <a href="https://github.com/PoziTronAr/Master-s-Diploma">project link</a>
@@ -226,7 +223,7 @@
           </div>
 
           <div class="card smartHome">
-            <h3>The device for monitoring the state of the switchboard equipment</h3>
+            <h3>Device for monitoring the state of the switchboard equipment</h3>
             <hr>
             <div class="projectLanguage"><p>
               <span><b>Programming language: </b></span>
@@ -249,9 +246,15 @@
 
     <section id="section-4">
       <div class="plot-4-1">
-        <div class="simple-linear"></div>
+        <div class="timer">
+          <h3 class="timerTitle">Do not miss the chance!</h3>
+          <p>Hire the promising employee. Time left:</p>
+        </div>
       </div>
       <div class="plot-4-2">
+        <div class="simple-linear"></div>
+      </div>
+      <div class="plot-4-3">
         <div class="about">
           <h2>About me</h2>
           <p>
@@ -266,7 +269,7 @@
 
   <footer class="footer" id="footer">
       <p class="footerMessage">Power of enthusiasm</p>
-      <p class="yearOfCreation">2022</p>
+      <p class="yearOfCreation">2023</p>
   </footer>
 
   <script>
