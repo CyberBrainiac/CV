@@ -179,7 +179,7 @@ const vocabulary = {
         "contacts": {
           "h2": "Contact",
           "span": ["Phone: ", "GitHub: ", "Email: ", "CV: ",],
-          "a": ["(+38) 0968098737", "project", "address", "pdf file",],
+          "a": ["(+38) 0968098737", "account", "address", "pdf file",],
         },
       }
     },
@@ -323,7 +323,7 @@ const vocabulary = {
         "contacts": {
           "h2": "Контакти",
           "span": ["Телефон: ", "GitHub: ", "Пошта: ", "Резюме: ",],
-          "a": ["(+38) 0968098737", "проєкт", "адреса", "pdf файл",],
+          "a": ["(+38) 0968098737", "аккаунт", "адреса", "pdf файл",],
         },
       }
     },
