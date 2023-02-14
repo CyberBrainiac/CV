@@ -2,6 +2,15 @@
 
 <div align="center"><a href="https://resum.online">Вы можете увидеть сайт-резюме по ссылке</a></div>
 
+## Обзор проекта
+
+### Цель создания проекта: продемонстрировать навыки frontend разработки
+Устроиться в компанию на должность Junior JavaScript developer
+
+### Особенность сайта: полностью адаптивний дизайн сайта
+The site calculates the type of user's device, its size, and position in space. Based on this data, design elements are placed and their styles are created. Responsive design allows the site to look equally good on the vast majority of devices. The project was created using the «Mobile First» development principle.
+
+
 ## Запуск проекта на локальком сервере
 **Вы можете копировать код с моего репозитария и использовать для своих проектов**
 
