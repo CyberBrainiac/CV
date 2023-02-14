@@ -1,6 +1,6 @@
 <h1 align="center">СV</h1>
 
-<div align="center"><a href="https://resum.online">Вы можете увидеть сайт-резюме по ссылке</a></div>
+<div align="center" target="_blank"><a href="https://resum.online">Вы можете увидеть сайт-резюме по ссылке</a></div>
 
 Вы можете копировать код с моего репозитария и использовать для своих проектов
 
