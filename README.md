@@ -1,56 +1,57 @@
 <h1 align="center">СV</h1>
 
-<div align="center"><a href="https://resum.online">Вы можете увидеть сайт-резюме по ссылке</a></div>
+<div align="center">You can see the site CV by clicking <a href="https://resum.online">here</a></div>
 
-## Обзор проекта
+## Project Overview
 
-### Цель создания проекта: *продемонстрировать навыки frontend разработки*
-**Устроиться в перспективную компанию на должность _Junior JavaScript developer_**
+### Objective: *to demonstrate frontend development skills*
 
-### Особенность сайта: *полностью адаптивний дизайн сайта*
+**Get a job at a promising company as a _Junior JavaScript developer_**
+
+### Site feature: *responsive website design*
+
 The site calculates the type of user's device, its size, and position in space. Based on this data, design elements are placed and their styles are created. Responsive design allows the site to look equally good on the vast majority of devices. The project was created using the «Mobile First» development principle.
 
+## Running the project on a local server
 
-## Запуск проекта на локальком сервере
+***You can copy the code from my repository and use it for your projects***
 
-***Вы можете копировать код с моего репозитария и использовать для своих проектов***
+To use the code of the site and change it, you will need:
+* get a copy of my site [repository](https://github.com/PoziTronAr/CV.git)
+  - download the repository in `zip` archive format;
+  - unzip the archive;
+  - start the file ***index.html***;
+  - Open all files with extensions `.html, .js, .css` in a convenient code editor..
+* Make a fork of the repository, edit files with built-in [tools](https://docs.github.com/ru/codespaces/developing-in-codespaces/developing-in-a-codespace) from GitHub
+* clone the repository with the `gh repo clone PoziTronAr/CV` command and then modify the code in the code editors.
 
-Для использования кода сайта и его изменения потребуеться:
-* получить копию [репозитария](https://github.com/PoziTronAr/CV.git) моего сайта:
-  - загрузить репозитарий в формате `zip` архива;
-  - распаковать архив;
-  - запустить файл ***index.html***;
-  - открыть все файлы с расширением `.html, .js, .css` в удобном редакторе кода.
-* сделать форк репозитария, редактировать файлы встроенными [инструментами](https://docs.github.com/ru/codespaces/developing-in-codespaces/developing-in-a-codespace) от GitHub;
-* клонировать репозитарий командой `gh repo clone PoziTronAr/CV`, с последующим изменением кода в редакторах кода.
+## The process of creating a website
 
-## Процесс создания сайта
+The stages of creating the site are described below:
 
-Этапы создания сайта описаны ниже:
-
-* исследование области:
-  - [zety CV builder](https://zety.com/resume-builder);
-  - [vista шаблоны резюме](https://create.vista.com/ru/templates/chief-executive-officer-professional-profile/id-6061a0ffa637ee11e3fba1bc/);
-  - [the muse шаблоны резюме](https://www.themuse.com/advice/the-41-best-resume-templates-ever);
-  - [microsoft шаблоны резюме](https://templates.office.com/ru-ru/resume-templates).
-* создание прототипа в [Figma](https://www.figma.com/):
-  - создание `moodboard`; 
-  - создание `прототипа`. Ниже приведён скрин *1 страницы* прототипа сайта: ![moodboard](/images_Readme/prototype.png)
-* frontend разработка:
-  - создание `HTML` каркаса;
-  - создание `JavaScript` анимаций:
+* research:
+  - [zety: CV builder](https://zety.com/resume-builder);
+  - [vista: CV templates](https://create.vista.com/ru/templates/chief-executive-officer-professional-profile/id-6061a0ffa637ee11e3fba1bc/);
+  - [the muse: CV templates](https://www.themuse.com/advice/the-41-best-resume-templates-ever);
+  - [microsoft: CV templates](https://templates.office.com/ru-ru/resume-templates).
+* prototyping in [Figma](https://www.figma.com/):
+  - `moodboard` creation;
+  - `prototype` creation. Below is a screenshot of the *1st page* of the prototype site.![moodboard](/images_Readme/prototype.png)
+* frontend development:
+  - creating an `HTML` skeleton;
+  - creating `JavaScript` animations:
     - **burger menu**;
     - **dropdown list**;
     - **preloader**;
     - **countdown timer**.
-   - создание `CSS` стилей.
-* тестирование функций на разних устройствах;
-* исправление ошибок;
-* оптимизация скорости работы сайта:
-  - **оптимизация 1**: изначально при перевороте устройства и при первом запуске сайта запускалась функция **preloader**. Оптимизация: сокращение использования функции **preloader**. Её использование было сокращено до 1 запуска при первой загрузке сайта. Что бы скрыть происходящие изменение при перевороте устройства, поднимается `svg` фон по *z-index*, перекрывая контент на сайте. В результате скорость перерисовки дизайна была увеличена со 100мс до 40мс на современных устройствах;
-  - **оптимизация 2**: изначально все фоновые рисунки были созданны в [Figma](https://www.figma.com/) и вставлены на страницу как `image.png`. Оптимизация: создание фоновых изображений при помощи `HTML` тегов: `<canvas>, <svg>`. На рисунке изображены проведенные расчёты для выведения **формулы скругления** прямых и тупых углов в многоуголинике на сайте (фоновая фигура вокруг фото). В результате, время на отрисовку страницы сократилось на 20мс ![картинка](/images_Readme/circleTangentToAnObtuseAngle.png)
-* создание readme файла;
-* релиз сайта.
+  - creating `CSS` styles.
+* testing functions on different devices;
+* error correction;
+* optimizing the speed of the site:
+  - **optimization 1**: initially, the **preloader** function started when you flipped the device and started the site for the first time. Optimization: reduced use of the **preloader** function. Its use has been reduced to 1 launch on the first loading of the site. In order to hide the changes occurring when the device is turned over, the `svg` background is raised by *z-index*, overlapping the content on the site. As a result, design redrawing speed was increased from 100ms to 40ms on modern devices;
+  - **optimization 2**: initially, all the backgrounds were created in [Figma](https://www.figma.com/) and inserted into the page as `image.png`. Optimization: create background images using `HTML` tags: `<canvas>, <svg>`. The figure shows the calculations performed to derive the **formulas for rounding** right and obtuse angles in a polygon on the site (the background figure around the photo). As a result, the page rendering time was reduced by 20ms. ![image](/images_Readme/circleTangentToAnObtuseAngle.png)
+* create a readme file;
+* site release.
 
 
 
