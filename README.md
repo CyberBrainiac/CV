@@ -4,55 +4,53 @@
 
 ## Обзор проекта
 
-### Цель создания проекта: продемонстрировать навыки frontend разработки
-Устроиться в компанию на должность Junior JavaScript developer
+### Цель создания проекта: *продемонстрировать навыки frontend разработки*
+Также, устроиться в перспективную компанию на должность Junior JavaScript developer
 
-### Особенность сайта: полностью адаптивний дизайн сайта
+### Особенность сайта: *полностью адаптивний дизайн сайта*
 The site calculates the type of user's device, its size, and position in space. Based on this data, design elements are placed and their styles are created. Responsive design allows the site to look equally good on the vast majority of devices. The project was created using the «Mobile First» development principle.
 
 
 ## Запуск проекта на локальком сервере
-**Вы можете копировать код с моего репозитария и использовать для своих проектов**
 
-Вы можете скачать zip архив с репозитарием сайта, распаковать его в удобное место, запустить файл index.html
+***Вы можете копировать код с моего репозитария и использовать для своих проектов***
+
+Для использования кода сайта и его изменения потребуеться:
+* получить копию [репозитария](https://github.com/PoziTronAr/CV.git) моего сайта:
+  - загрузить репозитарий в формате `zip` архива;
+  - распаковать архив;
+  - запустить файл ***index.html***;
+  - открыть все файлы с расширением `.html, .js, .css` в удобном редакторе кода.
+* сделать форк репозитария, редактировать файлы встроенными [инструментами](https://docs.github.com/ru/codespaces/developing-in-codespaces/developing-in-a-codespace) от GitHub;
+* клонировать репозитарий командой `gh repo clone PoziTronAr/CV`, с последующим изменением кода в редакторах кода.
 
 ## Процесс создания сайта
 
-* исследование области (ссылка на сайты примери резюме для IT)
-  - ссылка 1
-  - ссылка 2
-* создание прототипа в Figma(ссылка)(фото)
-* frontend разработка (фото)
-* тестирование функций
-* исправление ошибок
-* создание readme файла
-* релиз сайта
+Этапы создания сайта описаны ниже:
 
-### online
-On the site you can see my knowledge in web development.
-I will persevere to improve my skills.
-The result of my work can be seen on github.
-If you have any suggestions or comments please email me. 
+* исследование области:
+  - [zety CV builder](https://zety.com/resume-builder);
+  - [vista шаблоны резюме](https://create.vista.com/ru/templates/chief-executive-officer-professional-profile/id-6061a0ffa637ee11e3fba1bc/);
+  - [the muse шаблоны резюме](https://www.themuse.com/advice/the-41-best-resume-templates-ever);
+  - [microsoft шаблоны резюме](https://templates.office.com/ru-ru/resume-templates).
+* создание прототипа в [Figma](https://www.figma.com/):
+  - создание `moodboard`; 
+  - создание `прототипа`. ![moodboard](/images_Readme/prototype.png)
+* frontend разработка:
+  - создание `HTML` каркаса;
+  - создание `JavaScript` анимаций:
+    - **burger menu**;
+    - **dropdown list**;
+    - **preloader**;
+    - **countdown timer**.
+   - создание `CSS` стилей.
+* тестирование функций на разних устройствах;
+* исправление ошибок;
+* оптимизация скорости работы сайта:
+  - **оптимизация 1**: изначально при перевороте устройства и при первом запуске сайта запускалась функция **preloader**. Оптимизация: сокращение использования функции **preloader**. Её использование было сокращено до 1 запуска при первой загрузке сайта. Что бы скрыть происходящие изменение при перевороте устройства, поднимается `svg` фон по *z-index*, перекрывая контент на сайте. В результате скорость перерисовки дизайна была увеличена со 100мс до 40мс на современных устройствах;
+  - **оптимизация 2**: изначально все фоновые рисунки были созданны в [Figma](https://www.figma.com/) и вставлены на страницу как `image.png`. Оптимизация: создание фоновых изображений при помощи `HTML` тегов: `<canvas>, <svg>`. На рисунке изображены проведенные расчёты для выведения **формулы скругления** прямых и тупых углов в многоуголинике на сайте (фоновая фигура вокруг фото). В результате, время на отрисовку страницы сократилось на 20мс ![картинка](/images_Readme/circleTangentToAnObtuseAngle.png)
+* создание readme файла;
+* релиз сайта.
 
-**this is bold text**
-*this is italic text* 
-regular text
-
-***this text isnt `modify` in other text***
-
-
-Some basic Git commands are:
-```
-git status  
-git add
-git commit
-```
-The background color should be `#ffffff` for light mode and `#0d1117` for dark mode.
-
-https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
-
-[my link](https://google.com)
-
-![This is my image](images_Readme/circleTangentToAnObtuseAngle.png)
 
 
