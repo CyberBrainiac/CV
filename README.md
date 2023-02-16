@@ -35,7 +35,7 @@ The site calculates the type of user's device, its size, and position in space. 
   - [microsoft шаблоны резюме](https://templates.office.com/ru-ru/resume-templates).
 * создание прототипа в [Figma](https://www.figma.com/):
   - создание `moodboard`; 
-  - создание `прототипа`. ![moodboard](/images_Readme/prototype.png)
+  - создание `прототипа`. Ниже приведён скрин *1 страницы* прототипа сайта: ![moodboard](/images_Readme/prototype.png)
 * frontend разработка:
   - создание `HTML` каркаса;
   - создание `JavaScript` анимаций:
