@@ -17,13 +17,13 @@ The site calculates the type of user's device, its size, and position in space. 
 ***You can copy the code from my repository and use it for your projects***
 
 To use the code of the site and change it, you will need:
-* get a copy of my site [repository](https://github.com/PoziTronAr/CV.git)
+* get a copy of my site [repository](https://github.com/archSenya/CV.git)
   - download the repository in `zip` archive format;
   - unzip the archive;
   - start the file ***index.html***;
   - Open all files with extensions `.html, .js, .css` in a convenient code editor..
 * Make a fork of the repository, edit files with built-in [tools](https://docs.github.com/ru/codespaces/developing-in-codespaces/developing-in-a-codespace) from GitHub
-* clone the repository with the `gh repo clone PoziTronAr/CV` command and then modify the code in the code editors.
+* clone the repository with the `gh repo clone archSenya/CV` command and then modify the code in the code editors.
 
 ## The process of creating a website
 
