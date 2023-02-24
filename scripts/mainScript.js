@@ -21,6 +21,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
   let windowInnerWidth;
   let buttonLines = [];
   let fontSize;
+  let clock;
 
   const userDevice = function checkUserDev() {
   /*визначення типу пристрою клієнта*/
@@ -130,6 +131,9 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
           cardContent.style.display = "block";
         }
       }
+
+      /*Видаляю интервал зворотного відліка*/
+      clock.stop();
 
       /*перемальовую дизайн сторінки*/
       drawDesign();
@@ -690,60 +694,77 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
 
 
   function createTimer() {
+    let timerContainer = document.querySelector('.timer');
+    let timerContant = timerContainer.querySelector(".timerContent");
+    let timerNumberArr = timerContainer.querySelectorAll(".timerNumber");
+    let timerCaptureArr = timerContainer.querySelectorAll(".timerCapture");
+    let timerSeparatorArr = timerContainer.querySelectorAll(".timerSeparator > span");
+
+    let timerDNumber = document.getElementById("timerDNumber");
+    let timerHNumber = document.getElementById("timerHNumber");
+    let timerMNumber = document.getElementById("timerMNumber");
+    let timerSNumber = document.getElementById("timerSNumber");
+    
     class Clock {
-      constructor(container) {
-          this.name = "clock";
-          this.template = "d:h:m:sec";
-          this.currentDate = new Date();
-          this.container = container;
+      constructor() {
+        this.name = "clock";
+        this.template = "d:h:m:sec";
+        this.timerID;
       }
 
       render() {
-          let date = new Date();
-          let days = '01';
-          let hours = 24 - date.getHours();
-          if (hours < 10) hours = '0' + hours;
-          if (hours == 24) hours = '00';
-          let mins = 60 - date.getMinutes();
-          if (mins < 10) mins = '0' + mins;
-          if (mins == 60) mins = '00';
-          let secs = 60 - date.getSeconds();
-          if (secs < 10) secs = '0' + secs;
-          if (secs == 60) secs = '00';
-          let output = this.template
-              .replace('d', days)
-              .replace('h', hours)
-              .replace('m', mins)
-              .replace('sec', secs);
-          this.container.textContent = output;
+        let date = new Date();
+        let days = '01';
+        let hours = 23 - date.getHours();
+        if (hours < 10) hours = '0' + hours;
+        if (hours == 0) hours = '00';
+        let mins = 59 - date.getMinutes();
+        if (mins < 10) mins = '0' + mins;
+        if (mins == 0) mins = '00';
+        let secs = 59 - date.getSeconds();
+        if (secs < 10) secs = '0' + secs;
+        if (secs == 0) secs = '00';
+        
+        timerDNumber.textContent = days;
+        timerHNumber.textContent = hours;
+        timerMNumber.textContent = mins;
+        timerSNumber.textContent = secs;
 
-          this.container.classList.add("blink");
+        for (const timerNumber of timerNumberArr) {
+          timerNumber.classList.add("blink");
+
           setTimeout(() => {
-              this.container.classList.remove("blink");
+            timerNumber.classList.remove("blink");
           }, 100);
+        }
       }
 
       stop() {
-          clearInterval(this.timer);
+          clearInterval(this.timerID);
       }
 
       start() {
           this.render();
-          this.timer = setInterval(() => this.render(), 1000);
+          this.timerID = setInterval(() => this.render(), 1000);
       }
     }
 
-    if(drawDesignCount === 0) {
-      let container = document.querySelector('.timer');
-      let timerContainer = document.createElement("div");
-      timerContainer.classList.add("timerStyle");
-      timerContainer.style.fontSize = fontSize * 3 + "px";
-      container.appendChild(timerContainer);
-      container.style.backgroundColor = darkBackgroundColor;
-
-      let clock = new Clock(timerContainer);
-      clock.start();
+    for (const timerNumber of timerNumberArr) {
+      timerNumber.style.fontSize = fontSize * 3 + "px";
     }
+
+    for (const timerCapture of timerCaptureArr) {
+      timerCapture.style.fontSize = fontSize * 1.5 + "px";
+    }
+
+    for (const timerSeparator of timerSeparatorArr) {
+      timerSeparator.style.fontSize = fontSize * 3 + "px";
+    }
+
+    timerContainer.style.backgroundColor = darkBackgroundColor;
+    timerContant.classList.add('timerStyle');
+    clock = new Clock();
+    clock.start();// ЗАПУСК зворотнього відліку!
   }
 
 
@@ -907,7 +928,7 @@ function adaptiveDesign(preloaderControl) { /*Returns objectWithStyle or Error o
           let plot4_2 = document.querySelector(".plot-4-2");
           let plot4_3 = document.querySelector(".plot-4-3");
 
-          section4.style.height = timerContainerHeight + plot4_2.clientHeight + plot4_3.clientHeight + legalExtraHeight - 10 + "px";
+          section4.style.height = timerContainerHeight + plot4_2.clientHeight + plot4_3.clientHeight + legalExtraHeight + "px";
         break;
       }
     }

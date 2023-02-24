@@ -59,7 +59,6 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   document.querySelector(".progress > .position").textContent = vocabulary[lang]["section-2"]["work-experience"]["progress"].position;
 
   let liArrProgress = document.querySelectorAll(".progress > .card-content > ul> li");
-
   for(let i = 0; i < liArrProgress.length; i++) {
     liArrProgress[i].textContent = vocabulary[lang]["section-2"]["work-experience"]["progress"]["card-content"][i];
   }
@@ -127,6 +126,12 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
 /*Change Section-4 language*/
   document.querySelector(".timerTitle").textContent = vocabulary[lang]["section-4"].timer.timerTitle;
   document.querySelector(".timer > p").textContent = vocabulary[lang]["section-4"].timer.p;
+
+  let timerCaptureArr = document.querySelectorAll(".timerCapture");
+  for (let i = 0; i < timerCaptureArr.length; i++) {
+    timerCaptureArr[i].textContent = vocabulary[lang]["section-4"].timer.timerCapture[i];
+  }
+
   document.querySelector(".about > h2").textContent =  vocabulary[lang]["section-4"].about.h2;
   let aboutPArr = document.querySelectorAll(".about > p");
   for(let i = 0; i < aboutPArr.length; i++) {
@@ -145,7 +150,7 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
     try {
       preloaderControl.toggleOverlay();
     } catch (error) {
-      alert("Sorry the site broke");
+      alert("Sorry the site is broken");
     }
   }
 }
@@ -283,6 +288,7 @@ const vocabulary = {
       "timer": {
         "timerTitle": "Do not miss the chance!",
         "p": "Hire the promising employee. Time left:",
+        "timerCapture": ["day", "hour", "min", "sec"],
       }, 
       "about": {
         "h2": "About me",
@@ -426,6 +432,7 @@ const vocabulary = {
       "timer": {
         "timerTitle": "Не прогавте можливість!",
         "p": "Найміть перспективного співробітника. Часу залишилося:",
+        "timerCapture": ["день", "год", "хв", "сек"],
       }, 
       "about": {
         "h2": "Про мене",

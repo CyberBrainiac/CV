@@ -80,7 +80,10 @@ ul {
   font-size: 18px;
   font-weight: 300;
 }
-.pageContent { font-family: Georgia, 'Times New Roman', Times, serif;}
+.pageContent { 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  position: relative;
+}
 .pageBackground {
   width: 100%;
   height: 100vh;
@@ -404,18 +407,24 @@ ul {
   }
   .timer p {padding: 0.5em;}
   .timerStyle {
-    width: inherit;
-    height: inherit;
-    font-size: 20px;
     font-family: "VT323", monospace;
-    transition-property: color, opacity;
     color: #E08316;
-    transition-duration: 0.1s;
-    transition-timing-function: ease;
   }
   .blink {
     color: red;
     opacity: 40%;
+  }
+  .timerContent {
+    display: flex;
+    justify-content: center;
+  }
+  .timerElement {
+    display: flex;
+    flex-direction: column;
+  }
+  .timerCapture {
+    position: relative;
+    top: -10px;
   }
 
 .plot-4-2 {
@@ -443,6 +452,7 @@ ul {
 
 /* Нижний колонтитул */
 .footer {
+  position: relative;
   background-color: #373540;
   color: #f2f2f2;
   padding-top: 12px;
