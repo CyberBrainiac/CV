@@ -170,7 +170,7 @@ const vocabulary = {
     "section-1": {
       "plot-1-1": {
         "name": "Arkhipov Arsenii",
-        "status-cont": "Intern JavaScript developer",
+        "status-cont": "JavaScript developer",
         "skills": {
           "h2": "Skills",
           "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
@@ -184,7 +184,7 @@ const vocabulary = {
         "contacts": {
           "h2": "Contact",
           "span": ["Phone: ", "GitHub: ", "Email: ", "CV: ",],
-          "a": ["(+38) 0968098737", "account", "address", "pdf file",],
+          "a": ["(+38) 0968098737", "account", "arsenij.arxipov.1998 @gmail.com", "pdf file",],
         },
       }
     },
@@ -315,7 +315,7 @@ const vocabulary = {
     "section-1": {
       "plot-1-1": {
         "name": "Архипов Арсеній",
-        "status-cont": "Інтерн JavaScript розробник",
+        "status-cont": "JavaScript розробник",
         "skills": {
           "h2": "Навички",
           "li": ["Mocha framework", "JavaScript", "HTML 5", "CSS 3", "OOP", "Git",],
@@ -329,7 +329,7 @@ const vocabulary = {
         "contacts": {
           "h2": "Контакти",
           "span": ["Телефон: ", "GitHub: ", "Пошта: ", "Резюме: ",],
-          "a": ["(+38) 0968098737", "аккаунт", "адреса", "pdf файл",],
+          "a": ["(+38) 0968098737", "аккаунт", "arsenij.arxipov.1998 @gmail.com", "pdf файл",],
         },
       }
     },

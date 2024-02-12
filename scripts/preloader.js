@@ -77,8 +77,8 @@ function addPreloader(callback = () => {}) { //Return{preloader control}
 
   /*ВАЖЛИВО! для швидкодії розгорнути callback*/
  //сайт завантажується надто швидко, для того, щоб роздивитися цю чудову анімацію ;)
-  overlay.ontransitionend = (ev) => {
-    overlay.ontransitionend = "";
+  // overlay.ontransitionend = (ev) => {
+    // overlay.ontransitionend = "";
     callback(preloaderControl);
-  }
+  // }
 }

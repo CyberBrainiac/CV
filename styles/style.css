@@ -263,6 +263,11 @@ ul {
     .resumeFile::before {background-image: url("../images/file-text-white.svg");}
     .gitHub::before {background-image: url("../images/github-white.svg");}
     .mail::before {background-image: url("../images/mail-white.svg");}
+    .mail a {
+      display: block;
+      position: relative;
+      left: -26px;
+    }
 
 /*Section 2*/
 #canvasS2{
