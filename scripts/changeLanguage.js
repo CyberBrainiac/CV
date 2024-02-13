@@ -97,7 +97,6 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   document.querySelector(".resume > h3").textContent = vocabulary[lang]["section-3"].projects.resume.h3;
   document.querySelector(".resume .projectLanguage > span > b").textContent = vocabulary[lang]["section-3"].projects.resume.projectLanguage;
   document.querySelector(".resume .projectLanguage .projLang").textContent = vocabulary[lang]["section-3"].projects.resume.projLang;
-  document.querySelector(".visibleCaption > b").textContent = vocabulary[lang]["section-3"].projects.resume.visibleCaption;
 
   let figcaptionArr = document.querySelectorAll(".img-proj-resume > figure > figcaption");
 
@@ -106,22 +105,22 @@ function changeLanguage(adaptiveDesignStyle, preloaderControl) {
   }
 
   document.querySelector(".resume .card-content .project-description > p").textContent = vocabulary[lang]["section-3"].projects.resume["card-content"]["project-description"];
-  document.querySelector(".resume .card-content .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.resume["card-content"].projectLink.a;
-  document.querySelector(".resume .card-content .time").textContent = vocabulary[lang]["section-3"].projects.resume["card-content"].time;
+  document.querySelector(".resume .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.resume.projectLink.a;
+  document.querySelector(".resume .time").textContent = vocabulary[lang]["section-3"].projects.resume.time;
 
   document.querySelector(".dataCollectionSystem > h3").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.h3;
   document.querySelector(".dataCollectionSystem .projectLanguage > p > span > b").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.projectLanguage;
   document.querySelector(".dataCollectionSystem .projectLanguage .projLang").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.projLang;
   document.querySelector(".dataCollectionSystem .card-content .project-description > p").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem["card-content"]["project-description"];
-  document.querySelector(".dataCollectionSystem .card-content .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem["card-content"].projectLink.a;
-  document.querySelector(".dataCollectionSystem .card-content .time").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem["card-content"].time;
+  document.querySelector(".dataCollectionSystem .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.projectLink.a;
+  document.querySelector(".dataCollectionSystem .time").textContent = vocabulary[lang]["section-3"].projects.dataCollectionSystem.time;
 
   document.querySelector(".smartHome > h3").textContent = vocabulary[lang]["section-3"].projects.smartHome.h3;
   document.querySelector(".smartHome .projectLanguage > p > span > b").textContent = vocabulary[lang]["section-3"].projects.smartHome.projectLanguage;
   document.querySelector(".smartHome .projectLanguage .projLang").textContent = vocabulary[lang]["section-3"].projects.smartHome.projLang;
   document.querySelector(".smartHome .card-content .project-description > p").textContent = vocabulary[lang]["section-3"].projects.smartHome["card-content"]["project-description"];
-  document.querySelector(".smartHome .card-content .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.smartHome["card-content"].projectLink.a;
-  document.querySelector(".smartHome .card-content .time").textContent = vocabulary[lang]["section-3"].projects.smartHome["card-content"].time;
+  document.querySelector(".smartHome .projectLink > a").textContent = vocabulary[lang]["section-3"].projects.smartHome.projectLink.a;
+  document.querySelector(".smartHome .time").textContent = vocabulary[lang]["section-3"].projects.smartHome.time;
 
 /*Change Section-4 language*/
   document.querySelector(".timerTitle").textContent = vocabulary[lang]["section-4"].timer.timerTitle;
@@ -238,33 +237,33 @@ const vocabulary = {
           "h3": "Site CV",
           "projectLanguage": "Technology stack: ",
           "projLang": "HTML 5, CSS 3, JavaScript",
-          "visibleCaption": "Responsive site design!",
+          "visibleCaption": "Design for:",
           "img-proj-resume": ["tablet", "mobile", "computer"],
           "buttProj_moreInfo1": "More info",
           "buttProj_lessInfo1": "Less info",
           "card-content": {
             "project-description": "The site calculates the type of user's device, its size, and position in space. Based on this data, design elements are placed and their styles are created. Responsive design allows the site to look equally good on the vast majority of devices. The project was created using the «Mobile First» development principle.",
-            "projectLink": {
-              "span": "GitHub: ",
-              "a": "project link",
-            },
-            "time": "February 2023",
           },
+          "projectLink": {
+            "span": "GitHub: ",
+            "a": "project link",
+          },
+          "time": "February 2023",
         },
         "dataCollectionSystem": {
-          "h3": "Aircraft engine data collection system",
-          "projectLanguage": "Programming language: ",
-          "projLang": "LabVIEW",
+          "h3": "Organick Shop",
+          "projectLanguage": "Technology stack: ",
+          "projLang": "TypeScript, MySQL, Scss, React",
           "buttProj_moreInfo2": "More info",
           "buttProj_lessInfo2": "Less info",
           "card-content": {
-            "project-description": "The system for collecting data from sensors (temperature, humidity, pressure) is designed for their storage, graphical presentation in the form of a graph in real time. It has a subsystem for post-processing and visualization of measured data using averaging, interpolation and approximation algorithms.",
-            "projectLink": {
-              "span": "GitHub: ",
-              "a": "project link",
-            },
-            "time": "December 2021",
+            "project-description": "Finally project in Sigma Software University.This fullstack project is online shop with MySQL database. Client part uses React library, server part uses Express library. User can view product and details, add product to cart, remove product from cart, complete order.",
           },
+          "projectLink": {
+            "span": "GitHub: ",
+            "a": "project link",
+          },
+          "time": "September 2023",
         },
         "smartHome": {
           "h3": "Device for monitoring the state of the switchboard equipment",
@@ -274,12 +273,12 @@ const vocabulary = {
           "buttProj_lessInfo3": "Less info",
           "card-content": {
             "project-description": "Compact device for protection against fires, flooding, condensation. Installed in industrial or household electrical panels. It has the possibility of emergency power off in the electrical network. Measures temperature and humidity. In an emergency situation, sends SMS, MMS, and makes a call to the client's mobile phone.",
-            "projectLink": {
-              "span": "GitHub: ",
-              "a": "project link",
-            },
-            "time": "July 2020",
           },
+          "projectLink": {
+            "span": "GitHub: ",
+            "a": "project link",
+          },
+          "time": "July 2020",
         }
       }
     },
@@ -382,33 +381,33 @@ const vocabulary = {
           "h3": "Сайт резюме",
           "projectLanguage": "Стек технологій: ",
           "projLang": "HTML 5, CSS 3, JavaScript",
-          "visibleCaption": "Адаптивний дизайн сайту!",
+          "visibleCaption": "Дизайн для:",
           "img-proj-resume": ["планшет", "мобільний", "комп'ютер"],
           "buttProj_moreInfo1": "More info",
           "buttProj_lessInfo1": "Less info",
           "card-content": {
             "project-description": "Сайт обчислює тип пристрою користувача, його розміри, та положення у просторі. На основі цих данних розміщуються елементи дизайну, та створюються їх стилі. Адаптивний дизайн дозволяє сайту виглядати однаково гарно на абсолютній більшості пристроїв. При створенні проєкту використовувався принцип розробки «Mobile First».",
-            "projectLink": {
-              "span": "GitHub: ",
-              "a": "посилання на проєкт",
-            },
-            "time": "Лютий 2023",
           },
+          "projectLink": {
+            "span": "GitHub: ",
+            "a": "посилання на проєкт",
+          },
+          "time": "Лютий 2023",
         },
         "dataCollectionSystem": {
-          "h3": "Система збору даних з авіаційних двигунів",
-          "projectLanguage": "Мова програмування: ",
-          "projLang": "LabVIEW",
+          "h3": "Organick Shop",
+          "projectLanguage": "Стек технологій: ",
+          "projLang": "TypeScript, MySQL, Scss, React",
           "buttProj_moreInfo2": "More info",
           "buttProj_lessInfo2": "Less info",
           "card-content": {
-            "project-description": "Система збору данних з датчиків (температури, вологи, тиску) призначена для їх збереження, графічного подання у вігляді графіку в режимі реального часу. Має підсистему постобробки та візуалізації збережених до бази даних показників за алгоритмами усереднення, інтерполяції та апроксимації.",
-            "projectLink": {
-              "span": "GitHub: ",
-              "a": "посилання на проєкт",
-            },
-            "time": "Грудень 2021",
+            "project-description": "Останній проект в Sigma Software University. Цей fullstack проект являє собою інтернет-магазин з базою даних MySQL. Клієнтська частина використовує бібліотеку React, серверна частина використовує бібліотеку Express. Користувач може переглянути товар та деталі, додати товар до кошика, видалити товар з кошика, завершити замовлення.",
           },
+          "projectLink": {
+            "span": "GitHub: ",
+            "a": "посилання на проєкт",
+          },
+          "time": "Вересень 2023",
         },
         "smartHome": {
           "h3": "Пристрій контролю стану електрощитового обладнання",
@@ -418,12 +417,12 @@ const vocabulary = {
           "buttProj_lessInfo3": "Less info",
           "card-content": {
             "project-description": "Компактний пристрій для захисту від пожеж, затоплень, конденсату. Встановлюється в промислові чи побутові електричні щити. Має можливість аварійного вимкнення живлення в мережі. Вимірює показники температури та вологи. У аварійній ситуації передає SMS, MMS, та робить виклик на мобільний телефон клієнта.",
-            "projectLink": {
-              "span": "GitHub: ",
-              "a": "посилання на проєкт",
-            },
-            "time": "Липень 2020",
           },
+          "projectLink": {
+            "span": "GitHub: ",
+            "a": "посилання на проєкт",
+          },
+          "time": "Липень 2020",
         }
       }
     },

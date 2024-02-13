@@ -161,6 +161,9 @@ ul {
   margin: 1em auto;
   border-radius: 20px;
 }
+.card > p {
+  padding: 0 20px;
+}
 .card:before, .card:after {
   z-index: -1;
   position: absolute;
@@ -334,6 +337,7 @@ ul {
     position: absolute;
     text-align: center;
     width: 100%;
+    text-shadow: 1px 1px 1px black;
   }
   .language h2 {font-weight: 700;}
   .language p {margin-top: 0.3em;}
@@ -379,19 +383,10 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    margin-bottom: 1.5em;
+    align-items: center;
+    margin-bottom: 0.5em;
     margin-top: 0.5em;
   }
-    .resume figure {
-      width: 56px;
-      height: 56px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .resume figure figcaption {position: relative;}
-    #projTablet figcaption {top: 7px;}
-    #projPhone figcaption {top: 6px;}
 
   /*мобільна версія*/
   #buttProj_moreInfo1::after, #buttProj_moreInfo2::after, #buttProj_moreInfo3::after {background-image: url("../images/arrow-down.svg");}
