@@ -266,19 +266,19 @@ const vocabulary = {
           "time": "September 2023",
         },
         "smartHome": {
-          "h3": "Device for monitoring the state of the switchboard equipment",
-          "projectLanguage": "Programming language: ",
-          "projLang": "C++",
+          "h3": "SEO-Buy site",
+          "projectLanguage": "Technology stack: ",
+          "projLang": "TypeScript, Firestore Database, Scss, React, Redux",
           "buttProj_moreInfo3": "More info",
           "buttProj_lessInfo3": "Less info",
           "card-content": {
-            "project-description": "Compact device for protection against fires, flooding, condensation. Installed in industrial or household electrical panels. It has the possibility of emergency power off in the electrical network. Measures temperature and humidity. In an emergency situation, sends SMS, MMS, and makes a call to the client's mobile phone.",
+            "project-description": "The site was created for SEO and content writing specialists to promote the brand and the ambitious team. In the Tools section, you will find applications for automating routine work. These include: searching websites to post content, classifying websites by topic from a database.",
           },
           "projectLink": {
             "span": "GitHub: ",
             "a": "project link",
           },
-          "time": "July 2020",
+          "time": "January 2024",
         }
       }
     },
@@ -410,19 +410,19 @@ const vocabulary = {
           "time": "Вересень 2023",
         },
         "smartHome": {
-          "h3": "Пристрій контролю стану електрощитового обладнання",
-          "projectLanguage": "Мова програмування: ",
-          "projLang": "C++",
+          "h3": "SEO-Buy сайт",
+          "projectLanguage": "Стек технологій: ",
+          "projLang": "TypeScript, Firestore Database, Scss, React, Redux",
           "buttProj_moreInfo3": "More info",
           "buttProj_lessInfo3": "Less info",
           "card-content": {
-            "project-description": "Компактний пристрій для захисту від пожеж, затоплень, конденсату. Встановлюється в промислові чи побутові електричні щити. Має можливість аварійного вимкнення живлення в мережі. Вимірює показники температури та вологи. У аварійній ситуації передає SMS, MMS, та робить виклик на мобільний телефон клієнта.",
+            "project-description": "Сайт створений для фахівців з SEO та написання контенту для просування бренду та амбітної команди. У розділі 'Інструменти' ви знайдете додатки для автоматизації рутинної роботи. Серед них: пошук сайтів для розміщення контенту, класифікація сайтів за темами з бази даних.",
           },
           "projectLink": {
             "span": "GitHub: ",
             "a": "посилання на проєкт",
           },
-          "time": "Липень 2020",
+          "time": "Січень 2024",
         }
       }
     },

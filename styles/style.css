@@ -377,6 +377,9 @@ ul {
   .projects p {margin-top: 0.5em;}
   .visibleCaption {text-align: center;}
   .projectLanguage {text-align: center;}
+  .projectLanguage span:nth-of-type(even) {
+    color: rgb(70, 1, 190);;
+  }
   .project-description {text-indent: 1.2em;}
   .projects .card-content {padding: 0 6px;}
   .img-proj-resume {
